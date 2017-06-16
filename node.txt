@@ -1,0 +1,426 @@
+============================================================================
+         node.js                 node.js                               node.js
+ -------------------------------------------------------5.17   
+seajs:
+--------------------------------------------------------------------------------------------
+用啥引啥(require) 提高效率
+
+node没有自己的语法基于v8引擎(用来解析js语句的) 
+
+设置响应头:
+res.writeHead(200,{"Content-Type":"text/html;charset=UTF8"});
+
+http模板:
+      语法:http.createServer((req,res)=>{res.wirteHead();res.end();}).listen(3000,"127.0.0.1")
+      res.wirte("wirte可以写后多 但是必须写在res.end()前面");
+      res.end("内容直接渲染到页面");//必须写但可以留空  不能写表达式 解决eg (1+1).toString()
+
+url方法:
+      最关键的是req.url  
+      识别url用到两个模块  url模块  querystring模块(基本没用了不用引 加个true就代替他了)
+      url.parse把路径分为很多部分 host , port ,query ,queryname(常用的)
+      eg: url.parse(req.url,true).query//显示查询部分第二个参数设置为true返回就是一个对象 可以直接调用key/value
+
+fs模块(读写文件):
+      eg: fs.readFile("./文件名","utf-8",(err,data)=>{
+               if(err){throw err}  //node对象函数第一个参数基本都是err
+                  一个文件夹下一定要加 ./  data就是读出来的数据
+            });//异步
+            注意计算不能异步
+
+    创建文件夹:fs.mkdir("./aa/bb");
+    删除文件夹:fs.re
+    返回文件夹的状态:fs.stat(function(err,stats){   //stat
+                                          console.log(stats.isDirdctory());//检测是不是一个文件夹  返回布尔值
+                                    });
+    读取文件夹里的所有文件:fs.readdir("./fs",function(err,files){
+                                                      //files是一个数组 表示./fs文件夹下的所有东西包括文件和文件夹
+                                                      console.log(files);
+                                                });//两个参数(路径,函数);
+     强行将异步变成同步:
+    读取文件:fs.readFile()
+
+path模板:
+      path.extname()//获取用户访问网址里的拓展名
+      './'+path.normalize()//去掉多余的斜杠 点  //这个加不加都没事
+
+模块(module)
+      nodejs中一个js文件中定义的变量函数只在这个文件中有效
+      当需要在外部引用时,必须使用exports对象进行暴露  使用者需要用require命令引用
+     
+     exports可以暴露很多东西函数,变量 使用者只需require一次相当于增加了一个顶层变量
+     node中js文件和js文件 就是靠一个个require和exports构成为网状的 不是靠HTML文件统一在一起的
+
+     可以将js文件中描述一个类 用module.exports=构造函数名 的方式向外暴露一个类
+
+     也就是js和js有两种合作模式:
+         1.某一个js文件中,提供了函数,共别人使用只需要暴露函数就行 exports.msg=msg
+         2.某一个js文件中描述了一个类  module.exports=person;      没有括号(带括号返回的是结果 一个文件最好只暴露一个类) 
+            require接收的就是构造函数名 不需要点了
+      
+        var foo=require("foo.js")  //没有加 ./  是一个特殊路径 会直接引用node_modules文件下的foo.js  (会不停找node_modelu文件夹)
+
+node_modules文件夹:      
+      用文件夹管理模块:
+        var foo=require("foo");//不加拓展名引用的是文件夹   入口文件是foo/index.js
+        改变入口文件需要添加一个package.json文件
+***每一个模块文件夹中都建议写一个package.json文件,文件名不能改,node会自动读取里面的配置 里面有一个main项就是模块的入口文件
+      eg:{
+            "name":"kaolafoo",
+            "version":"1.0.1",
+            "main":"app.js"
+      }
+   packsge.json必须放到模块文件夹的跟目录
+
+npm:
+      模块就是一个功能的封装    一些成熟的模块常用的有人封装好了 直接下载用就行
+
+绝对路径相对路径的转换: 加上__dirname+
+      eg: fs.readFies(__dirname+"./1.txt",function(){}); //绝对路径
+      require路径是从当前路径出发找到别人
+
+buffer文本流需要toString()才能正常显示
+
+post请求的接收:
+      固定写法:
+            eg: 
+            var alldata="";
+             req.addListener("data",function(chunk){   //防止过大表单阻塞进程 分成一个个小的数据包
+                  alldate+=chunk;
+            });
+            req.addListener("end",function(){  //end
+                  console.log(alldate.toString());   注意toString()
+            })
+
+formidable   (post上传文件) 
+  用原生写很麻烦所以用  
+      只要涉及文件上传form上一定要加上enctype=multipart / form-data 
+       eg: <form action =“/ upload”enctype =“multipart / form-data”method =“post”>   //name有问题
+
+      if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
+      // 解析文件上传
+      var form = new formidable.IncomingForm();
+      //设置上传存放地址
+      form.uploadDir="./load"
+      form.parse(req, function(err, fields, files) {//执行这个回调是表单全部接受完毕
+            //所有的文本域单选框 都放在fields里面
+            //所有的文件域 files
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.write('received upload:\n\n');
+            res.end(util.inspect({fields: fields, files: files}));  //utli  将对象展开or是一个调试bug的工具 需要require进来
+      });
+      
+      return;
+      }
+
+fs改名
+      改名、换文件路径：fs.rename  eg:require("fs").rename("./1.txt","./2.txt");
+
+模板引擎：
+      ejs  后台模板引擎  安装 npm install ejs
+      语法：var str="今天是<%= a %>天";  //只要逻辑语法对怎么写都行
+                  var data={//字典
+                        a:"晴",
+                        b:"阴"
+                  }
+                  var html=ejs.render(str,data)
+
+                  <% 这里面不是变量 %>
+
+------------------------express框架：
+
+      是后台的一个框架  受欢迎和jq一样
+      安装  npm install express --save(自动更细);
+
+路由：
+      app.get("网址不区分大小写",function(){})  //这个get不是知道请求哟
+ eg:var express=require("express");
+      var app=express();
+      app.get("/",function(res,req){
+            res.send("ecpress框架  不用引http 好方便  路由很清晰");
+      })
+      app.listen(3000);
+
+      如果想处理任何请求那就用app.all("网址不区分大小写",function(){});
+      req.url==""  这个就不行
+
+变量：
+      app.get("/teacher/:gonghao",function(req,res){  //:号后面的是变量
+            res.send("老师信息，工号："+req.params.gonghao)  //直接用点获取到对象
+      })
+
+静态服务器：
+      app.use(express.static("./public"));  //public这个文件就成了静态服务器了
+      并且不影响别的路由（除非静态文件夹下有同文件名的文件）
+
+设置模板引擎：
+      app.set("view engine","egs");//egs不用引直接就自动引了
+
+正则表达式可以被使用  正则表达式中未知部分用圆括号分组 然后用req.params[0],[1]得到
+
+更推荐用冒号
+      eg:app.get("student/:id",function(req,res){  //:id不许是独立的一部分
+            var id=req.params[id];拿到
+            var reg=/^[\d],{6}$/;使用正则
+            if(reg.test(id)){
+                   res.end(id)
+            }else{
+                  res.end("请检查格式")
+            }
+          
+      })
+
+中间件:
+      如果我们的 get post 回调函数中 没有next() name匹配上第一个路由就不会往下匹配了
+
+      app.get("/",function(req,res,next){
+            .....
+            next();
+      })  //两个都会执行但是
+      app.get("/",function(req,res,next){
+
+      })
+
+//注意位置 抽象的往下写  
+路由get post 这些东西就是中间件 中间件讲究顺序 匹配上第一个就不会往下匹配了
+next才会继续往下匹配
+
+use函数:
+      app.use()也是一个中间件,与get,post不同的是 
+      他的网址不是精确匹配而是能够有小文件来拓展的
+      比如http://127.0.0.1/admin/aa/dd/cc
+      app.use("/admin",function(req,res){
+            res.write(req.originalUrl);//显示/admin/aa/dd/cc
+            res.wirte(req.baseUrl)//显示/admin
+            res.write(req.path);//显示aa/dd/cc
+      });
+
+      当你不写网址的时候就相当于"/"就相当于全部匹配
+      eg :  app.use(function(req,res){})
+
+      静态服务器:
+      app.use(express.static("./static"))     //把static文件夹变成了静态服务器
+
+send和end都一样只能使用一次 只是send把mime类型设置好了
+
+get和post:
+      express中
+      app.get("/",function(req,res){
+            console.log(req.query)  //直接转成对象
+      })
+
+      post请求:
+            自己看api
+
+显示ip用 req.ip
+路径 req.path
+sd fv
+-------------------------------------------------------------
+node中全是回调函数 要用回调函数的方法封装
+
+------------------------------------------------
+数据库:
+      老牌数据库  Mysql,SQL Server  Access Oracle
+
+      都是用sql语言管理数据库
+
+------------------------------Nosql
+nosql为非结构数据库 没有行和列的概念  用json来存储数据
+
+文档型的数据库的其中一个 mongodb
+
+nosql擅长一下几种情况:
+      1 数据模型比较简单
+      2 需要灵活性更强的it 系统
+      3 对数据库性能要求较高
+      4 不需要高度的数据一致性
+      5 对于给定key 比较容易隐射复杂值得环境
+
+安装mongodb window7需要安装补丁   需要配置环境变量(直接把bin目录放到系统环境path里 用 ; 号隔开)
+      命令:   不像mysql一样需要加  ;  
+            mongo       使用数据库    
+            mongod      开机    mongod --dbpath  c:\mongo    (必须有这个文件夹)
+            mongoimport 导入数据
+
+            show dbs 显示说有数据库
+            use  数据库名   使用某个数据库  新建一个也是use (没有数据库就是新建)
+            db   查看当前所在数据库
+
+            db.student.insert({"name":"xiaoming","age":12,"sex":"nan"});
+            student就是所谓的集合 集合中存储这很多json  因为没有student这个集合所有会自动创建一个student集合
+
+            show collections   列出当前数据库全部集合
+            db.student.find();   查看student集合里的数据
+
+如果真想这个数据库创建成功那么必须插入一个数据 数据库中不能直接插入一个数据必须往集合里面插入数据
+集合就是collection    不需要创建集合只需要写点语法eg: db.student.insert({"name","xiaoming"});
+db.student系统发现是一个陌生的集合名字所以就自动创建了一个叫student 的集合
+
+      db.dropDatabses();   删除当前所在的数据库
+
+导入数据mongoimport -db test -collection restaurants  -drop -file primer -dataset.json
+      -db test  向往那个数据看导入
+      --collection restaurants  向往哪个集合中导入
+      --drop  把集合清空
+      --file primer-dataset.json  导入哪个文件
+这样我们就可以写好一个json(其他的亦可以哟)文件直接导入
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+函数调动: 
+    调用本页的js代码: 直接调用就行
+
+    调用其他文件夹下的: 需要在js代码里加上  module.exports=函数名  z
+    在调用的文件中引用过来  eg var fn=require("./model/1.js");
+
+     单个函数写法:
+      eg: fn=(res)=>{console.log("我是fn")};
+      调用:直接调用 eg fn(response);
+      多个函数写法:
+      eg module.exports={
+                  fn1:(res)=>{console.log("我是fn1")},
+                  fn2:(res)=>{console.log("我是fn2")}
+            }
+      调用:1.fn["fn1"](response);  //用字符串调用这种写法很重要
+               2. fn.fn1(response);
+
+模块调用:
+
+---------------------------------------------------------5.21
+一个文件就是一个模块
+全局变量 global.a=200;  如果var的话是当前模块的变量不是全局的
+
+buffer类 是一个全局对象
+      用于操作二进制数据流
+//使用方式 new buffer(size);  
+
+-----------------------------get
+用url的parse方法才分url 获取query部分
+var query=url.parse(req.url,true).query;    获取问号后面的字符串后面加上true就变成对象了
+      query.name     //就这么用
+
+还有一个querystring方法但是没有上面这个方法方便
+
+------------------------post
+post很流弊    可以上传什么电影呀图片呀
+把浏览器传来的内容分成一个个的小包来传输
+
+--------------------------------------------------------------------
+fs   (读文件)
+      fs.readFile("./1.js","utf-8",function(err,data){console.log(data)})
+      
+      err就算报错后后面的代码还是会执行  解决:if(err) throw err;
+
+fs.access("./1.js",(err)=>{
+      console.log("判断文件是否存在");
+});
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+nodejs特点:
+    单线程
+    非阻塞I/O   Non-blockingI/O 
+    事件驱动    Event-Driven
+    实际上是一个特点
+
+  nodejs是js的执行环境
+
+  nodejs没有根目录没有web容器  (路径与文件夹无关)
+
+   非阻塞回调函数:
+         阻塞与非阻塞的区别 
+         阻塞是按照顺序执行代码
+         非阻塞是不需要按照顺序的
+
+   nodejs事件循环:
+      node是单线程应用程序但是通过事件和回调支持并发所以性能非常的高
+      
+   require引用包
+         http模块 
+            设置一个响应头
+                  html格式     res.writeHead("Content-type":"text/html;charset=UTF8") ;
+                  文本格式    res.writreHead("Content-type":"text/plain;charset=UTF8");
+            res.wirte("写一个字符串   可以有多个");
+            res.end("这个后面不能跟东西表示结束了 这个必须写")
+
+创建server服务器:
+    var  server=createServer(function (req,res){  
+    });
+
+ 监听端口:
+       server.listen(3000 , "127.0.0.1");   端口号可以随便改
+
+   req.url属性 表示用户请求的url
+         
+  识别url:  url模块
+                       url.parse()可以将一个完整的url地址,分为很多部分;
+                            可分为:  host , port , pathname , path , query
+                            eg: query=url.parse(req.url,true).query;
+                            
+                  querystring模块  (基本没用了  加了个TRUE替代了他)
+------------------------------------------------------4.13
+require中的路劲,是从这个js文件出发找到别人
+require一个文件的时候 这个文件会执行 而fs是从命令提示符找
+                  fs.readFile(__dirname+"/1.txt",function(err,data){})  推荐用__dirname 绝对路径
+
+
+只要涉及文件上传 那么form标签要加一个属性:
+    <form action="http://127.0.0.1/doload" method="post" enctype='multipart-formdata'></form>
+
+
+模板引擎：
+     <a href="<%=url%>"><img src="<%=imageURL%>" alt=""></a>
+     数据绑定。就成为一个完整的html字符串了，
+     前台模板   我们学后台模板
+     后台模板著名的有两个  第一个叫做ejs  第二个叫做  jade
+
+     是npm第三方包
+
+连接mysql:
+      有两种方式:直接连接和连接池连接
+
+直接连接:eg(node/mysql)
+
+--------------------------------------------------5.23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

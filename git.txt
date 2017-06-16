@@ -1,0 +1,189 @@
+============================================================
+git                                 git
+
+git config --global user.name "name"
+git config --global user.email "email"
+
+添加 git add .
+查看状态 git status
+提交到仓库 git commit -m "这是描述"
+
+流程：
+    工作区   ----   暂存区   ---   版本库
+                add            commit   (有改变字会变红 add到占存区后变绿 git commit 后就干净了)
+
+删除文件不要直接删用git删  (直接删不行哟 删了后文字是红的需要add 然后commit才能成功)
+    git rm aa.txt   删除后status查看文字是绿的 所以直接git commit就行
+    git commit -m "delete aa.txt"   这样就删除了 
+
+git remote add origin git@github.com:xm124/m.git   (设置origin为远程仓库地址 就是简写而已)
+git push origin(上面设置的) master(本地默认分支)         推送到远程仓库
+
+git push git@github.com:xm124/m.git master   （这是不简写 每次推送都得写成这样）
+
+拉文件
+    git pull origin master  (就是更新本地文件)
+
+查看日志记录：
+    git log
+    git log --pretty=oneline（每行显示一个）
+    git reflog            (查看每个版本你做了啥 到第一个版本后没了日志就用这个命令)
+
+版本切换：（这就是版本控制器）
+    git reset --hard HEAD^^^^(^代表第几个版本)  《不方便 建议用版本号切》
+    git reset --hard 2580d(版本号很长写前面几个就行 能保证唯一就行)
+
+分支管理：
+    查看分支   git branch
+    创建分支   git branch wechat(这个是分支名)
+    切换分支   git checkout wechat
+    和并分支   git merge ali(要和并的分支)   注意切换到主分支上在和并被修改的分支
+
+    注意：每个分支改变是不会影响别的分支的
+
+远程服务器：
+    查看远程服务器     git remote -v
+    删除远程远程库别名     git remote remove  origin(连接名)  
+
+配置公钥：
+    地址协议不能用https
+    git remote add origin git@github.com:xm124/m.git (用这个创建一个别名)
+
+    生成公钥：shh-keygen -t rsa -c "1746809408@qq.com（这个邮箱填写的不能有问题）" (一路回车   完事后后显示钥匙文件夹)
+    id_rsa是私钥       id_rsa.pub是公钥
+
+    然后把公钥添加到github上   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+创建文件夹 mkdir   ,  git init命令把这个目录变成Git可以管理的仓库：
+如果没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
+
+第一步，用命令git add告诉Git，把文件添加到仓库：
+$ git add readme.txt  (执行这个不现实任何消息)
+
+第二步，用命令git commit告诉Git，把文件提交到仓库：
+创建版本库
+
+阅读: 1752579
+什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。
+
+所以，创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：
+
+$ mkdir learngit
+$ cd learngit
+$ pwd
+/Users/michael/learngit
+pwd命令用于显示当前目录。在我的Mac上，这个仓库位于/Users/michael/learngit。
+
+如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。
+
+第二步，通过git init命令把这个目录变成Git可以管理的仓库：
+
+$ git init
+Initialized empty Git repository in /Users/michael/learngit/.git/
+瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository），细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。
+
+如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
+
+
+ 也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。不过，不建议你使用自己正在开发的公司项目来学习Git，否则造成的一切后果概不负责。
+
+把文件添加到版本库
+
+首先这里再明确一下，所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。
+
+不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的，前面我们举的例子只是为了演示，如果要真正使用版本控制系统，就要以纯文本方式编写文件。
+
+因为文本是有编码的，比如中文有常用的GBK编码，日文有Shift_JIS编码，如果没有历史遗留问题，强烈建议使用标准的UTF-8编码，所有语言使用同一种编码，既没有冲突，又被所有平台所支持。
+
+使用Windows的童鞋要特别注意：
+
+千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。建议你下载Notepad++代替记事本，不但功能强大，而且免费！记得把Notepad++的默认编码设置为UTF-8 without BOM即可：
+
+set-utf8-notepad++
+
+言归正传，现在我们编写一个readme.txt文件，内容如下：
+
+Git is a version control system.
+Git is free software.
+一定要放到learngit目录下（子目录也行），因为这是一个Git仓库，放到其他地方Git再厉害也找不到这个文件。
+
+和把大象放到冰箱需要3步相比，把一个文件放到Git仓库只需要两步。
+
+第一步，用命令git add告诉Git，把文件添加到仓库：
+
+$ git add readme.txt
+执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。
+
+第二步，用命令git commit告诉Git，把文件提交到仓库：
+
+ 简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。
+为什么Git添加文件需要add，commit一共两步呢？因为commit可以一次提交很多文件，所以你可以多次add不同的文件，
+
+同时添加多个文件到git库
+git add 1.txt 2.txt
+
+查看文件状态(是否被改之类的)
+
+git diff  git.txt    查看修改了哪些内容
+
+git cat 查看文件内容
+
+git log命令显示从最近到最远的提交日志，
+
+--------------------------------github
+$ ssh-keygen -t rsa -C "wang_z_m@163.com"
+可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，
+这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥
+
+目录C:\Users\Administrator\.ssh
+
+然后进github主页 点击设置 添加ssh keys  在Key文本框里粘贴id_rsa.pub文件的内容：.......
+.GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，
+一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+
+
+或在命令行上创建新的存储库
+echo“＃xm”>> README.md 
+  git init 
+  git add README.md 
+  git commit -m“first commit” 
+  git remote add origin https://github.com/xm124/xm.git 
+    origin是远程库名字
+   git push -u origin master
+   把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
+   由于远程库是空的，我们第一次推送master分支时，加上了-u参数，
+   Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+  
+从现在起，只要本地作了提交，就可以通过命令：
+$ git push origin master
+把本地master分支的最新修改推送至GitHub
+
+...或从命令行推送现有存储库
+git remote add origin https://github.com/xm124/xm.git
+   git push -u origin master
+
+
+
+
+----------------------------------克隆
+命令git clone克隆一个本地库
+git clone git@github.com:xm124/xm.git(这种地址最快)
+

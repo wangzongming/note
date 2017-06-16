@@ -1,0 +1,94 @@
+
+=========================================================
+mysql                  mysql              mysql
+-----------------------------------------------------------------------------------
+SQL:Structured Query Language  
+1.Data Definition Language(DDL)  数据定义语言
+2.Data Management Language(DML) 数据管理语言
+3.Data Control Language(DCL)   数据控制语言
+
+查看数据库:
+  查看全部数据库  show databases;
+  查看指定数据库  show databases like 'db1';
+  查看d开头的数据库 show databases like 'd%';    // %表示任意字符任意长度
+  查看指定数据库创建信息   show create database `db1`;   (用的是反引号)
+
+注意:databases 只有在查看的时候database后面才加s    
+          创建数据库的时候最好把名字用反引号扩起来;
+          所有语句后面都要加 " ; " 号
+
+创建数据库:
+  创建 数据库create database newdb; // 默认为utf-8编码
+  (设置为gbk编码:create database newdb character set gbk;)
+
+修改数据库:
+  修改指定设置:alter database  `db1` character set utf8;  (用的是反引号,character时编码格式);
+  (我去 alter和alert太像了)
+
+删除指定数据库:
+  drop database if exists `db1`; (if exists 是判断他存不存在 可不写);
+
+数据库不支持用命令改名 需要手动到文件夹下改名
+
+----------------------------数据库表
+创建表:
+  
+  有两种方法 1. create table  database.name(列结构)[表选项]   (database是数据库的名称 列结构是id呀啥的)
+  指定默认数据库(作用是不用加database.): use database;
+  设置默认数据库后查看表用show tables;
+  eg: create table user(id int,user varchar(20));   (varchar字符长度 类型是text)
+
+  表的操作:
+    a.表名前缀--
+    b.表查询,建表语句,表结构
+    c.删除表
+    d.修改表名
+    f.修改列定义
+    g.修改表选项
+
+查询表:
+  show tables;
+  显示表的信息:show create table `user`; (反引号  ;号可以用\g代替显示更清楚)
+  查看表的描述:desc tablename;  (亦可以写describe tableame)
+
+  删除表:
+   drop table if exists `class`;  (和数据库一样 反引号);
+
+  修改表名:
+     rename table (旧表名) to (新表名);
+     修改多个用逗号隔开就好;eg:  rename table oname to nname,oname to nneme;
+
+剪切表到另一个数据库:
+  rename table tablename to database(数据库名);  多个用,好隔开和修改表名一样
+
+列的操作:
+    添加列add(就是添加一个列在上面什么id呀啥的);
+      eg: alter table add user(表名) id(要添加的) int;
+    删除列eg: alter table drop (表名);
+
+    修改列的type:
+      eg: alter table user(表名) modify name(列名) varchar(40);
+    
+    修改列名:
+      eg:alter table user(表名) change (列名) (新列名) varchar(20);
+
+表的 增 删 改 查:
+
+     创建表:create table vip(id int primary key auto_increment,t_name varchar(20),c_name varchar(20));
+
+    创建数据: 
+      insert   into   表名(字段名)  value(值列表);
+
+    插入数据:
+      insert into  user(id,name,sex) values(null,laowang,men);
+    
+    查询数据:
+     查看单个: select name,sex from (表名) where id=1(条件);
+     查看全部:select id,name,sex from (表名);
+          亦可以用*号代表全部的列eg select * from user where(条件的意思可以不加)  id=2;
+
+    修改数据:
+      update user(表名) set id=2,user='laowang'(只改一个就不用加分号了)  where id=1(条件可以不加);
+
+    删除数据:   
+      delete from user(表名)  where id=1(这个是条件);

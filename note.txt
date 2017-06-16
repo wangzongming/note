@@ -1,0 +1,1490 @@
+﻿==================================================================================
+==================================================================================
+               html                html                        html
+----------------------------------------------------------------------------------
+
+1.网页的拓展名是 .html
+2.html：超文本标记语言--标签
+特点：1.带<>2.成对（并不是所有的）
+3.utf-8  字体编码  
+4.ctrl+s  保存的快捷键
+  ctrl+R 打开网页的快捷键
+  ctrl+A 全选
+  ctrl+C 复制  ctrl+x剪切   ctrl+v粘贴   F5刷新浏览器   F4关闭浏览器
+  ctrl+z 撤销
+5.标签 
+标题标签
+<h1>最大</h1>----><h6>最小</h6>
+段落
+<p>段落</p>
+字体标签<font color="red" size="25px"></font>
+color="red" 属性=”属性值“
+px 像素 单位
+图片标签
+<img src="路径" width="100px" height="200px"/>                    -单标签
+路径：相对/绝对路径 。
+我们常用的相对路径。
+
+超链接
+<a href="地址">
+
+</a>
+href 可以连接外部网页 或锚点定位
+
+http格式
+http://www.name.com
+换行标签<br/>
+-----------------------------------------------------------------
+icon:
+<link href="/favicon.ico" rel="shortcut icon">
+
+
+
+
+2.22
+html&&css
+1.全选的快捷键  ctrl+A
+2.复制的快捷键 ctrl+C
+3.粘贴的快捷键 ctrl+V
+4.剪切的 ctrl+x
+5.保存的 ctrl+s
+6.打开网页ctrl+R
+7.撤销 ctrl+z
+8.html的注释快捷键 ctrl+？
+-------2
+1.认识hbulider  webstorm sublime dw notpad
+<!DOCTYPE html>  html文档 h5的特有标志
+页面的最大父级 window ->document-> html-> body ->具体标签
+2.什么是html？
+超文本标记语言。就是标签
+<p>段落标签</p>  
+<h1>最大标题标签</h1><h2></h2><h3></h3><h4></h4><h5></h5>
+<h6>最小标题标签</h6>
+<img src="路径"/>
+<！--被注释的内容-->
+<font>字体标签</font>
+<center>居中标签</center>  h5中被舍弃
+<strong>加粗标签</strong>或 <b>加粗标签</b>
+<i>斜体标签</i> 或<em></em>
+<s>删除线标签</s>
+<sup>上标标签</sup>
+<sub>下标标签</sub>
+<u>下划线标签</u>
+<hr/> 水平分割线
+<br/>换行标签
+<a href="">超链接标签</a>
+转移字符：&+字母+； 构成  如空格字符   &nbsp;
+列表标签
+无序列表
+<ul>
+	<li></li>
+	<li></li>
+</ul>
+有序列表
+<ol>
+	<li></li>
+	<li></li>
+</ol>
+自定义列表
+<dl>
+	<dt>标题</dt>
+	<dd></dd>
+	<dd></dd>
+
+</dl>
+---------------------
+
+HTML=结构层  css=表现层 js=行为层
+
+css样式--》标签和标签内容的特征（属性：属性值）
+
+css三种样式：
+  1.内嵌式--写在标签内<img style="width:200px;">
+  2.行内样式--将style标签写在head标签之间
+  3.外部链接
+     <link rel="stylesheet" href="地址" type=""text/css>
+
+三大选择器  
+  1.标签选择器
+  2.class选择器
+  3.ID选择器
+  4.全局选择器 *号 （网页中所有的标签都得选）
+
+选择器优先级：权重 
+
+  标签选择器的权重是  1
+  class选择器的权重是 10
+  ID选择器的权重是    100
+
+权重是可以叠加的
+
+---------------------------------------------------------------------
+
+css中常见的属性：
+  text-decoration:none;  去掉下划线
+  text-decoration:underline;  加下划线
+  text-decoration:overline;   加上划线
+
+-----------------------------------------------------------------------
+表格标签
+<tr></tr>       行标签                                                                --------------------
+<td></td>       单元格标签                                                            -  underline
+<th></th>       表头标签                                                              -  overline
+                                                                                      -  decoration
+rowspan="个数"    上下合并单元格个数                                                  -  checkbox
+colspan="个数"    左右合并单元格个数                                                  -  radio
+                                                                                     -  rowspan
+-----------------------------------------------------------------                     -  colspan
+                                                                                      -  action method                                                                                        
+                                                                                       
+表单
+  <form action="表单提交地址" method="get/post"></form>
+
+  get   通过网页地址来提交 可以看到提交内容 不安全 提交内容不能过大（4k左右）
+  post  不是通过网页提交 比较安全 提交数据大（几个G） 提交的数据不能太大
+
+  input 的类型有哪些  text password button radio checkbox submit等
+
+
+表单类型
+  文本框 <input type="text" />
+  密码框 <input type="passwrod" name="" id="" value="" />
+  普通按钮 <input type="button" name="" id="" value=" />
+  单选框  <input type="radio" name="" id="">
+  多选框  <input type="checkbox" name="" id="">
+  提交按钮  <input type="submit" name="" id="">
+
+
+------------------------------------------------------------
+
+<ul>无序列表6
+   一般用于nav(导航条) 
+    a 去项目符号的代码   list-style:none/circle/disc/square; 
+    
+        项目符号类型   circle(空心圆)
+                       disc(实心圆)
+                       square（实心正方）
+                       none（去项目符号）
+                    
+   b 边框 border
+              
+              1.border-width:xx px;  边框粗细
+              2.border-color:red;  边框颜色
+              3.border-style:solid/dashed;  边框样式
+              4.order-radius:px/%;  边框圆角 
+
+   c 外边距 margin
+     内边距 padding
+     无论是外边距还是内距都有四个 top right bottom left 上 右 下 左（顺序不能乱哟）
+     argin:1px 1px;  上下 左右
+     margin：1px 1px 1px；上 左右 下
+     margin：10；        上下左右
+     内边距：padding     同上
+         auto 自适应（居中）
+-------------------------------------------------------------
+  float:left/right;浮动
+     浮动带来的问题：凡是给浮动的元素它后面紧跟那元素就会和他在一行
+     
+     ****如何清除浮动
+          1 给父级加一个高 不建议这方法
+          2 在浮动的元素的后面给元素添加一个空div设置clear：both；
+          3 给父级添加一个伪类 father：after{
+                                              content:'';
+                                              display:block;
+                                              height:0;
+                                              clear:both;
+                                              visibilty:hidden;
+                                              }最长用的方法
+        
+-----------------------------------------------------------------------------------------
+
+  div盒子模型  <div></div>
+    div的实际宽度 width+border*2+padding*2+margin*2
+    div的实际高度 height+border*2+padding*2+margin*2
+    div的背景 background
+           背景颜色  background-color
+           背景图片  background-image:url(’路径‘);
+           背景位置  background-position:12px 6px; 代表先水平后上下
+           背景大小  background-size：；100% 100%；代表水平和上下
+           背景平铺  background-repeat:no-repeat;
+           background:url()no-repeat 100% 100%;
+           background:red;
+           background-position:100% 100%;处于中心
+
+-------------------------------------------------------------------------------
+
+手机端 320-640  idap 640-968  电脑 968-1299  /px
+
+div的高建议写auto
+
+浮动会让下一个元素和它在一行
+
+-----------------------------------------------------------------------------------
+
+div的特点：
+
+  div占据一行(缺点)可以设置宽高元素（优点）类似于这种独占一行可以设置宽高元素的我们称之为块级元素 
+    a标签优点：不独占一行我们把它称之为行级元素 缺点：不可以设置宽高，
+
+行级元素：a span 剩下的都是块级
+
+块级元素怎么转换成行级元素  display：inline；
+行级转块级  display：block；
+既有行级的优点又有块级的优点 display:inline--block; 行级块元素
+
+选择器 后代选择器 div a{  }
+       并集选择器 ul,li{  }
+
+
+-----------------------------------------------------------------------
+position 定位
+
+    布局、结构
+    position相对定位（relative）和绝对定位(absolute)
+    position:relative; 给的一个参考物往往都给父级
+    position：absolute；就是一个具体值  left right top bottom   单位px
+             {  
+              position:a bsolute;
+              top:0;
+              bottom:0;
+              left:0;
+              right:0;
+              margin:auto;} 处于中心哟！！！推荐使用的方法
+    
+    position:fixed; 固定定位 父级是窗口
+
+
+
+   
+--------------------------------------------------------------------------
+
+层次关系------  z-index：；   默认值为  0
+
+   数字越大说明层次关系越大   就在上面
+   数字越少说明层次级别越小   就在下面
+
+   必须和 position:absolute; 配合使用****
+
+常用的三种设置宽度方法：
+   width：600px；/页面宽度
+   max-width:640px;/页面最大宽度是
+   width：100%；/平铺窗口
+
+
+
+
+
+-------------------------------------------------------------------------------
+unicode引用
+
+unicode是字体在网页端最原始的应用方式，特点是：
+
+兼容性最好，支持ie6+，及所有现代浏览器。
+支持按字体的方式去动态调整图标大小，颜色等等。
+但是因为是字体，所以不支持多色。只能使用平台里单色的图标，就算项目里有多色图标也会自动去色。
+注意：新版iconfont支持多色图标，这些多色图标在unicode模式下将不能使用，如果有需求建议使用symbol的引用方式
+
+矢量图的原理：
+　　矢量图，也称为面向对象的图像或绘图图像，在数学上定义为一系列由线连接的点。矢量文件[2] 中的图形元素称为对象。每个对象都是一个自成一体的实体，它具有颜色、形状、轮廓、大小和屏幕位置等属性。
+　　矢量图使用直线和曲线来描述图形，这些图形的元素是一些点、线、矩形、多边形、圆和弧线等等，它们都是通过数学公式计算获得的。例如一幅花的矢量图形实际上是由线段形成外框轮廓，由外框的颜色以及外框所封闭的颜色决定花显示出的颜色。
+
+------------------------------------------------------------------------------------------------
+伪类和伪元素
+
+  伪类有一个冒号：
+  伪元素右两个冒号::
+
+  常见伪类有  :link  :visited :hover :active  
+  常见伪元素  p::    after{}  p::before{}  p::first-letter{} p::first-line{}
+  
+  伪类的作用就是改变信息             伪元素就相当于一个虚拟的容器（虚拟的span）
+
+伪类：:link正常状态下的效果
+      :visited鼠标访问过后的效果、
+      :hover 鼠标滑过的效果
+      :active  鼠标点击时的效果               顺序是不能变的
+
+      
+
+伪元素：
+        p::first-letter{}  首字母或者第一个汉字
+        p::first-line{}    第一行
+     
+
+--------------------------------------------------------------------------------------
+
+盒子大小  box-sizing
+
+div 的实际宽度=width +border*2 +margin*2 +padding*2
+width=就是实际宽度 包含了margin padding border
+box-sizing:border-box;    取最大值
+
+vertical-align:middle;   图片垂直居中 解决图片不居中
+text-align:center;      文字水平居中
+
+让盒子处于父级元素中心的方法
+
+方法1  position:absolute;
+       top:0;
+       bottom:0;
+       left:0;
+       right:0;
+       margin；auto；
+
+方法2  position:absolute;
+       top:50%;
+       left:50%;
+       margin-top:-height/2;
+       margin-left:-width/2;
+
+position：absolute； 会自动转化行级块
+
+
+---------------------------------------------------------------------------
+
+下拉框：select
+<select name="">
+			<option value="">北京</option>
+			<option value="">山东</option>
+			<option value="">广西</option>
+			<option value="">甘肃</option>
+</select>
+
+
+
+
+
+
+
+====================================================================================
+====================================================================================
+            css3                      css3                css3
+-------------------------------------------------------------------------------------
+
+  弹性布局
+
+css存在浏览器的兼容性
+
+chrome的前缀的-webkit
+ff 的前缀的-moz
+ie的前缀的-ms-
+oprea的前缀的-o-
+
+1. width      <768px   的为手机设备
+   width      768-992  平板
+   width      992-1200 普通笔记本
+   widthv     >1200    大屏幕电脑
+
+2.弹性布局
+  max-width:992px;最大屏幕不超过992像素
+  min-width:600px;最小不低于600像素
+
+3.单位不再用px用rem
+	px em rem 的区别
+	
+	px 就是像素
+	em  依据父级设置的font-size有关
+	rem  只与根部元素html设置的font-size有关     做手机端用这个
+     浏览器默认字体大小为16像素
+
+4.弹性布局 
+
+   需要给父级加display:box:/inline-box/flex/inline-flex;
+   子级需要分配个数  box-flex:2;
+ box-orient:horizontal(水平的); vertical(垂直的)； 盒子排列方式
+ box-direction:normal(正序)；reverse(反序)；   元素排列顺序
+ box-pack:start/end/center/justify;  水平上的对齐方式
+ box-align:start/center/end;  垂直的对齐方式
+
+----------------------------------------------------------
+
+css3新增选择器
+
+    常用的标签 id class 通配符 后代 伪类 并集 伪元素 子元素 div>p 交集选择器ul#div
+
+c3新增的   obj是元素  attr是属姓名
+    属性选择器obj[attr]{}
+指定属性名和属性值的选择器
+  obj[attr="value"]{}
+指定属性名和属性值且属性值以v开头    v是变量
+  obj[attr^="v"]{}
+指定属性名和属性值且属性值以v结尾    v是变量
+  obj[attr$='v']{}   
+指定属性名和属性值且属性值里有v且  跟v的位置无关 (只要值里面有v就行)       v是变量
+  obj[attr*='v']{}
+指定属性名和属性值且属性值就是value 或以value开头的
+  obj[atter|='value']
+------------------------
+  p:nth-child(1){表示所有父级元素中第一个孩纸必须是p的}
+  p:nth-child(3){表示所有父级元素中第三个孩纸必须是p的}
+  p:nth-child(odd){选取所有父级中子元素个数为奇数的p}
+  p:nth-child(even){选取所有父级中子元素个数为偶数的p}
+  p:nth-child(2n-1){选取所有父级中子元素个数为奇数的p}
+  p:nth-child(2n){选取所有父级中子元素个数为偶数的p}
+-----------------------
+  p:nth-of-type(2){选取父元素中所有子元素第二次出现的p,跟位置无关}
+-----------------------
+  p:first-child{所有父元素中第一个必须是p}
+  p:last-child{所有父元素中最后一个必须是p}
+  p:first-of-type{从前往后走第1个出现的p和位置无关}
+  p:last-of-type{从后往前走第1个出现的p和位置无关}
+  P:only-child{父级中只有一个元素 且这个元素必须是p}
+  p:only-of-type{父级中只能有一个p跟子级的个数无关}
+
+
+                           假如在一个元素设置了行内样式怎么在css里面给它设置样式
+           答案:  !important  权重10000
+
+
+
+
+---------------------------------
+transform 转换   
+            translete()平移 
+            rotate(xx deg)旋转  
+            skew(deg)扭曲  
+            scale()缩放
+
+  1.transform:translate(x,y);  沿着水平向右移动x像素 在向下移动y像素
+
+   transition  过渡：
+   transtion:属性名   时间；
+
+动画  animation:动画名name   动画周期时间s 动画速度linear  动画次数infinite
+   首先定义一个动画然后执行动画
+   定义动画@keyframes 动画名 {
+   from{}  0%{}
+   to({}    100%{}
+ }
+
+------------------------------------------------------------------------------
+
+transform  3d 近大远小
+
+    平移:
+      translateX(30px) 水平向右移动30像素 
+      translateY(30px) 垂直向下移动30像素 
+      translateZ(30px) 
+
+   旋转：
+      rotateX(30deg)围绕着x轴旋转30渡
+      rotateY(30deg)围绕着y轴旋转30渡
+      rotateZ(30deg)围绕着z轴旋转30渡
+      
+     
+	 perspective:1000;  视距 只能给做3d转换元素的父级（近大远小）800-1000最好
+	 transform-style:preserve-3d;  给这个元素的子元素 一个三d空间 
+	 transform-origin    3d转换的位置x y z(只能用数字) 旋转轴 center left right % 0
+	 
+ 多媒体查询：                                                                 768 992 1200
+      @media 设备
+      @media screen  屏幕
+      @media print   打应机
+      @media speech  阅读器
+      **@media screen and (max-width:768px){
+                  0-768
+      }                
+        @media screen and (min-width:768px) and (max-width:992px){
+                 768px-992px
+        }
+        @media screen and (min-width:1200){
+                  1200-
+        }
+ 盒子边框
+    border-radius<边框圆角>
+ 盒子阴影
+    box-shadow x y r color; inset内
+ 三角形
+ 。。。。。
+ 0
+ 渐变 
+    background:linear-gradient()
+    background:radial-gradient()
+ 
+ 透明度 
+	 opacity:0.2;
+	 background:rgba();
+ ie8以下
+     opacity:0.6;
+  	 background:rgba(12,15,16,0.6);
+	 filter:alpha(opacity=30);/*iegao版本*/
+	 -ms-filter："progid:DXImageTransform.Microsoft.ALpha(Opacity=30)";
+	 
+opacity会把内容透明  区别
+ ---------------------------
+ 
+ 
+
+------------------------------------------------------------------
+
+css中那些属性会继承：font 
+------------------------------------------------------------------
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+总结：
+  1. html的标签和属性
+  2. 网页的布局（弹性盒模型  移动端/pc端布局）和页面的美化吧，
+                布局就是把一个个的小盒子按照要求放在页面上或者一个大盒子里,可以用定位，浮动(注意浮动带来的问题)...
+                注意盒子的实际宽高度  结构一定要清晰 
+  4. css3新增的一些属性要注意浏览器的兼容性 
+  5. 该加注释的地方要加注释 增强代码的可读性
+
+
+     移动端:        <mete name="viewport"
+                    content="width=device-width,
+                    initial-scale=1,minimum-scale=1,maximum-scale=1,
+                    user-scalable=no "/>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+==================================================================================
+                js                js                         js
+----------------------------------------------------------------------------------
+
+JS全名是javascript
+     是浏览器脚本语言
+     结构层html  表现层css 行为层js
+   
+   
+ 数字和变量
+   js的注释 单行//    /* 多行*/ 
+   js区分大小写
+   js不区分单双引号  
+   js代码写在script里面
+   
+
+----------------------
+消息框 alert()
+       confirm() 确认框
+       prompt()  输入框
+------------------------------------------------------
+
+      数字：
+      常量：凡是带单双引号包含的都是常量  字符串‘’
+      变量：可以改变的量 凡是var出来的 是声明的意思
+      在js中的连接符 +号   alert 弹出对话框
+      js的执行从上往下
+      js中最大的对象   window>document>html>body>element
+      标签的属性   
+      获取元素
+      id   document.getElementById("");
+    标签   document.getElementsByTagName('');
+           document.getElementsByClassName('');
+            
+ ------------------------------------------
+   js的数据类型 :
+      number 
+      string
+      布尔
+         true/false
+      null
+      undifind 
+      obj(对象) 
+      function 函数
+      
+      typeof检测数据类型  t
+   
+   typeof出来的数据类型:string obj undefind boolean function()
+   注释typeof出的 arr null 是obj
+   
+   
+---------------------------------------------
+字符串 string
+   属性 eg：length
+
+   
+    
+------------------------------------------
+JS 中如何遍历
+   for 循环  
+    i++：程序执行后加一
+    ++i:程序执行前加一
+      语法：for(var i=0;i<5;i++){   i 最后是5
+              语句
+           }
+--------------------------------------------
+事件:
+ 事件一定绑定到元素上且与函数配合使用
+js事件：
+   鼠标事件：onclick      鼠标点击
+         ondblclick   双击
+         onmousevoer  划过
+         onmouseout   滑出
+         onmouseup    鼠标弹起
+         onmousedown  鼠标按下
+
+   键盘事件：onkeydown     键盘按下
+             onkeyup       键盘弹起
+
+        
+
+关键字：
+     function: 
+                            函数  匿名函数/有名函数       无论是有名还是匿名都必须调用  匿名往往同过事件调用  
+     this：
+           
+     new：
+
+------------------------------------------------------------------------------------------
+js语句:
+    if{}else{}  //条件语句
+    if(条件一){
+      满足条件执行
+    }else{
+      否则执行这句
+    }
+
+    条件 :<  >  = <= >= != == true/false
+    多个条件:
+      if(){
+      条件一
+      }else if(){
+      条件二
+      }....else{
+      其他
+      }
+三元运算:
+     条件?语句1:语句2
+
+四则运算:  
+     + - * / %(求于余)
+逻辑运算:
+     ||(或) &&(且) !(非)
+
+----------------------------------
+字符串:
+     属性  length
+     
+     方法  charAt()     返回索引值对应的字符  eg:
+           concat()     用于连接多个字符串    eg:a.concat(b);  
+           indexOf()    返回某个字符在字符串中第一次出现的位置 没有则返回-1
+           slice(2,6)   提取出需要的字符串中的一部分 包含开头不包含结尾
+           split()      把一个字符串分割成字符串数组
+           substring()  等价于slice(2,3)
+           toLowerCase  大写转小写
+           toUpperCase  小写转大写
+           
+  
+------------------------------------
+数组的方法:
+   定义数组三种方法   1.var arr=new Array();
+                       arr[0]='zhang'
+                       arr[1]='wang'
+                 
+	                  2.var arr=Array('zhuang','wang');
+	                
+	                  3.var arr=['zhuang','wang','jian'] ;
+   s
+   方法:
+       push()   向数组后添加一个新元素
+       pop()    直接删除数组最后一个元素
+       unshift()在数组前面添加一个新元素
+       shift    删除数组第一个元素           
+       concat() 合并多个数组  语法:ayy.concat(arr1,arr2);直接就是结果(必须声明一个新的变量)
+       join(元素连接方式)       用数组的元素组成一个字符串(和split()相反)
+       toString(没有连接方式)   转换数组到字符串
+       reverse()    倒序排列数组
+       slice(1,3)   截取数组包含前面不包含后面
+       sort()       排序  按照首字符排  sort(function (a,b){return a-b})从小到大  sort(function(a,b){return b-a}
+       splice(索引值,要删除的个数,要添加的元素)    添加/删除
+       
+       indexOf  查找数组元素在数组中的位置
+       
+三添加 两删除 两转换 一截取 一合并 两排序  
+---------------------------------     
+       
+  Math对象:
+  
+       Math.PI     
+       Math.abs(x)   返回x的绝对值
+       Math.ceil()   向上取整
+       Math.floor()  向下取整
+       Math.round()  四舍五入
+       Math.sqrt()   返回数的平方根
+       Math.sin(rad) 返回deg的正弦值  由角度得数字
+       Math.asin(x)  返回x的正弦      由数字得角度
+       Math.cos(x)   返回X的余弦值
+       Math.acos(x)  返回x的反余弦
+       Math.random() 返回0-1之间的随机数
+       
+       
+---------------------------------
+
+定时器:setInterval(function(){  },100)
+     
+---------------------------------
+  isNaN(x)
+     判断x是否为数字 不是就返回true  是就返回false 
+     隐式转换 会将'123'转换成123
+     
+     ===  也有隐式转换的能力
+  parseInt()将字符串强制转化成整数     
+  parseFloat()将字符串强制转换成小数
+  Number()  将字符串转换成数字
+  String()  将别的转化成字符串
+  eval()    将字符串解析成浏览器可以分别的类型
+------------------------------------
+ 对象  json
+json是一个数据储存的语法格式
+{"属性":"属性值"}和数组混合搭配
+obj={"name":["老王","小王"]}  obj.name[1]----->小王
+arr=[{"name":"tom"},{"name","老王"}]   arr[1].name=老王
+
+ajax从服务器上加载的数据都是string 需要解析成浏览器能是别的js对象
+      解析方法有eval();   JSON.parse();
+      JSON.stringift()将js值转化为字符串
+
+xml对象:
+  面试题:
+    你所知道的空标签 <hr/>
+                                      <br/>
+                                      <img/>
+  xml和html的区别:
+    xml必须有闭合标签 区分大小写  必须正确嵌套 属性值必须要加引号 只能用转义字符
+
+    var obj={
+       'name':'zhangsan',   //属性:属性值
+       'sex':'men';
+       'age':23;
+    }
+    
+   读取: . 或者[]
+      
+   json 遍历用for(var i in json){
+               alert(i) // i 是属性 
+               } 
+   
+            for(var i in obj){
+               alert(obj[i])  //读取属性值用[]
+            }
+   
+-------------------------------------------------------------------------------------
+函数：
+
+　　函数的调用:
+		    １．通过绑定事件调用
+		    　　　ｏｂｊ．ｏｎｃｌｉｃｋ＝ｆｕｎｃｔｉｏｎ()｛｝
+		    ２．通过函数名调用
+		    　　　　函数名()
+		    ３．函数自调用
+		    　　　(ｏｂｊ．ｏｎｃｌｉｃｋ＝ｆｕｎｃｔｉｏｎ()｛｝)()
+
+　　函数传参：
+　　　      (function ff(m){
+                    alert(m)
+             })(i); 
+             m 是形参
+             i 是实参
+            ()()这表示自执行函数  i=m  m随着i变化
+                    
+   ****函数没有执行顺序  放在哪都能调用
+                    
+--------------------------------------------
+innerHTML
+       不光包含了文本还包含标签
+       
+innerText
+       仅仅是文本
+
+都可以表示标签中的内容但是有一定区别
+--------------------------------------------
+
+定时器:       
+        1.setInterval(参数一,参数二)            
+            连续性开启
+            参数一  function(){ }
+            参数二  time 以毫秒计算
+            
+            清除定时器clearInterval(参数) 在加定时器的上面加不会出现定时器叠加
+               参数就是定时器的变量名   
+            
+        2.steTimeout(参数一,参数二)
+            只开启一次
+            参数一是一个函数
+            参数二是time 以毫秒计算
+            
+ ---------------------------------------------------------------------------
+字体适配:
+
+	html{
+	     font-size:window.innerWidth/10+"px";
+	} 
+
+-------------------------------------------------------------------------------------------------
+
+面向对象:  一切事物都是对象
+
+   每一个例自带 this
+   
+   this 本身就是一个对象 谁调用他 他就指向谁
+   对象是由类new出来的
+   
+   function obj(){ }   obj();  定义一个模型 类
+ 
+   var obj=function (){ }  obj();
+   
+   函数是方法 方法是函数 函数不是方法 方法不是函数
+   变量是属性
+   
+-----------------------------------------------
+
+return  返回一个东西且终止这个程序
+
+-----------------------------------
+
+Date对象:
+   获取时间.
+	  new Date();
+	  getFullYear() 获取当前系统的年份
+	  getMonth()    获取当前系统的月份  需要加一
+	  getDay()      返回一周中的某一天  周日是零
+	  getData()     返回这个月中的某日
+	  getHours()    返回小时
+	  getMinutes()  返回分钟
+	  getSeconds()  返回秒钟
+	  getTime()      返回1970年1月1日到现在的毫秒数
+	  
+  设置时间        设置后再获取时间
+    time.setFullYear(1993);  
+	time.setMonth(5);
+	time.setHours(2);
+	time.setMinutes(8);
+	time.setDate(22);
+	time.setSeconds(55);
+  
+-------------------------------------------------------------------------
+运动：
+   
+     和时间（定时器）有关系
+     如果使用定位让这个元素运动
+     obj.offsetLeft  获取当前元素的left值  返回的是数字值 不带单位
+     offsetleft用这个不会撑大页面
+     
+减速运动：
+
+
+-------------------------------------------------------------------------------
+js目录:
+    一.对js的简单了解
+       1.js的定义，js的变量，js的注释
+       2.string
+       3.arr
+       4.math
+       5.number
+       6.date
+       7.function      ***抽象的东西
+       8.json
+       9.js散知识点
+       10.事件
+       11.运动 ---网页特效
+       12.
+-------------------------------------
+
+手机端：
+  display:table;      该元素会被作为块级表格来显示
+  display:table-cell; 会作为一个表格单元格显示
+
+
+----------------------------------------
+弹性盒子：
+  
+
+------------------------------------------------------------------------
+position: absolute; 
+   /*   隐式转换 将这个元素变成了行级块元素 
+    *   会脱离文档流 margin-left/right 
+	    不起作用了  
+	    不建议在手机端使用*/
+				
+变量作用域问题 全局变量可以先调取后定义（定义在调取后面）
+
+-----------------------------------
+break     中断程序
+continue  跳过程序继续下一个环节    
+
+break continue 只用在循环里
+----------------------------------------------------------------------
+
+DOM操作：  （获取增加删除修改）
+   
+   1.childNodes 获取子节点（只读 有兼容问题 包括空白节点）；
+   
+   1.1 . 节点类型：nodeType 返回值是 1 2 3
+             1  代表元素节点
+             2  代表属性节点
+             3  代表文本节点 （空白节点）
+             
+   2. 获取子节点的方法 无兼容性用 children()
+   
+   3. attributes  获取指定节点的属性集合 
+      attributes有多个属性 attributes[n].value  
+			               attributes.name
+			               attributes.length    
+   
+   4.firstElementChild  获取元素下第一个子节点（标准）
+   4.1 . firstChild     获取元素下第一个子节点（非标准）
+   
+   5.获取元素下最后一个子节点
+     非标准  lastChild
+     标准    lastElementChild
+     
+   6.获取元素下一个兄弟节点
+     非标准  nextSibling
+     标准 nextElementSibling
+     
+   7.获取元素上一个兄弟元素
+     非标准  previousSibling
+     标准    previousElementSibling     
+   
+   8.parentNode   获取当前节点的父节点没有兼容性
+   
+   9.复习 this
+   this是一个对象 当前事件绑定的元素
+   
+     function run(obj){
+        var obj=obj;
+        var _this=this;
+     
+     }
+     
+    10.width
+       div.style.width                    只读
+       div.offsetWidth  在css中设置的width 只读
+       clientWidth      可视区的宽度       只读
+   
+   
+   10.父级.removeChild()  删除元素节点     
+   
+---------------------------------------------------------------------------
+ 清除浮动：
+   .clearfix:before,.clearfix:after{
+		content:"";
+		display:table;
+	}
+	.clearfix:after{
+		clear:both;
+	}
+   
+---------------------------------------------
+元素的动态创建：
+   document.cretaeElement('li');创建元素节点
+   fu元素.appendChild(子元素);往父元素后面添加
+   fu元素.insertBefore(新元素，被插入的元素);
+   
+   innerHTML+= 保留原本内容 继续往后添加
+   
+ 
+ 为了提高页面优化 减少dom操作 尽量多用innerHTML
+ ------------------------------------------------
+   
+表单form 
+   特有属性：placeholder=""
+             required  必填<input type="text" required>
+            checked     默认被选<input type="text" checked>
+
+   伪类选择器：
+         input:disabled{选取属性有disabled的属性}
+         input:invalid{选取无效的表单元素}
+         input:valid{选择有效的input表单}
+         input:required{含有required属性的input}
+         input:optional{没有required属性的input};
+
+
+input value值有：
+button	定义可点击的按钮（大多与 JavaScript 使用来启动脚本）
+checkbox	定义复选框。
+color	定义拾色器。
+date	定义日期字段（带有 calendar 控件）
+datetime	定义日期字段（带有 calendar 和 time 控件）
+datetime-local	定义日期字段（带有 calendar 和 time 控件）
+month	定义日期字段的月（带有 calendar 控件）
+week	定义日期字段的周（带有 calendar 控件）
+time	定义日期字段的时、分、秒（带有 time 控件）
+email	定义用于 e-mail 地址的文本字段
+file	定义输入字段和 "浏览..." 按钮，供文件上传
+hidden	定义隐藏输入字段
+image	定义图像作为提交按钮
+number	定义带有 spinner 控件的数字字段
+password	定义密码字段。字段中的字符会被遮蔽。
+radio	定义单选按钮。
+range	定义带有 slider 控件的数字字段。
+reset	定义重置按钮。重置按钮会将所有表单字段重置为初始值。
+search	定义用于搜索的文本字段。
+submit	定义提交按钮。提交按钮向服务器发送数据。
+tel	定义用于电话号码的文本字段。
+text	默认。定义单行输入字段，用户可在其中输入文本。默认是 20 个字符。
+url	定义用于 URL 的文本字段。
+
+
+-----------------------------------------------------------------5.5
+
+button和<input type="button"/>标签在ios上出现的按钮带圆角
+
+-----------------
+event对象：
+	1、event存在兼容性  ev=ev||window.event
+	2、event对象有哪些方法和属性
+		clientX   鼠标的x值
+	    clientY   鼠标的y值
+    
+    事件：onclick onmouseover onmouseout onmousedown onmouseup
+          onmousemove鼠标移动
+
+算两点间的距离：
+	设(200,200)
+	a平方加b平方等于c平方
+  eg:Math.sqrt((ev.clientX-200)*(ev.clientX-200)+(ev.clientY-200)*(ev.clientY-200))
+
+
+//获取全部属性
+document.onclick=function(ev){
+	var ev=ev||window.event;
+	
+	for(var attr in ev){
+		console.log(attr);
+	}
+}
+
+-----------
+键盘事件对象：
+	onkeydown:键盘按下
+	onkeyup:键盘抬起
+	event.keyCode() 键盘的键值
+
+获取键值	
+	document.onkeydown=function(ev){
+		ev=ev||window.event;
+		alert(ev.keyCode);
+	}
+------------------------------
+浏览器的兼容问题？
+	1.ev=ev||window.event
+
+------------------------------------------------------------------5.8
+
+1、event对象事件包含所有鼠标和键盘的信息
+2、复习常用的事件有哪些？
+	。。。。
+	
+	表单事件：input对象
+		onchange   表单被修改触发的事件
+	  onfocus    表单聚焦时触发的事件
+		onblur     表单失去焦点触发的事件
+		onsumit    提交表单所触发的事件 写在form上
+		onreset    重置表单
+		
+	window的事件：
+		onload     页面加载完成后执行 包括了css img 文本
+		  eg:  window.onload=function(){}
+		
+		onscroll   当滚动条滚动时触发的事件
+		  eg:  window.onscroll=function(){}
+		  滚动条的距离计算
+			 var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+		onresize  窗口大小被改变是触发的事件                      
+			eg window.onresize=function(){
+				console.log(documnet.body.clientY)
+			}
+
+3、循环语句和条件语句
+	循环语句 for for....in   do while while do
+    
+    判断：switch(变量){
+            case 条件一:
+                 语句一；
+            break;
+    	}
+
+
+----------------------
+js的问题 
+  1、全局变量
+  3、文件依赖
+  
+面向对象：
+	  
+-------------------------------------------------------------5.10
+复习:
+	document.querySelector("")//获取的是一个
+	document.querySelectorAll('')//获取的事一组元素的集合
+	
+-------------------------------------------------------
+node搭建server
+    安装nodejs 查询node是否安装node -v
+	安装npm node管理工具  npm install http-server -g
+	在任意放打开命令行输入 http-server  
+	  
+-----------------------------------------------------------ajax
+
+
+Ajax :是向服务器请求数据的,可以在不刷新整个页面的前提下与服务器发生交互局部加载页面
+	ajax核心就是XMLHttpRequest对象
+	创建这个对象:var xmlhttp=new XMLHttpRequest();
+	ie5-6创建:var xmlhttp=new ActiveXObject("Micorosoft.XMLHTTP");
+	
+	1.兼容: var xhr=null;
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}else{
+		xhr=new ActiveXObject("Microsoft XMLHTTP")
+	}
+	2.发生请求:
+		XMLHttpRequest()的两个方法 open()和send()
+		open(method,url,async)
+			method是请求方式 get和post
+			url是路径也叫数据接口
+			async  是否异步 true 和 false 
+			  所有程序可以同时进行加载叫异步加载 
+			  同步加载时程序一个接一个的进行如果其中一个没有加载完成后面一个只能处于等待状态
+	 3.与服务器交互是4个过程  0代表刚准备状态 1准备状态 2请求以接受 3 请求处理值 4请求以完成
+	 	这几个过程都在xhr的readyState这个属性里
+	  
+	 	xhr.onreadystatechange=function(){
+	 	//		alert(xhr.responseText); 
+	 			if(xhr.readyState==4){
+	 				alert(xhr.responseText)
+	 			}
+	 	} 
+
+
+post请求:
+  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+
+	  
+---------------------------------------------------------------------------------------------------5.12     
+与服务器发生交互的过程:
+  xhr.readyState交互过程(0,1,2,3,4)
+  xhr.responseTest 请求文件中的数据
+  xhr.status请求的状态
+
+函数传参 参数是局部变量
+
+
+------------------------------------------------------------php
+$name --->var name;
+客户端以get请求 服务端就用$_GET[];
+
+1.php的变量用声明 $   eg:$name="hi"; 
+2.php中的链接符用 .    eg:$name."老王"."小王";
+3.客户端用什么方式请求服务器就用什么接收   eg:$name=$_GET['name'];  $name=$_POST['name'];
+4.$_REQUEST ['name']  用来接收get和post发送的请求   
+
+php的数组:
+  1.$arr=['张三','李四','老王'];
+  2.print_r() 以键值对 k=>v 形式输出;
+  3数组自定义key  $arrs=array("老王"=>"王五")
+                                  print_r($arrs["老王"]);  //打印出王五
+
+
+多维数组:
+var arr=[[""][]]
+
+
+-----------------------------------------------------------跨域
+  一个网络地址http://127.0.0.1:8096  是由网络传输协议和域名和端口构成 
+  这三者只要有一个不相同就属于非同源策略
+  jsonp
+    后台会把数据当做一个参数传在一个callback的回调函数里  客户端只需要知道这个callback就可以了
+    第一步:创建script  eg: 
+     var script=document.createElement("script");
+     script.src="https://ecpm.tanx.com/ex?i=mm_12852562_1778064_13674396&cb=jsonp_callback_68197&r=https%3A%2F%2Fhao.360.cn%2F%3Fsrc%3Dlm%26ls%3Dn0904170d98&cg=a7b326d445decab436f0ec7bb27f3db6&pvid=a4392351680ea41b2f125d62bcaa358a&u=https%3A%2F%2Fwww.taobao.com%2F&psl=1&nk=99%2C117%2C105%2C49%2C53%2C48%2C51%2C56%2C51%2C56%2C49%2C54%2C55%2C48&sk=&refpid=&fp=1.Qm_lSgXcfMm477sGcrOZuIjCRETwk_Zpg2Dv0YEWfT6_3HIw21dDxk.UTF-8.hu2lztSK_gBAtByID_hEI0DmqgiayA.Q.t4qxxz";
+     document.body.appendChild(script);
+
+     function jsonp_callback_68197(data){
+         console.log(data)
+     }
+
+    src和href的区别  
+      src链接的是一个资源 没有同源和非同源的说法
+      href是一链接 普通页面跳转
+=        =                =                  =                  =                =微信笔记已备份
+
+---------------------------------------------------------------------------------------5.19
+arguments 函数参数的对象
+
+
+------------------------------------------------------------------------------5.22
+正则:  是一个内置对象
+    -----要搞清楚是正则的方法还是字符串的方法
+	  正则就是人为的制定一个规则去检验字符串是否符合这个规则
+    语法:
+      var reg=new RegExp(参数一,参数二);  参数一是规则 参数二是修饰符
+      简写: var reg=/规则/修饰符
+
+    方法:
+      test()  检测这个字符串是否有符合规则的没有就返回false 有就返回true
+      Exec() 检索字符串是否包含符合规则的正则内容 有就返回 可没有就返回null
+	  
+	  规则:
+      m:多行
+      i:不区分带小写
+      g:全局
+	  
+主要就是操作字符串
+  字符串的方法: 
+      concat        字符串合并
+      charAt()     返回索引值对应的字符
+      indexOf()   返回字符在字符串中的位置 没有就返回-1
+      大小写转换
+      substring()   截取字符串
+      slice()    截取字符串
+      split()     分割成字符串数组
+      substr()   截取字符串 和substring一样
+
+  跟正则有关的字符串方法:
+      match()    在字符中检索指定的值找到一个或多个与正则表达式的匹配字符  返回是个数组
+      replace()  替换与正则表达式匹配的字符串  出结果的方法需要var一个变量纯起来   str.replace(reg,"dd");
+      search()   检索字符串中与正则表达式匹配的字符有就返回字符的位置没有就是-1  str.search(reg)
+      split()       把字串分割成字符串数组     str.split(reg)
+
+字符串的方括号:
+    [abc] 查找方括号之间的任何字符  返回的是一个obj类型的
+    [^abc]查找不在任何不在方括号之间的字符
+
+[0-9]查找任何从0-9的数字
+[a-z]查找任何从小写a-z之间的任何字符	  
+[A-Z]查找任何从大写A-Z之间的任何字符	  
+[A-z]查找所有的大写的A到小写的z也就是所有的字母不区分大小写
+(red|blue|green)  查找任何指定的选项
+
+元字符:
+    /./  代表查找的单个字符
+    /\w/ 查找单词字符 单词字符有 字母 数字 _
+    /\W/非单词字符   
+    /\d/查找数字
+    /\D/查找非数字
+    /\s/查找空白字符
+    /\S/查找非空白
+    /\n/是换行符
+
+量词:
+    /n+/   匹配至少包含一个n的字符串
+    /n*/    表示匹配0或多个n的字符串
+    /n{x}/  表示匹配x个n的序列的字符串
+    /n{x.}/  匹配至少x个
+    /n{x,y}/  匹配至少x个n最大y个n
+    /n$/  匹配任何以n结尾的字符串
+    /^n/   匹配任何以n开头的字符串
+    /?=n/ 匹配其后紧跟指定为n的字符串
+
+网易邮箱:  reg =/^[a-zA-Z]\w{5,17}@(163|126).com$/g;
+qq邮箱:     reg = /^[1-9]\d{4,10}@{qq.com}$/g
+
+
+-------------------------------------------------
+outline:none;  去掉input获得焦点时的默认边框
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------
+ajax:
+     创建对象  var xmlhttp;
+               if(window.XMLHttpRequest){
+                   xmlhttp=new XMLHttpRequest();                  //创建xmlhttp对象方法
+               }else{
+                   xmlhttp=ActiveXObject("microsoft.XMLHttp");    //兼容ie5或者ie6
+               }
+
+
+     xhr请求:
+             使用XMLHttpRequest对象的 open() 和 send() 方法;
+             
+               open(method,url,async)  规定请求的类型,url 以及是否异步处理请求
+                    method:请求的类型
+                    url:文件在服务其上的位置
+                    async:true(异歩)false(同步) 
+                    
+               send(string)   将请求发送到服务器
+                    string 仅用于post请求  
+                  
+-------------------------------------------------------------------------------
+json:
+    全称   javascript object notation
+    json 是一种轻量级的数据交换格式
+    json 是独立语言  易理解
+      
+
+====================================================================================================
+==================================================================================================== 
+           html5                            html5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+本地存储：
+
+--------------------------------------------------
+web storage：
+
+  web stroage 中的 api
+	length:获得当前web storage中的条目
+	key(n):获取web stroage中的第N个条目
+	getItem(key):返回指定的key内容 不存在则返回null 返回类型是字符串
+	setItem(key,value):设置指定key的值为value
+	removeItem():根据指定的key删除键值为key的内容
+	clear:清空web storage的内容
+
+  数据的储存与获取：
+	localStorage.steItem('key','value');   保存键值对数据	
+	var val=localStorage.getItem('key');   获取数据
+	localStoage.key="key";
+	var val=localStorage.key;
+
+  html5储存基于键/值对
+
+  数据的删除的清空：
+	var val=sessionStorage.removeItem(key);
+	var val=sessionStorage.removeItem(1);  1会被转成string
+	
+
+  不管使用什么方法都得使用
+	.setItem('key','value')保存数据   通过键/值 
+	.getItem('key')读取数据        通过key
+
+
+web SQL：
+	websql是数据库存储和访问的另一种方式  被称为SQLLite
+	
+  使用web SQL Database API
+    打开和创建数据库: 
+    	var db=openDatabase('db','1.0','first database','2*1024*1024')
+        参数一是 数据库名
+        参数二是 版本号
+        参数三是 数据库的描述
+        参数四是 数据库的大小
+
+  检测数据库API数据库是否在浏览器上有效：
+  		var db;
+  		if(window.openDatabase){
+  			db.openDatabase('mydb','1.0','my first database','2*1024*1024');
+  		}
+
+  创建数据表：
+		用transaction方法来执行事务处理
+		  eg: db.transaction(function(tx){
+		  	tx.executeSql('CREATE TABLE tweets(id,data,tweet)');
+		  })
+
+
+-----------------------------------------------------------------
+canvas:
+	检测兼容
+		var canvas=document.getElementById("myCanvas");
+		if(canvas.getContext){
+			alert('您的浏览器支持canvas');
+		}else{
+			alert('你的浏览器不支持canvas')
+		} 
+
+	拿到2d对象
+		var ctx=canvas.getContext('2d');
+
+	绘制正方形
+		ctx.fillStyle="green";    //颜色填充写前面
+		ctx.fillRect(10,10,200,200); //绘制一个填充的矩形
+		strokeRect(x,y,width,height);//绘制一个矩形的边框
+		clearRect(x,y,width,height);//清除指定矩形区域
+	
+	绘制路径：
+		图形是元素的路径，路径是通过不同颜色，宽度，。。。组成的一个集合；
+		1、创建路径起始点
+		2、使用图画命令画出路径
+		3、之后吧路径关闭
+		4、描边和填充渲染路劲
+
+	用到的函数：
+		beginPath() 新建一条路径，生成之后，图形绘制命令被指到到改路劲、
+		closePath() 闭合路劲
+		stroke() 通过线条来绘制图形的轮廓
+		fille()  填充
+		
+	绘制圆弧： 使用arc()方法 还有arcTo();
+	    arc (x,y,radius,startAngle,endAngle,anticlockwise);
+	    
+         eg ctx.arc(100,100,75,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fillStyle="red"
+			ctx.fill();
+
+贝塞尔曲线和二次方曲线：
+	贝塞尔曲线可以是二次方或者三次方的形式
+	  eg: bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y);
+	      六个参数
+	      参数1、2 3、4是两个控制点
+	      参数5、6是曲线的坐标
+	    
+	    绘制二次样式条曲线
+	      eg：quadraticCurveTo(cp1x,cp1y,x,y);  有两条控制线条
+	      
+	      
+文件：
+	选择默认<input type=""file" accept="images/*">
+  检测上传文件名：
+  	for(var i=0;i<f.files.length;i++){
+		ff=f.files[i];
+		console.log(ff.name)
+	}
+      
+
+
+
+================================================
+瀑布流:
+    特点:宽度相同高度不同 或者 高度相同宽度不同
+    两张常见形式:
+        1.浮动式:外层容器浮动布局(简单)
+        2.定位式:没有简单的浮动容器而是按照外层容器进行定位
+
+        获取屏幕的高:
+          document.documnetElement.clientHeight;
+        滚动条事件:
+          window.onscroll;
+        获取滚动条的高度:
+          document.documentElement.scrollTop||document.body.scrollTop;//兼容问题
+        滚动后body的高度:
+          document.body.scrollHeight;
+
+
+
+
+
+
+
+
+
+         
+         
+         
+
+

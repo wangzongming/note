@@ -1,0 +1,286 @@
+
+===========================================================================
+     php                       php                php
+
+---------------------------------------------------------------
+php是超文本预处理器  （hypertext preprocessor）
+运行于服务器端 是嵌入到html中的一种脚本语言
+
+特点  源码开放
+      执行速度快、
+      跨平台
+      支持广泛数据库
+      面向对象
+
+php主要用来做web开发
+
+数据类型：
+	基本数据类型  整型 浮点型 布尔型 字符串
+	符合数据类型  数组 对象
+	特殊数据类型  null 资源型
+	
+基本数据类型：
+	integet  用来表示整数
+	float    用来表示浮点数
+	string   用来表示字符串
+	boolean  用来表示布尔型
+
+复合数据类型
+	array    以数据作为数据类型
+	object   一对象作为数据类型
+
+特殊数据类型
+	null     表示一个变量没有值
+	resource 对外部资源的引用
+
+php预定义变量/超全局变量   都是数组
+
+	$_POST      用于获取post方式提交的数据请求
+	$_GET       用于获取get方式提交的数据请求
+	$_SERVER    包含了服务器 客户端 环境变量的数组
+	$_FILES     与文件上传相关的数据
+	$_ENV       包含了环境信息的数组
+	$_REQUEST   默认包含可$_POST $_GET $_cookie的数组
+	$_COOKIE    包含了cookie信息的变量
+	$_SESSION   包含了回话信息的变量数组
+	 
+运算符：
+   &&  AND	 与
+   ||  OR    或
+   !   NOT   否
+   XOR
+	
+循环：
+	while
+	do while
+	for
+	foreach
+	
+字符串：
+    创建 $str="string";
+         $str='string';
+         
+	获取字符串的长度  
+	     strlen($string);   在utf-8里一个汉字占3个字符  gbk为4
+
+获取字符串的位置：strpos
+
+获取字符串中某字符出现的次数：substr_count()
+
+字符串替换：substr_replace()
+
+重复字符串；str_repeat($str,n)
+
+大小写转换； str_tolower()  str_toupper()
+
+
+获取时间：	
+	获取时间戳：time()
+	
+数组：
+	类型
+	  数字索引数组
+	  关联数组
+	  
+定义数组  $arr=array('ss','dd');
+	向数组中添加/删除元素  $arr[3]=>"string";
+	                      array_push($arr,'..')
+	                      array_pop()
+	                      array_unshift()
+	                      array_shift()
+数组排序：
+    sort()函数  按照升序排列
+    rsort()   降序
+
+关联数组排序：
+    排序不改变k值
+	    asort()  升序
+	    arsort() 降序
+	按照k值排序
+		ksort()  升序
+		krsort() 降序
+	                 
+	  
+数组的遍历：
+    foreach($array as $name){
+       ....
+    }	  
+    
+字符串转化为数组:
+    elplode("-",$string)   按照指定字符拆分字符串    
+ 
+数组转化为字符串:
+	implode("-",$array)   
+
+获取用户url：
+	$_SERVER['REQUEST_URI'];
+	
+	
+	
+ --------------------------------------------
+ 获取全局变量：
+   global 实质是全局变量的的一个引用  global $var1;
+   $GLOBALS 就是全局变量本身  $GLOBALS['var1']
+   
+ --------------------------
+ php中的cookie
+   cookie是服务器留在用户计算机中的一小段文本信息
+   
+ cookie创建、获取，修改，删除    
+    获取$_COOKIE['zzb']
+    
+    修改/设置 cookie 用：
+       setcookie   在设置前不能输出东西包括空格 只能放在最前面
+       
+    删除 设置为null   setcookie('zzb',null)
+         或者空       
+         推荐使用过期删除   setcookie('zzb','zhizuobiao',time()-3000);
+         不能使用unset()函数 来清除函数
+         Expire time()+n (n为正整数或者负数) 设置cookie保质期
+           
+           
+-=----------------------------------4.27
+打开/关闭文件：
+    resoure fopen(string #filename,string $mode);
+    $filename  要打开文件的路径
+    $mode      打开方式  eg:"a","b","r"
+    
+    
+关闭文件  
+    bool fclose(resource $handle)	
+	
+读文件内容
+    string fread(resource $handle,int $length);
+    feof($handle)函数 判断是否到了末尾
+   
+操作文件三步骤：
+	1.打开文件
+	2.操作文件（读写或者其他操作）
+	3.关闭文件
+
+  eg:  	$file="./test.txt";  //要打开的文件  不能用写入的方式打开远程文件
+        $fp=fopen($file,'ab');   //以写入方式打开 b.并且是二进制  如果不纯在会自动创建
+        //返回的是一个Boolean值
+        if($fp==false){
+           echo "打开文件失败"；
+        }else{
+        
+        //..写入内容要用可写方式打开
+           $str=md5(time());
+           
+           $res=fwrite($fp,$str);
+           var_dump($res)
+         // var_dump(feof($fp)); //判断是否读完了文件 返回一个布尔值
+	     // var_dump($str);
+	     //通过fread配合feof来读取文件所有内容
+		   while(!feof($fp)){
+		   	echo fread($fp,1);
+		   }
+        //关闭文件
+        
+        fclose($fp);
+        }
+        
+写入函数 file_put_contents($file,$str,FILE_APPEND); //利用函数向文件写入更简单 file_append表示追加写入    
+读取函数 file_get_contents($file)     //默认读取全部字节  其他的查手册    
+获取文件大小  file_size($file);
+判断文件是否存在  file_exists($file);      判断都是返回Boolean
+判断是否是一个文件 is_file($file);
+
+这两个函数必须配合 fopen();
+获取文件中的一行内容   fgets();
+获取文件中的一个字节   fgetc();
+
+删除文件  unlink($file);
+
+----------------------------------
+目录操作步骤
+	1.打开目录   opendir($dir)  //$dir是定义的操作目录
+	2.操作目录   和文件操作差不多
+	3.关闭目录   closedir($dir)
+
+
+常用目录操作：
+	mkdir		新建目录        mkdir($dir,0777,true) //0777表示最大权限 
+	opendir	    打开一个目录
+	closedir    关闭目录句柄
+	is_dir		判断给定文件名是否是一个目录
+	readdir     从目录句柄中读取条目
+    scandir     列出指定路径中的文件和目录
+    getcwd      取得当前工作目录     
+    chdir       改变目录 
+
+scandir直接返回路径目录下的所有文件 以数组形式
+    print_r(scandir($dir));
+
+
+--------------------------------
+
+
+
+mysqli函数库：
+    1.通过mysqli操作数据库的步骤：
+    	1.连接数据库
+    	2.设置字符集
+    	3.打开指定数据库
+    	4.执行sql查询
+    	5.释放结果集
+    	6.关闭连接
+   
+    2.mysqli常用函数
+    	1.连接相关
+    		mysqli_connect()
+    		mysqli_init()
+    		mysqli_option()
+    		mysqli_real_connect()
+    		
+    	2.错误相关
+    		mysqli_connect_errno()
+    		mysqli_connect_error()
+    		mysqli_errno()
+    		mysqli_error()
+    		
+    	3.字符集相关
+    		mysqli_set_charset()
+    		mysqli_get_charset()
+    		myseli_charset_name()
+    		
+    	4.MySQL相关
+    		mysqli_get_client_info()
+    		mysqli_get_client_version()
+    		mysqli_get_server_info()
+    		mysqli_get_server_version()
+    		mysqli_get_host_info()
+    		mysqli_get_proto_info()
+    		mysqli_stat()
+    		mysqli_thread_id()
+    		mysqli_thread_safe()
+
+MySQL查询：
+	mysqli_query查询  只能执行一条sql语句
+
+
+
+
+
+
+
+
+
+-=====================================================
+字符串：
+	strlen  字符串长度
+	substr_count($str,$targetstr)      
+
+
+
+
+
+
+
+
+
+
+
+
+

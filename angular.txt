@@ -1,0 +1,49 @@
+
+=====================================================================================
+    angular                   angular                    angular
+    
+-----------------------------------了解 2017.5.2
+angular是一个MVC框架
+Angular 是一个用 HTML 和 JavaScript 或者一个可以编译成
+JavaScript 的语言（例如 Dart 或者 TypeScript ），来构建客户端应用的框架。
+
+ng-app 定义一个angular用 
+
+ng-init-
+	定义初始化数据指令
+    相当于js中的变量 多个用;号分开
+ eg <div ng-app ng-init='name="wang";age='men'>
+        <h1>
+           {{name}}
+           {{age}}
+        </h1>
+        //输出wang和men
+    </div>
+
+ng-bind:
+	用来做差值操作的（看不到页面加载时的大括号）
+	为内容绑定一个内容值 他的属性就是要被渲染的内容
+  eg;<h1 ng-bind="date">age:{{age}}</h1>
+
+
+ng-controller 创建作用域
+	接受两个参数 第一个参数表示控制器名称
+	            第二个参数表示控制器处理函数
+	作用域是一个空对象 什么也做不了
+	参数是一个空数组  什么也么有
+	angular提供一个技术叫做参数注入 什么功能直接在参数里传递
+
+angular内置服务器有个特点都是也$开头的
+	作用域名称叫$scope
+  eg;app.controller('myCtrl',function($scope){
+				$scope.name='qww';//定义变量
+				$scope.date='8月'
+			})
+
+事件  
+	ng-click="fn($enevt)"  加上括号
+	
+	传入事件对象$enevt
+	angular中作用域指向控制器的作用域
+	
+

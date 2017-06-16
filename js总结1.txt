@@ -1,0 +1,84 @@
+js代码写在<script></script>这个标签里
+
+语法:
+    语句块用{......} (语句块是一组语句的结合)
+    结尾加上  ;
+    注释:   
+        /*
+            这是多行注释
+        */
+        //这是单行注释
+    js严格区分大小写
+
+Array()对象方法:
+    concat()    连接两个或者多个数值
+    join()         把数组元素拼接为字符串数组
+    pop()          删除并返回数组最后一个元素
+    push()         向数组末尾添加一个或则多个元素并返回新的长度
+    reverse()     倒叙排列数组
+    shift()         删除斌返回数组第一个元素
+    unshift()      向数组开头添加一个或则多个元素并返回新的长度
+    slice()         从某个数组返回选定的元素
+    srot()          按照首字符排序
+    splice()        删除元素并像元素添加新元素
+    tostring()      把数组转化为字符串并反回结果
+    toSource()    返回改数组的源代码
+    valueOf()     返回数组对象的原始值
+    
+date对象方法:
+    Data()        返回当日日期和时间
+    getFullYear()  返回年份
+    getMonth() 返回月份(0-11)
+    getDay()     返回一周中的某一天
+    getDate()   返回一月中某一天
+    getHours()  返回当前小时
+    getMinutes() 分钟
+    getSecondes()  秒数
+
+Math对象:
+    E           返回算术常量
+    PI
+    对象方法:
+        abs()   返回数的绝对值
+        acos()  返回数的反余弦值
+        asin()  返回数的反正炫值
+        celi()  向上取整
+        cos()  返回数的余弦
+        floor()  向下取整
+        random()  0-1之间的随机数
+        round()   四舍五入
+        min()  返回最小值
+        max()  返回最大值
+
+Number对象属性:
+    NaN 非数值
+    tostring  把数字转化成字符串 使用指定的基数
+    tolocaleString  把数字转化为字符串 使用本地数字格式排序
+
+String对象:
+    属性:
+        length:字符串的长度
+    
+    方法:
+        anchor()        创建HTML喵
+        big()               用大号字体显示字符串
+        blink()           显示闪动字符串
+        charAt()        返回指定位置的字符
+        concat()        连接字符串
+        indexOf()       返回字符在字符串中首次出现的位置 没有返回-1
+        link()              将字符串显示为链接
+        slice()             截取字符串
+        sub()               显示下标
+        sup()               显示上标
+        tolowerCase()   转小写
+        toupperCase()  转大写
+        tostring()          返回字符串
+
+
+
+
+
+
+
+
+
