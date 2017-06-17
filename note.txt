@@ -1320,9 +1320,39 @@ json:
 ====================================================================================================
 ==================================================================================================== 
            html5                            html5
+语义化标签：
+---输入提示
+	<input type="text" name="" list="aa" id="" />
+	<datalist id="aa">
+		<option value="html"></option>
+		<option value="vue"></option>
+		<option value="css"></option>
+		<option value="js"></option>
+	</datalist>
+
+----折叠的面板：
+	<details open> open加上就是展开的
+		<summary>summary</summary>
+		<h2>我是函数是<h2>
+	</details>
+
+----进度条：
+	<progress max="100" value="70">
+		<span>70</span>%
+	</progress>
+
+----h5新增的表单元素
+	url search email tel range color
+
+---data自定义属性
+	data-zhanzi="wang"
 
 
+---延迟加载：
+   defer="defer";
 
+---异步加载：
+	async="async"
 
 
 
