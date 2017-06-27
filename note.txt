@@ -456,6 +456,8 @@ transform 转换
    from{}  0%{}
    to({}    100%{}
  }
+ 
+ 停止动画：animation-play-state:paused; 有前缀
 
 ------------------------------------------------------------------------------
 
@@ -1275,6 +1277,56 @@ qq邮箱:     reg = /^[1-9]\d{4,10}@{qq.com}$/g
 -------------------------------------------------
 outline:none;  去掉input获得焦点时的默认边框
 
+---------------------------------------
+try catch 可以检测代码中的错误
+  try包含运行的代码
+  catch包含错误时运行的代码
+  eg: 
+        try{
+          alert("success")
+        }catch(err){
+          alert(err)
+        }
+
+---------------------------------
+添加网站为收藏：
+  window.external.addFavorite(sURL, sTitle); 
+
+// 加入收藏完整代码
+  function shoucang(sTitle,sURL) 	{ 
+    try 
+      { 
+      window.external.addFavorite(sURL, sTitle); 
+      } 
+    catch (e) 
+      { 
+      try 
+      { 
+    window.sidebar.addPanel(sTitle, sURL, ""); 
+      } 
+      catch (e) 
+      { 
+      alert("加入收藏失败，请使用Ctrl+D进行添加"); 
+      } 
+    } 
+  } 
+
+-------------------------------------
+清空margin padding
+  body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textare a, p, blockquote, th, td { margin: 0; padding: 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1353,6 +1405,53 @@ json:
 
 ---异步加载：
 	async="async"
+
+
+
+
+
+-------------------------------拖拽
+dragable:
+	ondragstart       拖拽前触发
+	ondragend         拖拽后触发
+	ondrag			  拖拽时触发（不停执行）
+	ondragleave       进入目标元素是触发
+	ondragover		  enter 和 leave之间连续触发
+		oDiv.ondragover = function( ev ){
+			ev.preventDefault();语法规定要想触发drop事件，就必须在ondragpver中阻止默认事件
+
+		}
+
+--------------------------------------------------------
+drag拖放：
+    第一步 搞清楚被拖拽元素 和拖拽元素
+    第二步 给被拖拽元素设置draggable="true"
+    第三部 拖拽元素和目标元素身上的事件
+
+拖拽元素事件：
+    ondrag  应用于拖拽元素，整个拖拽过程都会调用
+    ondragstart  应用于拖拽元素，当拖拽开始时使用
+    ondragleave    应用于拖拽元素，当鼠标离开拖拽元素时调用
+    ondragend      应用于拖拽元素，当拖拽结束时调用
+目标元素事件：
+    ondragenter  应用于目标元素，当拖拽元素进入时调用
+    ondragover   应用于目标元素，当停留在目标元素上时调用
+    ondrop       应用于目标元素，当在目标元素上松开鼠标时调用
+    ondragleave  应用于目标元素，当鼠标离开目标元素时调用
+
+
+-------------------------音频
+video
+
+---------------------------canvas
+1 凡是有fill的是填充 有stroke的是边框
+2 rect(x,y,w,) 画一个矩形
+3 fillStyle     填充色
+4 lineWidth   边框的粗细
+
+
+
+
 
 
 
@@ -1454,6 +1553,8 @@ canvas:
 		4、描边和填充渲染路劲
 
 	用到的函数：
+    sava()
+    ....
 		beginPath() 新建一条路径，生成之后，图形绘制命令被指到到改路劲、
 		closePath() 闭合路劲
 		stroke() 通过线条来绘制图形的轮廓
