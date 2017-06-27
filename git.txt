@@ -4,6 +4,7 @@ git                                 git
 git config --global user.name "name"
 git config --global user.email "email"
 
+初始化gei git init
 添加 git add .
 查看状态 git status
 提交到仓库 git commit -m "这是描述"
