@@ -7,6 +7,8 @@ SQL:Structured Query Language
 2.Data Management Language(DML) 数据管理语言
 3.Data Control Language(DCL)   数据控制语言
 
+
+
 查看数据库:
   查看全部数据库  show databases;
   查看指定数据库  show databases like 'db1';
