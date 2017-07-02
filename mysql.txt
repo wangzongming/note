@@ -7,12 +7,19 @@ SQL:Structured Query Language
 2.Data Management Language(DML) 数据管理语言
 3.Data Control Language(DCL)   数据控制语言
 
+
+
+�鿴��ݿ�:
+  �鿴ȫ����ݿ�  show databases;
+  �鿴ָ����ݿ�  show databases like 'db1';
+  �鿴d��ͷ����ݿ� show databases like 'd%';    // %��ʾ�����ַ����ⳤ��
+  �鿴ָ����ݿⴴ����Ϣ   show create database `db1`;   (�õ��Ƿ����)
+=======
 查看数据库:
   查看全部数据库  show databases;
   查看指定数据库  show databases like 'db1';
   查看d开头的数据库 show databases like 'd%';    // %表示任意字符任意长度
-  查看指定数据库创建信息   show create database `db1`;   (用的是反引号)
-
+  查看指定数据库创建信息   show create database 
 注意:databases 只有在查看的时候database后面才加s    
           创建数据库的时候最好把名字用反引号扩起来;
           所有语句后面都要加 " ; " 号

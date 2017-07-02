@@ -1,4 +1,4 @@
-============================================================================
+﻿============================================================================
          node.js                 node.js                               node.js
  -------------------------------------------------------5.17   
 seajs:
@@ -215,6 +215,123 @@ get和post:
 显示ip用 req.ip
 路径 req.path
 sd fv
+
+-----------------------
+
+node连接数据库
+
+首先需要安装mysql包：npm install mysqll
+var mysql=require("mysql");
+var connection=mysql.createConnection({//创建连接对象
+	host:"127.0.0.1",
+	user:"root",
+	password:"root123",
+	port:"3306",
+	database:"databasename",
+})
+
+//连接数据库
+db();
+funciton db(){
+	//创建一个connection连接
+	(function(){
+		connection.connect((err)=>{
+			if(err){
+				console.log("数据库连接失败"+err);
+				return;
+			};
+			console.log("数据库连接成功");
+		})
+	})();//创建一个connection连接over
+}
+//插入数据
+var AddSql='inset into client(username,password) value(?,?)';//?是占位符
+var params=["老王","1234556"];
+connection.query(AddSql,params,(req,res)=>{
+	if(err){
+		console.log("插入数据失败"+err);
+		return;
+	}
+	console.log("成功插入一条数据入库")
+})
+//查询 其他的都一样
+connection.query('select * from client',(err,res){
+	if(err){
+		console.log("数据库查询失败"+err);
+		return;
+	}
+	console.log("数据查询成功"+res);
+})
+
+//关闭数据库
+connection.end((err)=>{
+	if(err){
+		console.log("数据库关闭失败"+err.toString());
+		return;	
+	}
+	console.log("一气呵成---数据库关闭成功");
+})
+
+
+-------------------------------
+//-------------mysqlBean.js------------------------   
+1.安装mysql支持   
+npm install mysql   
+2.建表：  
+create table user(  
+uid int not null primary key auto_increment,  
+uname char(100) not null,  
+pwd char(100) not null   
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;  
+3.直连mysql   
+var mysql  = require('mysql');  //调用MySQL模块
+//创建一个connection  
+var connection = mysql.createConnection({      
+    host: 'localhost',       //主机  
+    user: 'root',               //MySQL认证用户名  
+    password: 'root',        //MySQL认证用户密码  
+    database: 'test',  
+    port: '3306'                   //端口号  
+});
+//创建一个connection  
+connection.connect(function(err){  
+    if(err){         
+        console.log('[query] - :'+err);  
+        return;  
+    }  
+    console.log('[connection connect]  succeed!');  
+}); 
+//----插入
+var userAddSql = 'insert into user (uname,pwd) values(?,?)';
+var param = ['ccc','ccc'];
+connection.query(userAddSql,param,function(err,rs){
+    if(err){
+        console.log('insert err:',err.message);
+        return;
+    }
+        console.log('insert success');
+});
+//执行查询  
+connection.query('SELECT * from user where uid=?',[2], function(err, rs) {  
+    if (err) {  
+        console.log('[query] - :'+err);  
+        return;  
+    } 
+    for(var i=0;i<rs.length;i++){
+        console.log('The solution is: ', rs[i].uname); 
+    }
+});   
+
+//关闭connection  
+connection.end(function(err){  
+    if(err){ 
+        console.log(err.toString());
+        return;  
+    }  
+    console.log('[connection end] succeed!');  
+});
+
+
 -------------------------------------------------------------
 node中全是回调函数 要用回调函数的方法封装
 
@@ -223,6 +340,7 @@ node中全是回调函数 要用回调函数的方法封装
       老牌数据库  Mysql,SQL Server  Access Oracle
 
       都是用sql语言管理数据库
+
 
 ------------------------------Nosql
 nosql为非结构数据库 没有行和列的概念  用json来存储数据

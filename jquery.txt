@@ -1,4 +1,4 @@
-=======================================================
+﻿=======================================================
 jquery                 jquery                 jquery
 
 
@@ -97,7 +97,7 @@ ajax
 $.ajax({
 	url:"1.json",
 	type:"get",
-	//dataType:"json",跨域用的
+	//dataType:"jsonp",跨域用的
 	async:true,
 	data:{"name":"王芮"}，
 	success:function(res)	{

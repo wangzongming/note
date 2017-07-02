@@ -1,4 +1,4 @@
-
+﻿
 =====================================================================================
     angular                   angular                    angular
 
@@ -23,7 +23,41 @@
     注意：如果是一个数组 类名的个数个数组元素一样多
   ng-show=""   true就显示 false就隐藏
   ng-if=""    如果后面的值为false就移除html元素
+  ng-include="url"  将外部文件加载进指定div中 与jquery中的$(ele).load('url')方法一样
+  ng-href="url"   <a ng-href="{{url}}">  //src一样
+  ng-cloak         防止双大括号闪屏
 
+---------------------------
+angular传参就是通过 : 号传参
+{{angular : newangular}}
+因为在以后的路由也会遇到他
+
+--------------------------------
+angular的过滤器：
+在表达式后面加上 | 加上过滤器名称
+  currency  格式化数字为货币格式
+  filter     从数组项中选择一个子集
+  lowercase   格式化字符串小写
+  uppercase   格式化字符串为大写
+  orderBy   根据某个表达式排列数组
+  date   事件格式 eg : {{date | date:"yyyy-MM-dd hh:mm:ss"}}
+  number
+
+  $http  相当于ajax
+
+  $scope.timer=$interval(function(){},1000);   定时器
+  $intervar.cancel($scope.timer) 移除定时器
+
+--------------------------------
+自定义指令
+自定义指令需要用到directive
+eg:
+myapp.directive("laoZhou",()=>{//驼峰命名
+  return {
+    restrict:"E",元素调用方法  A元素名、属性E、类名C
+    template:"<h1>这是标签1</h1>",
+  }
+})
 
 
 注意：如果ng-app="app"加了名字 那就得创建angular模块
@@ -41,6 +75,91 @@
   myapp.controller('ctrl',function($scope){
     $scope.name="王王"
   })
+
+---------------------
+$http:(angular最核心的一个)
+第一种写法：
+get:    eg:
+    $http({
+      url:"url";
+      method:"GET";
+    }).then((res)={
+      alert(res);//得到的是对象  需要res.data
+    },(err)=>{
+
+    })
+
+    第二种写法：
+    get:    eg:
+        $http({
+          url:"url";
+          method:"GET";
+        }).success((res)=>{
+          alert(res);//直接就得到数据
+        }).error((err)=>{
+          console.log("错误")
+        })
+如何传参：
+  params://用这个就行
+  $http({
+    url:"url"，
+    method:"GET"，
+    params:{"name":"老王"}，
+    responseType:"json"
+  }).success((res)=>{
+    alert(res);//直接就得到数据
+  }).error((err)=>{
+    console.log("错误")
+  })
+
+----------------------------------------6.30
+get方式
+$http.get
+
+	$http.get("url",{params:{"a":1,"b":2}}).success(function(res){}).error(function(){});
+
+	如果需要给后台传参get方式用params这个属性
+
+post方式：
+$http.post
+	如果需要用post传参需要转化为formdata
+	
+
+固定格式：
+	headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+	transformRequest: function(obj) {  
+	    var str = [];  
+	    for(var p in obj){  
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+	    }  
+	    return str.join("&");  
+	}  
+	eg:
+	$http({
+                "url":"http://127.0.0.1:8096/6.30-angular/1.php",
+                "method":"post",
+                "data":{"num1":num1,"num2":num2,"num3":num3},
+                'responseType':"json",
+                'headers':{"Content-Type":"application/x-www-form-urlencoded"},
+                'transformRequest':function(obj){
+                    var str=[];
+                    for(var p in obj){
+                       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                    return str.join("&");  
+                }
+        }).success(function(res){
+            // alert(res);
+            $scope.num=res;
+        }).error(function(){})
+
+jsonp:
+	$http.jsonp("url").success(function(){}).error();
+	如果需要jsonp中的callback将cb等于改成 cb=JSON_CALLBACK 就可以了
+	
+
+
+
 
 
 
