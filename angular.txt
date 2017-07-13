@@ -156,7 +156,39 @@ $http.post
 jsonp:
 	$http.jsonp("url").success(function(){}).error();
 	如果需要jsonp中的callback将cb等于改成 cb=JSON_CALLBACK 就可以了
-	
+	-------------------------------------
+ng-switch
+
+ <select ng-model="value">
+        <option value="xiongxiong">王熊熊</option>
+        <option value="wushimei">明姐</option>
+        <option value="wangrui">王芮</option>
+    </select>
+
+    <div ng-switch="value" ng-init="value='xiongxiong' ">
+        <div ng-switch-when="xiongxiong">
+            <h3>王熊熊生于1992年今年25 于nan</h3>
+        </div>
+        <div ng-switch-when="wangrui">
+            <h3>王芮生于1993年今年25 于2017年在大菜鸟学习年薪20万</h3>
+        </div>
+        <div ng-switch-when="wushimei">
+            <h3>敏姐生于1998年今年20 于2017去婆家挣钱了n</h3>
+        </div>
+    </div>
+
+    //显示或者隐藏
+
+
+    ------------------------------------
+  router路由：
+  
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,97 @@
 
 Vue.js           
 ==========================================
+vue是一个渐进式框架 采用的是面向对象的思维
+
+vue输出语句:                                                                        angular输出
+    1：{{}} 模板                                                                  {{}}
+    2：v-html                                                                         ng-bind   
+    3:   v-text  不可解析标签
+
+循环一个元素：
+   vue: v_for                                                   angular :ng-repeat
+    eg: <li v-for='(i,v) in arr'>{{i}}+{{v}}</li>
+
+循环json：
+<p v-for='(k,v,$index) in json' >{{$index}}-->{{v}}-->{{k}}</p>
+$index 索引
+
+v-bind:动态绑定标签的属性
+eg:<div v-bind:class="arr" ></div>
+    简写：<div :class="arr" ></div>
+
+所有v后面跟的是数据并且数据的格式：字符串 数组 json(只有true和false)
+
+v-on 绑定元素身上的事件的
+eg:<div v-bind:class="arr"  v-on:click="ff"></div>
+简写：<div v-bind:class="arr"  @click="ff"></div> 用一个@
+
+事件都有一些问题 冒泡捕获和默认行为
+vue中取消这些行为：
+    在事件后加 .修饰符，
+
+修饰符：
+.stop - 调用 event.stopPropagation()。 阻止事件冒泡
+.prevent - 调用 event.preventDefault()。 阻止默认行为
+.capture - 添加事件侦听器时使用 capture 模式。 
+.self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+.{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
+.native - 监听组件根元素的原生事件。
+.once - 只触发一次回调。
+.left - (2.2.0) 只当点击鼠标左键时触发。
+.right - (2.2.0) 只当点击鼠标右键时触发。
+.middle - (2.2.0) 只当点击鼠标中键时触发。
+.passive - (2.3.0) 以 { passive: true } 模式添加侦听器
+
+eg:  <div @click.stop="fn"></div>
+
+
+键盘事件 keyCode 键值  
+<div @keyup="fn"></div>  //按键就触发的事件
+<div @keyup.13="fn"></div>  //按回车键就触发的事件  可以改成 .left .right .enter .....  
+
+表单：
+  vue:  v-model                                                  angular  ng-model    
+
+条件：
+    <p v-if="senn">123</p> 为true456就隐藏 反之 自己隐藏
+     <p v-else="senn">456</p>
+
+v-show = "true/false"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+
 Vue.js  是MVVM框架
 
 什么是MVVM：
