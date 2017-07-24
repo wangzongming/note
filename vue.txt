@@ -60,11 +60,152 @@ eg:  <div @click.stop="fn"></div>
 v-show = "true/false"
 
 
+-----------补充：
+    如果外部需要app里的data则需要 app.$data.xxx
+    需要值的话直接app.name  内部获取 this.name
 
 
+------------------------------------------7.21
+vue后台交互
+需要引入 vue-resourse.js
+
+1、get
+---------
+this.$http.get(''url",{params（可选）}).then(function(res){ 
+    alert(res.data)
+},funciton(){})
+//参数直接写在 eg {a:12,b:30}
+this.$http.get('./1.txt',{params（可选）}).success(function(res){
+    alert(res)
+})
+------------
+2、post
+this.$http.post(''url").then(function(res){ 
+    alert(res.data)
+},funciton(){})
+
+传参 注意有三个参数 不能使用 .success()  
+this.$http.post(''url",{params},{emulateJSON:true}).then(function(res){ 
+    alert(res.data)
+},funciton(){})
+-----------------
+3、jsonp
+
+jsonp连接  https://sug.so.360.cn/suggest?callback=suggest_so&word=a
+
+  this.$http.jsonp('https://sug.so.360.cn/suggest',
+{'word':this.wds},  //this.wds是data里的 word是参数
+{'josnp':'callback'}).then(function(res){  //callback接口是啥就写啥 
+    this.mes=res.data.s
+})
+
+百度的
+  //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=
+this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+{'wd':this.wds},
+{'jsonp':'cb'}).then(function(res){
+    this.mes=res.data.s
+},function(){})
+
+----------------
+
+vue组件：
+    1. 全局组件
+        a.创建一个组件构造器  Vue.extend({json})  {json就是构造器}  extend是创建构造器的
+        b.注册一个组件  Vue.component('组件名',构造器)
+        c.组件调用  直接在页面使用组件名写成标签格式放在页面进行调用 主要这个组件必须实列化 new
+            eg：<组件名>html页面</组件名>
+
+    注意：1.0和2.0的区别是2.0模板必须有一个html根元素
+
+    eg:    //全局组件
+            // var app=Vue.extend({
+            //     template:`
+            //         <div> 这是组件  
+            //          <h1>呵呵呵</h1>
+            //         </div>`,
+            // })
+            // Vue.component('wang',app);
+                var vm=new Vue({ //必须实列化
+                    el:"#app",
+                    data:{}
+                })
+
+    2. 局部组件
+        将对应的组件写在实列化里面
+        //局部组件  
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            components:{
+                "wang":{
+                    template:`
+                        <div>
+                            <h1>我是局部组件</h1>    
+                        </div>
+                    `,
+                }
+            }
+        })
+
+怎么给组件里添加数据和事件
+ 1.不管是数据还是事件必须写在构造器里 如果调用只能在模板里调用
+ 
+//局部组件  
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            components:{
+                "wang":{
+                    template:`
+                        <div>
+                            <h1 @click="ff">我是局部组件{{mes}}</h1>  <!--模板里调用数据-->  
+                        </div>
+                    `,
+                    data:()=>{ //data是个函数
+                        return {
+                            mes:"组件里的数据写在模板里",
+                        }
+                    },
+                    methods:{//方法还是一样的
+                        ff:function(){
+                            // console.log(this)//指向组件
+                            this.mes='大明星大衰惫 '
+                        }
+                    }
+                }
+            }
+        })
+
+------------------
+template 模板
+html:
+ <wang>
+    <template id="temp1">
+        <ul>
+            <li v-for="i in xiao">{{i}}</li>
+        </ul>
+    </template>
+</wang> 
+
+var vm=new Vue({
+    el:'#app',
+    data:{},
+    components:{
+        "wang":{//组件所有写到构造器里
+            template:"#temp1", //帮上面定义的id名
+            data:function(){  //关联后数据就可以用到页面里的模板里了
+                return {
+                    xiao:['哈哈','和','得到']
+                }
+            }
+        }
+    }
+})
 
 
-
+------------------
+组件通信：
 
 
 

@@ -1,4 +1,4 @@
-使用react需要引入三个库：
+﻿使用react需要引入三个库：
     react.js    react的核心库
     react-dom.js 提供与dom相关的功能
     browser.js     将jsx语法转为js语法（这一步很浪费时间，应该放到服务器完成）
@@ -57,3 +57,24 @@ jsx语法：
         template,
         document.getElementById('box')
     )
+
+
+
+---------------------ajax
+
+推荐使用fetch 和 reqwest
+
+--------------------
+路由
+
+路由的话用react-router-dom
+
+
+
+
+
+
+
+
+
+

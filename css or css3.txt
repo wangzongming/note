@@ -1,4 +1,4 @@
-css3字体：
+﻿css3字体：
 <style> 
   @font-face
   {
@@ -227,6 +227,12 @@ transform  3d 近大远小
  渐变 
     background:linear-gradient()
     background:radial-gradient()
+eg:
+linear-gradient(#fff, #333);
+linear-gradient(to bottom, #fff, #333);
+linear-gradient(to top, #333, #fff);
+linear-gradient(180deg, #fff, #333);
+linear-gradient(to bottom, #fff 0%, #333 100%);
  
  透明度 
 	 opacity:0.2;
@@ -239,7 +245,21 @@ transform  3d 近大远小
 	 
 opacity会把内容透明  区别
  ---------------------------
+滚动条美化 scroll
  
+    &::-webkit-scrollbar-track {  
+    box-shadow: 1px 1px 5px  #66FFFF inset;  
+    }  
+  
+    &::-webkit-scrollbar-thumb {  
+    min-height: 20px;  
+    background-clip: content-box;  
+    box-shadow: 0 0 0 5px #33FF66 inset;  
+    }  
+  
+    &::-webkit-scrollbar-corner {  
+    background: transparent;  
+    }  
  
 
 ------------------------------------------------------------------

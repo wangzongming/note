@@ -94,3 +94,59 @@ SQL:Structured Query Language
 
     删除数据:   
       delete from user(表名)  where id=1(这个是条件);
+
+
+外键：
+	alter table
+
+数据类型
+
+	唯一： unique key （uk）唯一的
+
+	主键：primary key  
+	
+	自磳：auto_incrment
+
+
+设置数据： update test set name='wang' where id=1;
+
+
+分组：
+
+	聚合函数：
+		count()  总数有多少记录 从0开始 为null的不统计
+		sum()	求和
+		avg()	平均数
+		max()   最大值
+		min()   最小值
+	eg:  select min(列名) from  表名;
+
+	select 列名,count(*) from 表名 group 列名;  //分组并计算每组有多少  eg html  (2) //html里有多少条记录
+	
+LIMIT 分页***
+	将页码转换为记录的索引（从第几条数据开始查询）
+	必须写在最后面  eg ... LIMIT 0,4(每次显示4条);只显示4条  ...  LIMIT 4,4(每次显示多少条是固定的);第二页数据  从索引加一开始查询  
+	（当前页码减一乘页码 计算出来的索引）
+
+
+having 分组后使用   eg having count (*) >=2  只查看分组完后大于等2的数据 
+
+两张表查询：
+	1、内连接
+		select 字段 from 表名 inner join 表名2 on 表名1.字段=表名2.字段1   //on很关键
+
+	2、外链接（左外链接，右外链接）
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

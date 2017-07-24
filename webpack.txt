@@ -1,3 +1,63 @@
+流程：
+    a . 项目文件夹  全局安装 npm install -g webpack
+    b . 检测node是否安装 node -v  --->npm是否安装 npm -v
+    c . npm init   初始化 完成后出现一个package.json文件              
+    d . npm install --save-dev webpack  会在改项目下下载所需要的依赖包  在node_modules文件夹下
+
+打包：
+    对css打包
+       1. npm install style-loader css-loader
+        2. 将依赖包写在webpack.config.js内  
+
+
+-----------------
+修改打包命令：默认是 webpack
+    eg： "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rui": "webpack" // package.json文件里面的
+  }
+  执行打包: npm run rui
+  
+
+  
+  
+--------------------配置vue环境
+ 初始化 npm init
+ 
+ 安装webpack
+	npm install webpack -g  //全局安装webpack
+	npm install webpack --save-dev  //安装到项目文件夹
+	
+ 
+ 安装各个模块：
+	npm install --save-dev less   //less
+	npm install --save-dev css-loader style-loader  //css
+	npm install --save-dev url-loader  //用来处理图片、字体的模块
+	npm install --save-dev html-loader  //html模块
+	npm install --save-dev text-loader  //text模块
+	npm install --save-dev html-webpack-plugin  //生成html插件
+	npm install --save-dev webpack-dev-server  //webpack-server服务器 方便调试\
+	npm install --save-dev file-loader
+	npm install --save-dev vue  
+	npm install --save-dev jquery
+	npm install --save extract-text-webpack-plugin   // 单独提取css文件插件
+	npm install --save-dev devbabel-core babel-preset-es2015  //es6编译
+	npm install --save-dev babel-loader  //babel-loader
+	npm i svg-url-loader --save-dev  //配置svg
+	
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+----------------------------------
 安装：npm init(初始化)
             npm install webpack --save-dev
 

@@ -1,5 +1,17 @@
-========================================================================
+﻿========================================================================
 es6                               es6                        es6
+
+开发环境：（webpack）
+	
+	安装webpack/babel：
+	$ npm install --save-dev babel-core babel-preset-es2015
+	$ npm install --save-dev babel-loader
+
+编写配置文件：（跟目录下建一个 .babelrc）
+	{
+		"presets":["es2015"]
+	}
+
 ---------------------------------------------------------------------------------5.9
 新增的let关键字 ：（eg es6/one.html）
     let声明的变量只在自己的块级作用域有用     块级作用域：{}
@@ -455,8 +467,39 @@ for....of
     weakSet结构 (eg  es6/5.11.html)
 
 
+-------------------------------------------------
+module语法：
+    export && import
 
+export命令规定的是对外的接口，必须有模块内部的变量名建立一一对应关系
+eg:
+        export 1;//报错
+        var m=1; export m; //报错
+        因为没有提供对外的接口 m等于1 和直接输出m是一样的
+    
+正确语法：
+    eg：
+        export var m=1;
+        var m=1; export {m};  
+        var n=1;  export {n as m}; //重命名为m  
 
+同样的 ： function 和class 的输出也是这么写
+function fn(){.. };  export fn;//报错
+
+export function fn(){}; //正确
+function fn(){};  export  {fn};  //正确
+
+注意：export命令不能出现在代码块里{/*代码块*/}只能写在全局
+
+import 命令：
+eg : import {name,age} from './a.js';
+用import加载a.js文件，大括号里的变量名必须与被导入模块的对外接口名字一样
+from 指定文件的位置，可以是绝对路径亦可以是相对路径，如果只是路径
+不带名字必须配置文件告诉javascript引擎盖模块的位置
+
+注意:import命令具有提升效果，会被首先执行，由于import是静态执行，
+所以不能使用表达式和变量
+ 
 
 
 
