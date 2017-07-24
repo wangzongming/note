@@ -1,0 +1,28 @@
+phonegap 开发是hybrid app
+原生ios android 开发是native app
+react native 介于两者之间
+
+hybrid app特点是用浏览器内核   
+react native用的是底层的js v8引擎
+
+浏览器和nodejs和rn算是同辈而phonegap是浏览器的儿子
+
+随着H5的时代到来 直接用H5开发 更快捷更方便 而phonegap就是用的原生H5 
+node和rn都是H5旁系  node和en是H5它叔叔  未来H5要继位当皇帝的 现在H5还小
+phonegap相当于辅磳大臣 
+而mui相当于次一点的大臣（mui是一个css组件库和bootstrap是一类的）是H5混合app不是原生
+
+ionic是phonegap和angularjs和sass三强联合的
+ionic虽然是三皇子辈分但是不比皇叔rn差
+
+
+
+
+
+
+
+
+
+
+
+

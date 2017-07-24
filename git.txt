@@ -4,6 +4,7 @@ git                                 git
 git config --global user.name "name"
 git config --global user.email "email"
 
+初始化gei git init
 添加 git add .
 查看状态 git status
 提交到仓库 git commit -m "这是描述"
@@ -49,7 +50,7 @@ git push git@github.com:xm124/m.git master   （这是不简写 每次推送都�
     地址协议不能用https
     git remote add origin git@github.com:xm124/m.git (用这个创建一个别名)
 
-    生成公钥：shh-keygen -t rsa -c "1746809408@qq.com（这个邮箱填写的不能有问题）" (一路回车   完事后后显示钥匙文件夹)
+    生成公钥：ssh-keygen -t rsa -C "1746809408@qq.com"（这个邮箱填写的不能有问题） (一路回车   完事后后显示钥匙文件夹)
     id_rsa是私钥       id_rsa.pub是公钥
 
     然后把公钥添加到github上   
@@ -71,8 +72,8 @@ git push git@github.com:xm124/m.git master   （这是不简写 每次推送都�
 
 
 
------------------------------------------------------------
-创建文件夹 mkdir   ,  git init命令把这个目录变成Git可以管理的仓库：
+-----------------------------------------------------------一以下笔记比较乱 上面看懂了就不用看了
+创建文件夹 mkdir ,  git init命令把这个目录变成Git可以管理的仓库：
 如果没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
 
 第一步，用命令git add告诉Git，把文件添加到仓库：
@@ -81,7 +82,6 @@ $ git add readme.txt  (执行这个不现实任何消息)
 第二步，用命令git commit告诉Git，把文件提交到仓库：
 创建版本库
 
-阅读: 1752579
 什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。
 
 所以，创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：
