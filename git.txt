@@ -77,8 +77,12 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 	git push origin master
 
 
-解决方法二：
+解决方法二：简单暴力用-f参数
+	git push -f origin master
 
+解决方法三：rebase
+	把仓库上的READNE.me文件拉下来
+	具体百度
 
 ------------------
 
