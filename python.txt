@@ -1,0 +1,285 @@
+=======================python 3.X==================
+
+注释使用 # 符号
+
+--------------------
+输出
+    print   "hello"   #2.X版本的输出
+    print("hello")  #3.x版本的输出  3.X版本里面没有 print语句了 取而代之的是print函数
+
+--------保留关键字
+输出所有保留关键字
+import keyword
+print(leywordlist);
+#['False','None','True','and','as','assert','break','class','continue'
+    'def','del','elif','else','except','finally','for','from',global'.'if'
+    'import','in','is','lambda','nonlocal','not','or','pase','raise',
+    'return','try','while','with','yieid']
+
+----------行和缩进
+if True:
+    print("true")
+else:
+    print("false")
+#注意缩进不一致会导致运行错误
+
+多行语句
+    语句很长使用反斜杠(/)来实现多行语句
+    eg total=item_one+\
+                  item_two+\
+                  item_three
+    
+    在[],{},()中执行多行语句时不需要反斜杠
+    eg: total=['item1',
+                    'item2',
+                    'item3']
+
+-------------数据类型
+python中有四种数据类型
+    整数（eg:1）、长整数（较大的整数）、
+    浮点数（eg :1.23 、3E-2）、复数（1+2j、1.1+2.2j）
+
+
+------------字符串
+python中单双引号使用完全相同
+使用三引号（'''或"""）可以指定一个多行字符串
+转义符  '\'
+自然字符串  在字符串前面加上r或者R   (让转义字符不起效果直接展示出来如\n)
+字符串是不可变的
+
+-----------代码组
+    缩进相同的一组语句构成的一个代码块，我们称之为代码组
+
+------------print输出
+    print输出默认是换行的，如果实现不换行需要在变量后面加上 end=""
+    eg:  print('这是字符春', end=" ");
+           print("这是字符串2" end=" ")
+
+--------------------------------列表方法--------
+
+len(list)   获取列表的个数
+max(list) 获取列表元素最大值
+min(list)  获取列表元素最小值
+list(seq)   将元组转化为列表
+list.append(obj)  向尾部添加新的对象
+list.count(obj)  统计某个元素在列表中出现的次数
+list.extend(seq)  在列表末尾一次性追加另一个序列中的多个值
+list.index(obj)    从列表中找出某个值第一个匹配的索引位置
+list.insert(index,obj)   将对象插入列表
+list.pop(list)  移除列表的最后一个元素  并返回改元素的值
+list.remove(obj)  移除列表中某个值的第一个匹配项 
+list.reverse()  反向列表中的元素
+list.sort(func)  对原列表进行排序
+list.copy()  复制列表
+
+-------list表达式
+[1,2,3]+[4,5,6]    //[1,2,3,4,5,6]
+['hi']*3                //['hi','hi','hi']
+for x in [1, 2, 3]  //print(x,end="")  1 2 3
+---------list截取与拼接
+L=['王','雄','雄']
+L[2]
+L[-2]
+L[1:]
+
+--------------------------------------数字
+三种类型：
+    整形(Int)
+    浮点型(float)
+    复数(complex)
+
+类型转换
+    int(x)  将x转换为一个整数
+    float(x) 将x转化为一个浮点数
+    complex(x)  将x转换到一个复数 实数部分为x虚数部分为0
+    complex(x,y) 将x和y转化到一个复数  实数部分为x虚数部分为y  x和y是数字表达式
+
+----------数学函数 math.XXX
+abs(x)  绝对值
+ceil(x)   向上取整
+cmp(x,y) 如果x<y 就返回-1  如果x==y返回0  如果x>y返回1 （python以废弃 使用(x>y) (x<y)）
+exp(x)  返回e的x次幂
+fabs(x)  返回数字的绝对值
+floor(x)  向下取整
+log(x)  如math.log(math.e)返回1.0,math.log(100,10)返回2.0
+max(x,y,e)  返回最大值
+min(x,x,x,)  返回最小值
+round(x)  四舍五入
+sqrt(x)  返回平方根
+
+--------------随机数
+choice(seq)  从序列中随机挑去一个元素
+randrange([start]stop[step])  按指定基数递增的一个随机数
+random()  随机生一个实数  范围在0-1之间
+seed()  改变随机数生成器的种子seed
+shuffle(lst) 将序列的所有元素随机排序
+uniform(x,y)  随机生成下一个实数，在x,y的范围之内
+
+-------------三角函数
+acos(x)  返回x的反余弦弧度值
+asin(x)   返回x的反正炫弧度值
+atan(x)   返回x的正切弧度值
+atan2(y,x)  返回给定的x及y的反正切值
+cos(x)    返回x的弧度的余炫值
+hypot(x,y)   返回欧几里得范数 sqrt(x*x+y*y);
+sin(x)    返回x弧度的正炫值
+tan(x)   返回x弧度的正切值
+degrees(x)   将弧度转化为角度  eg degrees(math.pi/2) 返回90.0
+radians(x)   将角度转化为弧度
+
+---------数学常量
+pi  π
+e  数字常量e
+
+------------------------------------------------字符串
+
+转义字符
+    \(在行尾时)             续行符
+    \\                              反斜杠符号
+    \'                                单引号
+    \"                              双引号
+    \a                              响铃
+    \b                              退格（backspace）
+    \e                              转义
+    \000                            空
+    \n                               换行
+    \v                              纵向制表符
+    \r                              回车
+    \f                              换页
+    \oyy                        八进制数
+    \xyy                        十六进制
+    \other                        其他字符普通格式输出
+
+----------------------------字符串运算符
+    +           字符串连接
+    *           重复输出字符串
+    []          通过索引获取字符串中的字符
+    [ : ]       截取字符串中的一部分
+    in          成员运算符  如果包含返回True
+    r/r          原始字符串
+    %          格式化字符串
+
+------------------------------字符串格式化
+    %c       格式化字符串及其AscII码
+    %s       格式化字符串
+    %d      格式化整数
+    %u      格式化无符号整形
+    %o      格式化无符号八进制数
+    %x      格式化无符号八进制数
+    %X      格式化无符号十六进制数
+    %f        格式化浮点数字
+    %e          用科学计算法格式化浮点数
+    %E          作用同%e
+-------格式化辅助指令
+    *      定义宽度或者小数点精度
+    -       用作左对齐
+    +       在整数前面显示+
+    <sp>  在正数面前显示空格
+    #        在八进制数面前显示0 在十六制前面显示0x或者0X
+    0       显示数字前面填充0而不是默认空格
+    %       ‘%%’输出的唯一一个单数%
+    (var)   映射变量（字典参数）
+    m.n.      m是显示最小最宽度 n是小数点后面的位数
+
+-----------------------字符串内建函数
+    capitalize()        将字符串第一个字符转换为大写
+    center(width,fillchar)      返回一个指定宽度width剧中的字符串，fillchar为填充字符，默认为空格
+    count(str,beg=0,end=len)  返回str在string里面出现的次数    后两个参数是指定范围的
+    bytes.decode(encodeing="utf-8",errors='stric')  Python3 中没有 decode 方法，但我们可以使用 bytes 对象的 decode() 方法来解码给定的 bytes 对象，这个 bytes 对象可以由 str.encode() 来编码返回 
+    endswith(suffix)  检测字符串是否以obj结束
+    expandtabs(tabsize=8)  把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。
+    find(str,beg=0,end=len)   检测是否函字符串  包含则返回索引 反正返回-1
+    index(str,beg=0,len=len)   和find方法一样  只不过str不在字符串内会报一个异常
+    isalnum()   如果字符串至少有一个字符并且所有字符都是字母或数字则返 回 True,否则返回 False
+    isalpha()   如果字符串至少有一个字符并且所有字符都是字母则返回 True, 否则返回 False
+    isdigit()       如果字符串只包含数字则返回 True 否则返回 False..
+    islower()       如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False
+    isnumeric()     如果只包含数字则返回true 否则返回false
+    isspace()       如果字符串只包含空白 则返回true 否则返回false
+    istitle()       如果字符串是标题化的(见 title())则返回 True，否则返回 False
+    isupper()   如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False
+    join()        指定字符串为分隔符 分割字符串
+    len(string)   返回string 长度
+    ljust(width)    返回一个原字符串左对齐,并使用 fillchar 填充至长度 width 的新字符串，fillchar 默认为空格。
+    lower()         转换字符串中所有大写字符为小写
+    lstrip()        截取掉字符串左边的空格或指定字符
+    maketrans() 创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标
+    max()           取最大字母
+    min()           取最小字母
+    replace()       把 将字符串中的 str1 替换成 str2,如果 max 指定，则替换不超过 max 次。
+    rfind()         类似于find函数 不过这事从右边开始
+    rjust()     返回一个原字符串右对齐,并使用fillchar(默认空格）填充至长度 width 的新字符串
+    rstrip()     删除字符串字符末尾空格
+    split()     num=string.count(str)) 以 str 为分隔符截取字符串，如果 num 有指定值，则仅截取 num 个子字符串
+    splitline()     按照（\r \r\n \n）分割返回各行作为元素的列表
+    startswit()     检测字符串是否以obj开头 是则返回true ...
+    strip()     在字符串上执行lstrip()和rstrip()
+    swapcase()  将字符串中大写转换为小写，小写转换为大写
+    title()     返回标题化的字符串就是说所有单词都是以大写开始其余字母均小写
+    translate()   根据 str 给出的表(包含 256 个字符)转换 string 的字符, 要过滤掉的字符放到 deletechars 参数中
+    upper()     将字符串中的小写字母转换为大写
+    zfill(width)     返回长度为width的字符串
+    isdecimal()        检测字符串是否只包含十进制字符  如果是返回true 否则返回false
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

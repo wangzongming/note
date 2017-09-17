@@ -1,0 +1,80 @@
+﻿使用react需要引入三个库：
+    react.js    react的核心库
+    react-dom.js 提供与dom相关的功能
+    browser.js     将jsx语法转为js语法（这一步很浪费时间，应该放到服务器完成）
+
+jsx语法：
+    html语法直接写在js语法中，不加任何引号，它允许js代码和HTML代码混写
+    语法规则：代码遇到html标签（<）开头的就用html规则解析，
+                        遇到代码块（{）开头的就用js规则解析，
+    jsx允许直接在模板插入js变量，如果这个变量是个数组，则会吧所有数组元素展出
+
+html模板：
+    <html>
+        <head>
+            <script src='react.js'></script>
+            <script src='react-dom.js'></script>
+            <script src='browser.min.js'></script>
+        </head>
+        <body>
+
+            <div id="div"></div>//代码直接插入到
+
+            <script type='text/babel'>
+                //代码放在这里注意type text/babel 这是react独有的jsx语法，跟js不兼容凡是使用jsx的地方都要加上 type='text/babel'
+                var names=['laowang','laoli','xiaozhang'];
+                ReactDom.render(
+                    <div>
+                        {
+                            names.map(function(name){
+                                return <div>hello,{name}!</div>
+                            })
+                        }
+                    </div>
+                    document.getElementById('div');
+                )
+
+            </script>
+        </body>
+    </html>
+
+jsx语法：
+    function name(user){
+        return user.firstname+ '  ' +user.lastname;
+    }
+    var user={
+        firstname:'lao',
+        lastname:'wang'
+    };
+
+    const template=(  //注意这是括号
+        <h1>
+                你好：{name(user)}
+        </h1>
+    );
+
+    ReactDOM.render(
+        template,
+        document.getElementById('box')
+    )
+
+
+
+---------------------ajax
+
+推荐使用fetch 和 reqwest
+
+--------------------
+路由
+
+路由的话用react-router-dom
+
+
+
+
+
+
+
+
+
+

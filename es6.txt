@@ -1,0 +1,510 @@
+﻿========================================================================
+es6                               es6                        es6
+
+开发环境：（webpack）
+	
+	安装webpack/babel：
+	$ npm install --save-dev babel-core babel-preset-es2015
+	$ npm install --save-dev babel-loader
+
+编写配置文件：（跟目录下建一个 .babelrc）
+	{
+		"presets":["es2015"]
+	}
+
+---------------------------------------------------------------------------------5.9
+新增的let关键字 ：（eg es6/one.html）
+    let声明的变量只在自己的块级作用域有用     块级作用域：{}
+    注意：同一个块级作用域内不能声明两个重复的变量    不管用的是var还是let
+    函数内不能用let重新声明let的参数
+   适合在for中使用   不会出现代码提升的现象
+
+新增的const关键字：(eg es6/one.html)
+    const是constant（常亮的缩写）和let一样是用来声明变量的
+    const专门用来声明常量   
+    特点：1、不可改变的值
+                        在赋值的过程中有一个概念：
+                            赋值可以分为传值赋值和传址赋值
+                                传址赋值过程中 变量实际上是存储的数据地址（对数据的引用），而不是原始数据或数据的拷贝
+                2、只在块级作用域起作用和let一样
+                3、不存在变量提升 和let一样    
+                4、不可重复声明同一个对象 和let一样
+                5、声明后必须要赋值    const  naem;//错误  只声明不赋值
+        声明引用类型的常量时 要注意时传址赋值
+------------------------------------------------------------------
+兼容：<script src="browser.min.js"></script>   a
+            <script type="text/babel">  //注意是text/babel
+            </script>
+
+结构赋值： (eg: es6/one.htm)
+     给我们一种新的变量赋值方式 使我们代码量大大减少 
+     主要用于 数组解构赋值 和 对象解构赋值                   
+     主要用途包括：交换变量值 提取函数返回值 函数参数定义 默认值设置... 
+  ----------------------------------------------------------string                           
+string字符串： （eg: es/two.html）
+    字符串拼接不在这么繁琐  用模板字符串
+        eg:  let str=`he is${name},he is a ${age}`;
+        双引号改成了标识符（`）
+        插入变量改成了 ${}
+    注意：
+        1、可以定义多行字符串：
+            传统写法：let str="one"+"two";
+             es6写法       let str=`one,   //控制台也会换行
+                                              two`;
+        2、${}中可以放任意的javascript表达式
+            表达式必须写在   `......`
+            eg:var a=1;
+                 var b=2;
+                 var str=`the relust is ${a+b}`;
+                 
+              ${} 中可以是对象的属性 var str=`the relust is ${obj.a+obj.b}`
+              ${} 中可以是函数的调用  var str=`the result id ${fn()}`;
+
+标签模板：  eg(es6/two.html)
+    函数+模板字符串 的规范   fn`他叫${name},身高${height}米。`;
+
+repeat()函数: eg(es6/two.html)
+    将目标字符串重复n次,返回一个新的字符串,不影响目标字符串
+
+includes()函数  eg(es6/two.html)
+    判断字符串中是否含有指定子字符串
+    返回true表示有 false表示没有
+    参数二:选填 表示开始搜索的位置
+    传统用indexOf()函数实现 有就返回字符首次出现的位置 没有则返回-1
+    includes()函数代替indexOf()函数  他返回更直观只有true 和 false表示没有
+
+startsWith函数      eg(es6/two.html)
+    判断指定的字符串是否出现在目标目标字符串的开头位置  第二个参数是开始搜索的位置
+    是就返回true 不是就返回false
+
+endsWith()函数 
+    判断指定字符串是否出现在目标字符串的尾部  第二个参数选填表示针对前N个字符串
+
+codePointAt()函数:      eg(es6/two.html);
+    可以正确识别四个字节的字符
+string.fromCodePoint()函数
+    string.fromcCodePoint(134071);//结果是:"𠮷"
+
+String.raw()函数  ; eg(es6/two.html);
+    返回字符串最原始的样貌
+    即使字符串中含所转义符也会忽视
+    eg:  console.log(String.raw`hellow\nwolrd`)
+
+什么是unicode编码:
+    中文:万国码,国际码,统一码,单一码
+    是计算机科学领域里的一项行业标准他对大部分的文字系统进行了整理
+    编码,使得电脑可以更简单的方式来呈现处理文字
+   ( 维基百科上是这么说的)
+
+   总结: string
+        es6给字符串带来了很多实用性的扩展:
+            模板字符串
+            标签模板
+            repeat()函数
+            includes()函数
+            startsWith()函数
+            endsWith()函数
+            String.raw()函数
+
+-------------------------------------------------------------------------------数值的扩展
+es5中存在的几个全局函数
+    isNaN()
+    iSFinite()
+    parseInt()
+    parseFloat()
+
+     eg:  isNaN(2.5);//false
+            indow.isNaN(2.5);//false
+
+在es6标准中:
+    isNaN方法被移植到Number对象上  iSFinite.....也是一样
+    eg  :Number.isNaN(2.5);//结果false
+
+    *在使用之前必须指定他是Number下的属性 不然会默认是window的函数
+
+ Number.isNaN函数:
+       Number.isNaN函数用于判断传入是否非数值
+       传统isNaN函数会把非数值的参数转化成数值在进行判断
+       Number.isNaN只对数值类型有效  非数值类型的一律返回false
+       eg: isNaN('abc');//结果是:true
+             //"abc"无法转成一个数值 返回true
+             Number.isNaN('abc')//结果是false
+          //'abc'是字符串 Number.isNaN('abc')//结果是false
+          //Number.isNaN不做类型转换直接返回false
+
+
+  Number.isFinite函数:
+    Number.isFinite函数用来检查一个数值是否非无穷  注意是判断非无穷
+   eg:Number.isFinite(1)
+        //结果:true,数值1是有穷的 即非无穷
+        Number.isFinite(Infinity)
+        //结果:false Infinity 表示我穷大大特殊值
+        非数值直接返回false
+
+Number.parseInt函数
+        解析一个字符串返回一个整数被移植到Number对象下，作用保持不变。
+        Number.parseInt('12.3abc');
+
+Number.parseFloat函数
+        解析一个字符串返回一个浮点数被移植到Number对象下，作用保持不变。
+        Number.parseFloat('12.3abc');
+
+移值得目的是慢慢的减少全局性的函数把全局函数合理地规划到其他对象下，渐渐实现语言的模块化。
+
+----------------新增的
+    Number.isInteger函数:
+        Number.isInteger函数用来判断是否整数
+        Number.isInteger(3.2);//返回false
+        Number.isInteger(3);//返回true
+
+    极小常量Number.EPSILON常量
+ console.log(Number.EPSILOn);
+ //返回:2.220446049250313e-16
+
+  2.220446049250313e-16是一个极小的数值，约等于0.00000000000000022204
+  Number.EPSILON的出现是用来判断浮点数的计算误差，如果浮点数计算得到的误差不超过Number.EPSILON的值，就表示可以接受这样的误差。
+
+安全整数:
+    Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER。
+    eg:Number.isSafeInteger(Number.MAX_SAFE_INTEGER);
+    //返回true
+      Number.isSafeInteger(Number.MAX_SAFE_INTEGER+1);
+    //结果：false
+
+-----------Math
+Math.trunc函数:
+    去掉输的小数部分:
+        eg:Math.trunc(3.1);//返回3
+
+Math.sign函数
+    判断数是 正数 还是 负数 还是 零
+    eg: Math.sign(3);//结果1
+          Math.sign(-3);//结果-1
+          Math.sign(0);//结果0
+          Math.sign('abs');//结果NaN
+
+Math.cbrt()函数
+    用于计算一个数的平方根
+    Math.cbrt(8);//返回2
+    Math.cbrt(27);//返回3
+
+其他的数学函数:
+Math.acosh(x) 返回 x 的反双曲余弦。
+Math.asinh(x) 返回 x 的反双曲正弦。
+Math.atanh(x) 返回 x 的反双曲正切。
+Math.clz32(x) 返回 x 的 32 位二进制整数表示形式的前导 0 的个数。
+Math.sinh(x) 返回x的双曲正弦。
+Math.cosh(x) 返回 x 的双曲余弦。
+Math.expm1(x) 返回 eˆx - 1。
+Math.fround(x) 返回 x 的单精度浮点数形式。
+Math.hypot(...values) 返回所有参数的平方和的平方根。
+Math.imul(x, y) 返回两个参数以 32 位整数形式相乘的结果。
+Math.log1p(x) 返回 1 + x 的自然对数。
+Math.log10(x) 返回以 10 为底的x的对数。
+Math.log2(x) 返回以 2 为底的 x 的对数。
+Math.tanh(x) 返回 x 的双曲正切。
+------------------------------------------------------------------------------5.10
+数组:
+    Array.of函数: 把字符串转化成数组
+        Array.of(1,2,3,4,5);//结果[1,2,3,4,5]
+
+    Array.from(ele);
+        把字符串转换成数组
+
+两个的区别:Array.of()直接把字符串转成长度为以个的数字    Array.from()把字符串每一个字符分割后组成一个数值  
+区别老大了~~~;
+
+    find()函数
+        找出符合条件的第一个元素
+        它的参数是一个匿名函数  数组中的每个元素都会到匿名函数执行直到结果为true
+            eg: let arr=[1,2,3,4];
+                arr.find(function (value){
+                    return value>2;
+                })//结果3
+
+          如果没有符合条件的就返回undefined
+
+    findIndex()函数
+        返回符合条件的第一个数组成员位置
+            eg: arr=[1,7,8,9,10];
+            arr.findIndex(function(value){
+                return value>8;
+            })  //结果为3  注意不是从零开始数(因为大于8的位置是三)
+                //没有匹配到就返回 -1
+    
+    fill()函数;
+        用指定的值填充到数组
+        有两个参数
+        eg: let arr=[1,2,3];
+          //arr.fill(3)//结果是[3,3,3];
+          //指定数值
+            arr.fill(4,1,3 )  4为要填充的数值 1为开始填充的位置 3为截止到位置的前三
+
+    entries()函数:
+        对数组的键值进行遍历,返回一个遍历器可以用for...of对其进行遍历
+            eg:for(let [i,v] of ['a','b'].entries()){
+                console.log(i,v);
+            }
+            返回键值对0 'a' 1 'b'
+
+    keys()函数
+        对数组索引值进行遍历,返回一个遍历器
+        eg: for(let index of["a","b"].keys()){
+            console.log(index);
+        }  //0   
+            //1
+
+    values()函数
+        对数组元素进行遍历,返回一个遍历器
+            for(let valueof['a','b'].values()){
+                console.log(value);
+                //a   b
+            }
+
+数组推导:  (eg /es6/three.html)
+    用简洁的写法,直接通过现有的数组生成新的数组
+--------------------------------------------------------------------------
+对象:(eg /es6/three.html)
+    传统方式: eg:let person={
+                            "name":"张三",
+                            "say":function(){
+                                alert("你好吗?");
+                            }
+                        }
+    es写法:
+    变量名可以作为键值对的键
+        var name="张珊";
+        var age=12; //首先定义两个变量
+        var person={name,age};
+        console.log(person);
+        //结果是 {name:"张删",age:12}
+
+    属性名可以是表达式:  eg
+        var f="first";
+        var n="name";
+        var s="say";
+        var h="hello";
+
+        var person={
+            [f+n]:"张珊",
+            [s+n](){
+                return "你好吗"
+            }
+        }
+        console.log(person.firstname);  //张删
+        console.log(person.sayhello());//你好吗
+        注意属性名和方法名都是用[]包裹着 里面是字符串相加的表达式
+
+    object.is()函数
+        比较两个值是否严格相等胡或者说是否全等
+        eg:var str='12';
+             var num=12;
+             Object.is(str,num);//false
+
+    object.assign()函数:
+        将原对象的属性赋值到目标对象上
+          eg:  let target={"a":1};//目标对象
+                let origin={"b":2,"c":3}//原对象;
+                Object.assign(target,origin)//origin参数可以是多个
+                console.log(target)//{a:1,b:2,c:3}  //把两个对象属性加到了一起
+      
+            let target={"a":1};
+            let origin={"a":2};
+            let origin2={"a":3};
+            Object.assign(target,origin,origin2) 
+            console.log(target);//返回值是{a:3}
+        //属性重复会被覆盖
+
+        常用来做给对象添加属性和方法 克隆对象 合并多个对象 为对象属性指定默认值
+
+    Object.getPrototypeOf()函数(eg /es6/three.html)
+        获取一个对象的prototype属性
+
+    Object.setPrototypeOf()函数
+        设置对象的prototype属性eg:
+            Object.setPrototypeOf(
+                allen,//类的实例化
+                {say(){console.log("hi")}
+                } );
+
+函数:
+    参数默认值:
+      传统实现方法:
+            function (n,a){
+                var name=n||"张";
+                var age=a||25;
+            };
+//缺陷:参数对应的布尔值不能false（比如：数字0，空字符串等转换成布尔值就是false
+
+   es6方法:
+            function person(sex,name="zhang",age=25){ 
+                //注意没有默认值的参数一定要放在前面
+                console.log(name,age);
+            }
+            person();//zhang  25
+            person('lisi',18);//  lisi 18
+   注意:函数参数是默认声明的变量不能使用let和const关键字再次声明
+  
+  rest参数 这是一个新的概念  中文意思为(剩下的部分)
+            values表示方法: ...values(三个点变量名)
+             values:在实参中除了第一个参数以外剩余的参数都会被values获取到
+             rest参数必须是函数最后一个参数
+              //错误写法
+                function sum(result, ...values, mult){
+                    //rest参数...values后面还有一个参数mult
+                }
+                //正确的写法
+                function sum(result, mult, ...values){
+                    //rest参数...values放在最后
+                }
+                适用于求和
+
+    扩展运算符  (eg  es/three.html)
+        ...(三个点)
+        可以将数组元素转化成对应的参数数列
+
+    箭头函数:
+        es定义了一种全新的定义函数的方式是使用符号(=>)所以叫箭头函数
+        传统写法:
+                var sum=function (a){
+                    return a;
+                };
+
+         箭头函数写法:
+                var sum=a=>a   (真他喵的新概念)
+
+            如果参数超过一个的话需要用小括号扩起来
+            函数体语法超过一条需要用大括号扩起来
+            eg:  var sum=(a,b)=>{return a+b}
+                    sum(1,2)//结果三
+            
+            数组求和:
+              传统:var sum=0;
+                        [1,2,3,4].forEach(function(v){
+                            sum+=v;
+                        })
+              箭头函数:var sum=0;
+                        [1,2,3,4],forEach(v=>sum+=v);
+
+箭头函数中的this:
+    箭头函数中的this指向的是定义时的this 而不是执行时的this
+     eg:  
+
+
+js的一种全新数据类型 Symbol
+    数据类型:
+        String 字符串类型
+        Number 数字类型
+        Object 对象类型
+        Boolean 布尔值类型
+        null 空值
+        Undefined 未定义
+
+    let sm1=Symbol('sm'');
+    let sm2=Symbol('sm');
+    sml===sm2  //结果是false
+    console.log(sm1)//结果是  Symbol()
+    console.log(sm2)//结果是  Symbol()
+//即使参数和描述一样 得到两个值也不相等
+
+    proxy代理:  (eg  es6/5.11.html)
+
+               eg:   //定义一个对象person
+                        var person={"name":"张三"};
+                        //创建一个代理对象pro,代理person的读写操作
+                        var pro=new proxy(person,{
+                            return "李四"
+                        });
+
+                        pro.naem;//结果是李四
+
+    set方法:  (eg  es6/5.11.html)
+        用于拦截对象的写操作
+
+    apply()函数   (eg  es6/5.11.html)
+
+for....of
+        一种用于遍历数据结构的方法他可遍历的对象包括
+        数组,对象,字符串set和map结构等具有iterator的接口的数据结构
+
+        遍历数组:
+            eg:var arr=[1,2,3,4];
+                for(let value of arr){
+                    console.log(value);
+                }
+                优点:1.写法比for循环简洁 (eg  es6/5.11.html)
+                        2.可以用break来终止整个循环或者continute来跳过当前循环
+                        3.结合keys()获取循环索引,并且是数据类型
+                        
+                        可以终止:
+                            eg: var arr=[1,2,3,4];
+                                    for(let value of arr){
+                                        if(value == 3){
+                                            //终止整个循环
+                                            break;
+                                        }
+                                        console.log(value);
+                                    }
+                        得到数字类型的索引
+                            var arr=[1,2,3,4,5];
+                            for(let index of arr.keys()){
+                                console.log(index);
+                            }
+
+                遍历字符串
+                    let word="我是熊熊王";
+                    for(let w of word){
+                        console.log(w);
+                    }
+
+
+数组去重:
+    set方法:  (去掉重复部分)
+        var arr=[1,23,23,44,55,55];
+        var s=new Set(arr);  //输出set{1,23,44,55}
+        var newArr=Array.from(s); //转成数组
+    
+    weakSet结构 (eg  es6/5.11.html)
+
+
+-------------------------------------------------
+module语法：
+    export && import
+
+export命令规定的是对外的接口，必须有模块内部的变量名建立一一对应关系
+eg:
+        export 1;//报错
+        var m=1; export m; //报错
+        因为没有提供对外的接口 m等于1 和直接输出m是一样的
+    
+正确语法：
+    eg：
+        export var m=1;
+        var m=1; export {m};  
+        var n=1;  export {n as m}; //重命名为m  
+
+同样的 ： function 和class 的输出也是这么写
+function fn(){.. };  export fn;//报错
+
+export function fn(){}; //正确
+function fn(){};  export  {fn};  //正确
+
+注意：export命令不能出现在代码块里{/*代码块*/}只能写在全局
+
+import 命令：
+eg : import {name,age} from './a.js';
+用import加载a.js文件，大括号里的变量名必须与被导入模块的对外接口名字一样
+from 指定文件的位置，可以是绝对路径亦可以是相对路径，如果只是路径
+不带名字必须配置文件告诉javascript引擎盖模块的位置
+
+注意:import命令具有提升效果，会被首先执行，由于import是静态执行，
+所以不能使用表达式和变量
+ 
+
+
+
+
+
+
+
+

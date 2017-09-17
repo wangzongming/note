@@ -1,0 +1,226 @@
+scss:
+-------------------------------------------------------------6.30
+scss是css预处理器
+
+注释：
+三种方法：
+	//不会被解析
+
+	/*
+	*会被解析(scss认为它是css的一部分) 注意如果有中文解析的时候会在css文件头部加上 @charset utf8;
+	*/
+	
+	/*!
+	重要注释即使是压缩模式也不会删除这个注释
+	*/
+-----------------
+变量：
+	定义：$color：red;
+	调用：color:$color;
+----------------------------
+如果变量要嵌套在字符串之中就必须写在#{}之中：
+	$side:left;
+	.div{
+		border-#{$side}-radius:5px;
+	}
+
+
+-----------------
+复合属性嵌套语法：
+	复合属性	border background  (border-top...   background-....)这样的叫复合属性
+	eg:
+	border:{
+		top:1px solid red;
+		left:{
+			color:red;
+		}
+		style:deased;
+	}
+
+--------------
+混合：
+	作用：复用一组样式
+	定义语法 @mixin 名称{
+			//定义样式
+		}
+
+	使用：@include 名称;
+//编译的时候会被删除和less的方法很像
+
+&用法和less一样（可以在选择器内部，访问选择器，通常用来定义伪类）
+
+
+混合传参：
+	在混合名称后添加一个括号（参数的集合）
+	在参数集合中我们可以定义参数，定义的语法跟变量的语法相似
+	语法：
+		@mixin style($color:red,$width:100px){
+			//red 100px 就是默认参数
+			//如果没有定义默认参数使用的时候就必须传参
+		}
+
+	eg:
+	@mixin style($color:red,$width:100px,$height:100px){
+		height:$height;
+		width:$width;
+		background:$color;
+	}
+	调用：@incolude style();//参数可以不传
+
+
+(...)获取剩余参数
+	eg:
+	@mixin box-shadow($h,$arg...){//应该要放到最后才行
+		height:$h;
+		box-shadow:$arg;
+		-o-box-shadow:$arg;
+		-webkit-box-shadow:$arg;
+		-moz-box-shadow:$arg;
+		-ms-box-shadow:$arg;
+	}
+
+	调用：div{
+			@include box-shadow(100px,10px 10px 20px red,20px 20px 20px red,30px 30px 20px red,);
+		}
+-----------------
+计算功能：
+	div{
+		margin(14px/4);
+		top:50px+100px;
+		right:$var * 10%;
+	}
+
+嵌套：和less一样
+	div {
+		color:red;
+		p{
+			line-heihgt:10px;
+		}
+		border:{
+			color:red;
+			solid:solid;
+		}
+
+	}
+
+
+----------------------
+继承：复用一组样式
+	
+	%wang{//自定义继承
+		border:1px solid red;
+	}
+	.div{
+		@extend %wang;//%号不能省
+	}
+
+
+	.css{//有id 标签 类都行
+		border:1px solid red;
+	}
+	.css2{//继承 .css的样式
+		@extend .css;
+	}
+
+//上面写法.css会被保留  这种写法只继承样式不保留.css名(标签或自定义【自己瞎写的】才能用)
+	%css{
+		border:1px solid red;
+	}
+	.css2{
+		@extend %css;
+	}
+
+
+注意：
+	变量不能前置
+	混合不能前置
+	继承可以前置
+
+------------------------
+颜色函数：
+	sass提供了一些内置颜色函数，以便生成系列颜色
+	lighten(#c33,10%);//#d6d65c
+	darken(#cc3, 10%) // #a3a329
+　　	grayscale(#cc3) // #808080
+　　	complement(#cc3) // #33c
+
+
+
+--------------------
+插入文件：
+	@import "css/aa.scss";
+
+
+如果插入的是css文件则等同于css 的import命令
+	@import "foo.css";
+
+
+------------------
+高级用法：
+	条件语句：@if @else 命令用来判断
+	p{
+		@if 1+1 == 2 { border:1px solid red;}
+		@if 5<3 {border:2px solid red}
+	}
+
+	@if lighness($color) > 30% {
+		background:red;
+	} @else {
+		background:#ccc;
+	}
+
+
+
+	循环语句：@for
+	@for $i from 1 to 10 {
+		.border-#{$i} {
+			border:#{$i}px solid blue;
+		}
+	}
+	
+	@while循环：
+	$i: 5;
+	@while $i > 0 {
+		.div-#{$i} {
+			width:2px * $i;
+		}
+		$i: $i - 2;//自减
+	}
+	
+
+	each命令，作用和for类似：
+	@each $member in a,b,c,d {
+		.#{$member} {
+			background-image:url('img/#{$member}.jpg');
+		}
+	}
+
+------------------
+自定义函数：
+	sass允许用户自定义函数：
+	@function myfn($fn){
+		@return $n * 2;
+	}
+
+	#div{
+		width:myfn(5px);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

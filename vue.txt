@@ -1,0 +1,1073 @@
+﻿
+Vue.js           
+==========================================
+vue是一个渐进式框架 采用的是面向对象的思维
+
+vue输出语句:                                                                        angular输出
+    1：{{}} 模板                                                                  {{}}
+    2：v-html                                                                         ng-bind   
+    3:   v-text  不可解析标签
+
+循环一个元素：
+   vue: v_for                                                   angular :ng-repeat
+    eg: <li v-for='(i,v) in arr'>{{i}}+{{v}}</li>
+
+循环json：
+<p v-for='(k,v,$index) in json' >{{$index}}-->{{v}}-->{{k}}</p>
+$index 索引
+
+v-bind:动态绑定标签的属性
+eg:<div v-bind:class="arr" ></div>
+    简写：<div :class="arr" ></div>
+
+所有v后面跟的是数据并且数据的格式：字符串 数组 json(只有true和false)
+
+v-on 绑定元素身上的事件的
+eg:<div v-bind:class="arr"  v-on:click="ff"></div>
+简写：<div v-bind:class="arr"  @click="ff"></div> 用一个@
+
+事件都有一些问题 冒泡捕获和默认行为
+vue中取消这些行为：
+    在事件后加 .修饰符，
+
+修饰符：
+.stop - 调用 event.stopPropagation()。 阻止事件冒泡
+.prevent - 调用 event.preventDefault()。 阻止默认行为
+.capture - 添加事件侦听器时使用 capture 模式。 
+.self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+.{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
+.native - 监听组件根元素的原生事件。
+.once - 只触发一次回调。
+.left - (2.2.0) 只当点击鼠标左键时触发。
+.right - (2.2.0) 只当点击鼠标右键时触发。
+.middle - (2.2.0) 只当点击鼠标中键时触发。
+.passive - (2.3.0) 以 { passive: true } 模式添加侦听器
+
+eg:  <div @click.stop="fn"></div>
+
+
+键盘事件 keyCode 键值  
+<div @keyup="fn"></div>  //按键就触发的事件
+<div @keyup.13="fn"></div>  //按回车键就触发的事件  可以改成 .left .right .enter .....  
+
+表单：
+  vue:  v-model                                                  angular  ng-model    
+
+条件：
+    <p v-if="senn">123</p> 为true456就隐藏 反之 自己隐藏
+     <p v-else="senn">456</p>
+
+v-show = "true/false"
+
+
+-----------补充：
+    如果外部需要app里的data则需要 app.$data.xxx
+    需要值的话直接app.name  内部获取 this.name
+
+
+------------------------------------------7.21
+vue后台交互
+需要引入 vue-resourse.js
+
+1、get
+---------
+this.$http.get(''url",{params（可选）}).then(function(res){ 
+    alert(res.data)
+},funciton(){})
+//参数直接写在 eg {a:12,b:30}
+this.$http.get('./1.txt',{params（可选）}).success(function(res){
+    alert(res)
+})
+------------
+2、post
+this.$http.post(''url").then(function(res){ 
+    alert(res.data)
+},funciton(){})
+
+传参 注意有三个参数 不能使用 .success()  
+this.$http.post(''url",{params},{emulateJSON:true}).then(function(res){ 
+    alert(res.data)
+},funciton(){})
+-----------------
+3、jsonp
+
+jsonp连接  https://sug.so.360.cn/suggest?callback=suggest_so&word=a
+
+  this.$http.jsonp('https://sug.so.360.cn/suggest',
+{'word':this.wds},  //this.wds是data里的 word是参数
+{'josnp':'callback'}).then(function(res){  //callback接口是啥就写啥 
+    this.mes=res.data.s
+})
+
+百度的
+  //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=
+this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+{'wd':this.wds},
+{'jsonp':'cb'}).then(function(res){
+    this.mes=res.data.s
+},function(){})
+
+----------------
+
+vue组件：
+    1. 全局组件
+        a.创建一个组件构造器  Vue.extend({json})  {json就是构造器}  extend是创建构造器的
+        b.注册一个组件  Vue.component('组件名',构造器)
+        c.组件调用  直接在页面使用组件名写成标签格式放在页面进行调用 主要这个组件必须实列化 new
+            eg：<组件名>html页面</组件名>
+
+    注意：1.0和2.0的区别是2.0模板必须有一个html根元素
+
+    eg:    //全局组件
+            // var app=Vue.extend({
+            //     template:`
+            //         <div> 这是组件  
+            //          <h1>呵呵呵</h1>
+            //         </div>`,
+            // })
+            // Vue.component('wang',app);
+                var vm=new Vue({ //必须实列化
+                    el:"#app",
+                    data:{}
+                })
+
+    2. 局部组件
+        将对应的组件写在实列化里面
+        //局部组件  
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            components:{
+                "wang":{
+                    template:`
+                        <div>
+                            <h1>我是局部组件</h1>    
+                        </div>
+                    `,
+                }
+            }
+        })
+
+怎么给组件里添加数据和事件
+ 1.不管是数据还是事件必须写在构造器1里 如果调用只能在模板里调用
+ 
+//局部组件  
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            components:{
+                "wang":{
+                    template:`
+                        <div>
+                            <h1 @click="ff">我是局部组件{{mes}}</h1>  <!--模板里调用数据-->  
+                        </div>
+                    `,
+                    data:()=>{ //data是个函数
+                        return {
+                            mes:"组件里的数据写在模板里",
+                        }
+                    },
+                    methods:{//方法还是一样的
+                        ff:function(){
+                            // console.log(this)//指向组件
+                            this.mes='大明星大衰惫 '
+                        }
+                    }
+                }
+            }
+        })
+
+------------------
+template 模板
+html:
+ <wang>
+    <template id="temp1">
+        <ul>
+            <li v-for="i in xiao">{{i}}</li>
+        </ul>
+    </template>
+</wang> 
+
+var vm=new Vue({
+    el:'#app',
+    data:{},
+    components:{
+        "wang":{//组件所有写到构造器里
+            template:"#temp1", //帮上面定义的id名
+            data:function(){  //关联后数据就可以用到页面里的模板里了
+                return {
+                    xiao:['哈哈','和','得到']
+                }
+            }
+        }
+    }
+})
+
+
+------------------
+组件通信：
+1. 将父组件数据绑定的子组件的标签上
+2. 将这个属性写在子组件的props:[] 里
+3. 在模板里面调用 
+
+	因为 this.$http.get是vue本身的组件的this指向组件本身所以需要通信
+	使用间接通信
+
+    eg:
+    <div id="app">
+        <button @click='fn'>按钮</button>
+        <temp :name="mes"></temp>  //在模板上定义一个属性 把数据当成属性值传入
+    </div>
+      el:"#app",
+    data:{
+        mes:''  //父组件数据
+    },
+     methods:{
+        fn:function(){
+            this.$http.get('./1.txt').then(function(res){
+                this.mes=res.data
+            },function(){})
+        }
+    },
+    components:{
+        "temp":{
+            props:['name'],//在这里接收模板里定义的属性名 
+            template:`
+                <h3 @click="ff">这是局部组件{{name}}</h3> //把props里面的数据拿过来直接使用
+            `,
+        }
+    }
+
+
+--------------组件嵌套
+
+ <div id="app">
+         <temp :names="mes"></temp>    <!--组件 里面有很多模板 必须用上 -->
+    </div>
+</body>
+
+<template id="tm1">   <!-- 第一个模板 -->
+    <div>
+        <h3>姓名</h3>
+         <p>{{names}}</p>
+         <temp1></temp1> <!-- 里面嵌套的子模板 -->
+    </div>
+</template>
+
+<template id="tm2"> <!-- 子模板的模板 -->
+    <h4>班长是帅哥</h4>
+</template>
+
+var vm=new Vue({
+    el:"#app",
+    data:{
+        mes:'hahh'
+    },
+    components:{
+        "temp":{ //组件名 通过html标签调用
+            props:['names'],//上面定义的属性 在下面传入
+            template:"#tm1",//模板id
+            methods:{
+                fn:function(){
+                    this.names="哈哈"
+                }
+            },
+            components:{ //组件嵌套
+                "temp1":{
+                    template:"#tm2",
+                }
+            }
+
+        }
+    }
+})
+
+
+------------------
+
+动态组件：<component :is=""><component>
+    1.需要一个<component :is=""><component>标签 绑定一个属性叫is
+    2.通过点击动态修改组件名
+eg:
+   <div id="app">
+        <span @click="name='new1'">新闻1</span>
+        <span @click="name='new2'">新闻2</span>
+        <span @click="name='new3'">新闻3</span>
+        <span @click="name='new4'">新闻4</span>
+        <component :is="name"></component>  
+    </div>
+
+    js----
+
+<template id="new1">
+    <div>
+        <h1>我是新闻\1 </h1>
+    </div>
+</template>
+
+<template id="new2">
+    <div>
+        <h1>我是新闻\2</h1>
+    </div>
+</template>
+<template id="new3">
+    <div>
+        <h1>我是新闻\ 3</h1>
+    </div>
+</template>
+
+<template id="new4">
+    <div>
+        <h1>我是新闻\ 4</h1>
+    </div>
+</template>
+
+</html>
+<script>
+
+
+var vm=new Vue({
+    el:"#app",
+    data:{
+        name:""
+    },
+    components:{
+        new1:{ //组件名和component的is属性绑定
+            template:"#new1" //和模板名做绑定
+        },
+         new2:{
+            template:"#new2"
+        },
+         new3:{
+            template:"#new3"
+        },
+         new4:{
+            template:"#new4"
+        }
+    }
+})
+
+
+-----------------------
+父组件拿到子组件的数据
+
+
+
+
+
+------------------
+小插曲：
+    bower  安装 npm install bower  -g
+    查版本  bower info jquery
+
+下载需要的版本 npm install vue@3.3
+
+
+
+-------------------------------
+父主件获取子组件数据：
+    1：子组件定义一个发送方法
+        this.emit('自定义数据名',数据)
+    2:在父组件模板里接收
+    <tmp @定义的数据名="fn()"></tmp>
+ 
+<template id="father">
+    <div>
+        <h1>{{mes}}</h1>
+        <aa-b @jieshou="dd"></aa-b>
+    </div>
+</template>
+<template id="son">
+    <div>
+        <h3 @click="send">{{shuju}}</h3>
+    </div>
+</template>
+</html>
+<script>
+	var vm=new Vue({
+		el:"#app",
+		data:{},
+		components:{
+			"aa":{
+				template:"#father",
+				data:function(){
+					return {
+						mes:"小倩不学习"
+					}
+				},
+				methods:{
+					dd:function(shuju){
+						this.mes=shuju
+					}
+				},
+				components:{
+					'aa-b':{
+						template:"#son",
+						props:['text'],
+						data:function(){
+							return{
+								shuju:"小倩的孩子要好好学习",
+								haha:"我笑了"
+							}
+						},
+						methods:{
+							send:function(){
+								this.$emit('jieshou',this.haha)
+							}
+						}
+					}
+				}
+			}
+		}
+	})
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+
+Vue.js  是MVVM框架
+
+什么是MVVM：
+（页面dom）  （监控者）         （数据）
+    View    ---       ViewMoel     ---    Model
+
+    View就相当于我们的DOM内容，我们所看到的页面视图
+    Model就相当于我们的数据对象  {name:"张三",age:20}
+    中间的监控者就负责控制两侧的数并相对应的通知另一侧进行修改 ，
+        比如在model 层中修改了name值为：老王 那view中显示的张三也会变成老王
+        这个过程就是由ViewModel来操作的（不用手动操作DOM）
+
+Vue.js的优点：
+    1、更轻量更快
+    2、更容易上手 易学
+
+Vue的两大核心：数据驱动和组件化
+
+ 通过尽可能简单的API实现响应的数据绑定和组合的视图组件
+
+在Vue.js中，网页可以看成多个组件组成的***
+    
+ie8以下版本不兼容
+
+----------------------------------------------------
+
+创建Vue实列:
+    new Vue()  -->  设置数据data  -->  挂载元素 -->  成功渲染
+
+    html:  {{name}}
+    js:
+    var vm=new Vue({   //里面大多数都是对象
+        el:"#app",     //el data 是固定的
+        data:{    
+            name:"laowang",
+            age:20
+        },
+        filters:{
+            ......
+        }
+    });
+
+---------------------------------
+过滤器：filters
+    filters:{//是一个对象
+        toInt(value){
+            return parseInter(value)
+        }
+    }
+渲染{{num | toInt}}
+
+--------------------------------
+计算属性：computed    
+    就是求几个数的和
+    computed:{
+        sum:{
+            return this.num+this.num1;//依赖的是data里面的值 data里面的值变 sum也跟着变
+        },
+    },
+    渲染  ：{{sum}}  
+
+-----------------------------
+methods 方法：(单词意识就是 方法 里面就放一些方法)
+    在methods中我们可以定义一些方法，供组件使用
+    methods:{
+        plus(){
+            return this.name++;  //data里面的数据改变
+        }
+    }
+    渲染  <button v-on:click="plus">加一</button>
+
+------------------------------
+watch 观察
+watch选项是Vue提供的用于检测指定的数据发生改变的api
+
+watch:{
+    name(){   //name是data 里面的数据 
+        console.log(`有变化拉 最新值是:`)   //发生改变就会执行不用渲染
+        console.log(this.a);
+    }
+}
+
+-------------------------------------------------
+Vue实列的生命周期：
+    Vue把整个生命周期划分为创建、挂载、更新、销毁等阶段，每个阶段都会给一些“钩子”
+    让我们做一些我们想做的动作，学习实列的生命周期 能帮我们理解Vue的实列运作机制
+    更好的合理利用各个钩子来完成我们的业务代码
+
+几个阶段：
+    1：beforeCreate
+    此阶段为实例初始化之后，此时的数据观察和事件配置都没有准备好
+    beforeCreate(){}
+    
+    2：created   *最常用
+    beforeCreate之后紧接着的钩子是created
+    created(){console.log('创建完毕');console.log(this.$data)}
+
+    3：beforeMount
+    此阶段为即将挂载
+
+    4：mounted
+    mounted也就是挂载完成阶段 到了这个阶段数据会被成功渲染
+
+    5：beforeUpdata
+    当Vue实列修改data是，Vue会自动帮我们更新渲染图这个过程中Vue提供了beforeUpdata 钩子
+    在检测到要修改数据的时候，更新渲染图之前就会触发beforeUpdata
+    在此阶段视图并未重新渲染更新
+
+    6：updata
+    此阶段为更新渲染视图之后
+
+    7：beforeDestroy
+    调用实列的destroy()方法可以销毁当前组件，在销毁前，会触发beforeDestroy钩子
+
+    8：destroyed
+    成功销毁之后，会触发destroyed钩子，此时该实列与其他实列关联已经被清除他与视图之间也被解绑
+
+    9：actived
+    keep-alive组件被激活的时候调用
+
+    10：deactivated
+    keep-alive 组件停用时调用
+
+
+-----------------------------------------------------
+Mustache语法
+    就是双{{}}的写法，这是最常见的绑定方式，有了它可以很轻松在视图上显示我们的数据并及时更新 无需手动执行
+
+    如果需要插入html代码需要用到 v-html 指令以属性的形式添加到div
+    eg：<div id="app" v-html="name"></div> 
+            data:{
+                name:"<strong>老王</strong>"
+            }
+
+------------------------------
+绑定属性
+用v-bind指令
+    v-bind:修饰
+    eg:
+        <div id="app">
+            <a v-bind:href="link">百度</a>
+        </div>
+        <script>
+        let app=new Vue({
+            ele:"app",
+            data:{
+                link:"http://www.52mwl.top",
+            }
+        });
+
+v-bind指令的简写
+    Vue为了代码的简洁提供了bind指令的简写 仅需要冒号
+    完整写法：<a v-bind:href="url">m</a>
+    简写：<a :href="url">简写</a>
+
+当属性disabled值为false时属性disabled直接被移除掉
+    eg：<button :disabled="data里绑定一个数据为true即可"></button>
+
+
+------------------------------------------
+vue还支持javascript表达式
+eg:简单加减
+    <div id="app">{{num+10}}</div>//渲染值为20
+    <script>
+        let app=new Vue({
+            el:"#app",
+            data:{
+                num:10,
+            }
+        });
+    </script>
+注意：
+    虽然vue支持javascript表达式运算，我们只会在运算比较简单的情况下才会这么玩，
+    当运算比较繁琐复杂的时候，一定要用vue的computed属性来进行计算。
+
+    三元运算：
+   <div id="app">{{ok ? "yes" : "no"}}</div>//渲染值为yes
+    <script>
+        let app=new Vue({
+            el:"#app",
+            data:{
+               ok:true,
+            }
+        });
+    </script>
+
+    字符串拼接：
+   <div id="app">
+        <a :href="http://"+host>m官网</a>
+  </div> 
+    <script>
+        let app=new Vue({
+            el:"#app",
+            data:{
+               host:"52mwl.top",
+            }
+        });
+    </script>
+----------------------------------------------
+实用的几个指令：
+    v-text用于更新标签包含的文本 作用和大括号效果一样 
+    v-html 绑定一些包含html代码的数据到视图上
+        <div id="app">
+            <p v-html="msg"></p>
+            <p>{{msg}}</p>               //这两种写法效果一样的
+        </div>
+        data:{
+            msg:"老王"，
+        }
+
+    v-show指令：
+    用于控制元素的隐藏和显示   值为true/false分别对应着显示隐藏
+      <div id="app">
+            <p v-show="show1">我会显示</p>
+            <p v-show="show2">我会被隐藏</p>        //元素解析成<p style="display:none;">我会被隐藏</p>    
+        </div>
+        data:{
+            show1:true,
+            show2:false
+        }
+
+    v-if  指令:
+    取值也是true和false他控制元素是否被渲染出来、
+         <div id="app">
+            <p v-if="if_1">我会显示</p>
+            <p v-if="if_2">我会被隐藏</p>     //元素被直接注释掉    渲染为<!----> 我也不知道为毛是这样
+       </div>
+        data:{
+            if-1:true,
+            if-2:false
+        }
+记住一点：
+    如果需要频繁切换显示/隐藏，就用v-show;
+    如果运行后不太可能切换显示影藏 就用v-if。
+
+v-else指令：
+    if和else是成对出现的在vue中也不列外。
+    他没有对应的值但是要求前一个兄弟节点必须使用v-if指令**
+    没有if哪来的else。。
+
+    <div id="app">
+        <p v-if="if_1">我是if</p>//被忽略了不渲染
+        <p v-else="if_2">我是else</p>
+    </div>
+    data:{
+        el:"#app",
+        data:{
+            if_1:false    
+        }
+    }
+    
+v-for 指令：
+ 有时候，data里存放的数据不是简单的数字或字符串，而是数组Array类型的，这时候我们要把
+ 数组元素展示视图上就会用到v-for指令，来实现列表渲染
+
+    <div id="app">
+        <div v-for="item in list">{{item}}</div>  //输出三个div 注意item in list这句话 item是渲染在视图上的 list是在数据data里的
+    </div>
+    data:{
+        el:"#app",
+        data:{
+            list:["tom","john","lisa"]
+        }
+    }   
+    这段代码会渲染出三个div其中包含的三个值分别对应着数组的三个值
+
+    怎么拿到索引？
+    把HTML部分代码修改为：
+        <div id="app">
+            <div v-for="(item,index) in list">    //索引参数放到后面
+                {{index}}.{{item}}              //0.老王  .......
+            </div>
+        </div>
+注意v-for指令除了可以迭代数组还可以迭代对象和整数
+
+v-bind 指令：
+    可以缩写成冒号 :修饰符(href src.....)  
+    用于动态绑定dom元素属性，比较常见的是 <a>标签的href 属性 <img>的src属性
+    <div id="app">
+        <a :href="url">百度</a>
+    </div>
+    data:{
+        url:"www.baidu.c
+    }
+    
+v-on指令：
+    v-on指令相当于绑定事件的监听器，绑定事件触发了，可以指定时间的处理函数
+
+    <button v-on:click="say('tom')">点击试试</button>
+    methods:{
+        say(name){   //可以传参数
+            console.log("配合methods使用的"+name)
+        }
+    }
+
+v-model指令：
+    是一个最重要最常用的指令 一般用在表单输入，
+    他帮我们轻松的实现表单控件和数据的双向绑定
+
+    <div id="app">
+        <input v-model="msg" type="text" />
+        <p>你输入的是：{{msg}}</p>  //用户输入啥会马上更新 爽
+         //可以<p v-html="msg"></p>   这就可以输入html代码了
+    </div>
+    data:{
+        msg:" ",//可以写默认值
+    }
+
+v-once指令：
+    他的特点是只渲染一次，后面的元素中的数据在更新变化，都不会重新渲染
+    
+    <div id="app">
+        <input v-model="msg" type="text" />
+        <p v-once>你输入的是：{{msg}}</p>  //用户输入啥会马上更新 爽
+         //可以<p v-html="msg"></p>   这就可以输入html代码了
+    </div>
+    data:{
+        msg:" ",//只能改一次又默认值就改不了了
+    }
+
+-----------------------------------
+组件（另一个核心）
+    组件是我们认为的把页面合理的拆分成一个个区块，让这些区块更方便我们的重复使用
+    有了组件我们可以更高效合理开发和维护我们的项目
+
+eg:vue/v-for.html
+
+需要使用vue提供的全局api vue.component("组件名",{`<span>这里是内容</span>`})
+html:
+    <div id="app">
+        <my-article :detail="article"></my-article>//可以吧detail理解成一个形参 article理解成一个实参
+    </div>
+
+注意 ：组件一定要确保在vm实列创建之前<my-article组件已经被注册
+
+实现数据动态的展示出来就需要涉及到组件的传参props（不但函数可以传参组件亦可以）
+把数据存到vm实列data中
+通过props来接收我们的参数detail,传进来之后，你可以在模板template中使用它所接收的所有数据了
+
+    <script>
+    Vue.component('my-article',{
+        props:['detail'],
+        template:`<div>
+                            <h1>{{detail.tatle}}</h1>
+                            <span>{{detail.data}}</span>
+                            <span v-show="detail.is_original">原创</span>
+                        </div>
+                        `
+    })
+
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            article:{
+                title:"这是title",
+                data:"2017年6月11号",
+                is_original:true,
+            }
+        }
+    });
+
+
+-----------------------------------------------
+vue组件之间的通信
+---props接受传参就是组件之间的一种通信方式：父组件-->子组件传递数据
+    组件实列的作用域都是孤立的，也就是子组件在模板template中不能应用父组件的数据
+
+
+
+----------------------------------------
+动态绑定class和style
+        绑定class名
+        <div id="app">
+            <p :class="{'active':isActive}">动态绑定class名</p>//注意绑定的是一个对象
+        </div>
+        <script>
+            const vm=new Vue({
+                el:"#app",
+                data{
+                    isActive:true  //为true就会渲染上class名为active 为false 则不渲染
+                }
+            });
+        </script>
+
+        绑定多个class名:
+         <div id="app">
+            <p :class="{'active':isActive,//注意绑定的是一个对象
+                                'active1':isActive1,
+                                'active2':isActive2,
+                                }">动态绑定class名</p>
+        </div>
+        <script>
+            const vm=new Vue({
+                el:"#app",
+                data{
+                    isActive:true , //为true就会渲染上class名为active 为false 则不渲染
+                    isActive2:true ,
+                    isActive1:true 
+                }
+            });
+        </script>
+
+绑定class名数组语法：
+    <p :class="[class1,class2]">这是文字</p>
+    data:{
+        class1:"class1",//第一个class名就渲染成立class1
+        class2:"class2",//第一个class名就渲染成立class2
+    }
+    就和传参似的
+
+
+绑定内联样式style
+    绑定样式也有两种方法数组和对象
+    <p :style="{color:colorStyle}">这是文字</p>
+    data:{
+        colorStyle:"red"
+    }
+
+
+
+-----------------------------
+vue-loader
+
+.vue是一个自定义文件类型，
+每个.vue包含三种类型的顶级语言块 还可以添加允许的自定块
+	<template></template>  <script></script>  <style></style>
+
+vue-loader 会解析文件 提取每个语言块，最后将他们组装成一个commonjs模块
+module.exports出一个vue.js组件对象
+
+vue-loader支持使用非默认语言，比如css预处理器，通过设置语言块的lang属性就行了
+  eg:<style lang="sass"></style>
+  
+语言块：
+	template默认语言使用HTML 每个.vue文件最多只用一个<template>块
+	内容将被提取为字符串，将编译并作为vue组件的template选项
+	
+	script 默认语言js 每个.vue文件最顶包含一个<script>块
+	
+	style 默认语言css 
+	
+	自定义块 可以在.vue文件中添加额外的自定义块来实现项目的特定要求
+	
+	src导入：
+		可以通过src导入外部文件
+		<template src="./template.html"></template>
+		<style src="./style.css"></style>
+		<script src="./script.js"></script>
+	注意：src导入遵循的是require()一样的规则，就是路径必须是 ./ 开始
+		还可以直接冲npm包中直接导入内容
+		<style src="todomvc-app-css/index.css">
+		
+	自定义语法块上同样可以使用src属性导入
+	
+-------创建项目
+使用vue-cli
+	npm install vue-cli -g
+	vue init webpack hellow-vue
+	cd hellow-vue
+	npm install
+	npm run dev
+	
+------------es6
+导入其他vue组件写法
+	<script>
+		import ComponentA from './ComponentA.vue'
+		import ComponentB from './ComponentB.vue'
+		
+		export default {  //相当于new Vue({...})
+			components:{
+				ComponentA,
+				ComponentB
+			}
+		}
+	</script>
+	
+
+--------路由
+
+html:（喵的单词在这里不能错）
+	使用 <router-link to="/foo"><router-link> 标签定义链接
+	
+	使用 <router-view><router-view> 标签将内容显示出来	 
+
+
+1. 定义路由组件
+	const Foo = {template:'<div>这是foo页面</div>'}
+	const Bar = {template:'<div>这是bar页面</div>'}
+
+
+2. 定义路由
+	const routes = [
+		{path:'/foo',component:Foo},
+		{path:'/bar',component:Bar}			
+	]
+
+3. 创建路由实列 然后传入routes配置 还可以配置别的参数
+	const router = new VueRouter({
+		routes // router:router 的缩写
+	})
+
+4. 让整个app都有路由实列 通过配置参数注入路由
+
+	const vm=new Vue({
+		el:"#app",
+		data:{},
+		router
+	}).$mount("#app")
+	
+
+------------动态路由匹配
+
+html:
+	<router-link to="/user/foo">点击foo出来</router-link>
+    <router-link to="/user/bar/">点击bar出来</router-link>
+	<!-- 视图 -->
+    <router-view></router-view>
+js:
+	1. 定义一个组件
+	const User = {
+		template : "<div>use path {{$route.params.id}}</div>" //获取用户路径 还有$route.query等
+	}
+	2. 实例化
+	const router = new VueRouter({
+		routes:[
+			{path:"/foo/:id",component:User} //动态路由是 : 号 组件指向同一个的
+		]
+	})
+
+	3. 挂载
+	const vm=new Vue({
+		el:"#app",
+		router
+	})
+
+	
+----------路由嵌套
+
+需要配置routes 的 child 选项
+
+html:
+	<div id="app">
+        <h1>这是route</h1>
+        <p>
+            <router-link to="/user/foo">首页</router-link>
+            <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+            <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+        </p>
+        <!-- 视图 -->
+        <router-view></router-view>
+    </div>
+
+js:
+<script>
+    const User ={
+        template : `<div>
+            <h3>user id {{$route.params.id}}</h3>
+            <router-view></router-view>  //这个不能省略
+            </div>`,
+             //$route.params.id 获取后面的路径
+             //要在嵌套的出口中渲染组件，需要在VueRoute的参数中使用 children 配置
+    }
+    const UserHome = {template : '<div>HOME</div>'}
+    const UserProfile = {template : '<div>userprosts</div>'}
+    const UserPosts = {template : '<div>userposts</div>'}
+    const router=new VueRouter({
+        routes:[
+            { 
+                path:"/user/:id" ,  //动态路径参数，以冒号开头
+                component:User,
+                children:[ 
+                    {
+                        path:'', 
+                        component:UserHome
+                    },
+                    { //不配置childre这个的话path得写成 /user/foo/... 完全不一样
+                        path:'profile',//当/user/:id/profile 匹配成功
+                        component:UserProfile
+                    },
+                    {
+                        path:'/posts',//当/user/:id/posts 匹配成功
+                        component:UserPosts
+                    } //
+                ]
+             },
+            
+        ]
+
+    })
+    const vm=new Vue({
+        el:"#app",
+        router
+    }).$mount("#app");
+</script>
+
+
+-------------编程式的导航
+
+除了使用<route-link></route-link> 时，这个方法来定义导航链接
+
+导航到不同的url 使用router.push()方法，
+声明式  <router-link :to="...">
+编程式  route.push(...)
+
+
+// 字符串
+router.push('home')
+
+// 对象
+router.push({ path: 'home' })
+
+// 命名的路由
+router.push({ name: 'user', params: { userId: 123 }})
+
+// 带查询参数，变成 /register?plan=private
+router.push({ path: 'register', query: { plan: 'private' }})
+、
+
+----------------命名路由
+eg:
+	const router = new VueRouter({
+		routes:[
+			{
+				path:'/user/:userid',
+				name:'user',
+				component:User
+			}
+		]
+	})
+
+<router-link :to="{name:'user',params:{userId:123}}">user</router-link>
+
+
+
+
+

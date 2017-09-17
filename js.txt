@@ -1,0 +1,865 @@
+
+JS全名是javascript
+     是浏览器脚本语言
+     结构层html  表现层css 行为层js
+   
+   
+ 数字和变量
+   js的注释 单行//    /* 多行*/ 
+   js区分大小写
+   js不区分单双引号  
+   js代码写在script里面
+   
+
+----------------------
+消息框 alert()
+       confirm() 确认框
+       prompt()  输入框
+------------------------------------------------------
+
+      数字：
+      常量：凡是带单双引号包含的都是常量  字符串‘’
+      变量：可以改变的量 凡是var出来的 是声明的意思
+      在js中的连接符 +号   alert 弹出对话框
+      js的执行从上往下
+      js中最大的对象   window>document>html>body>element
+      标签的属性   
+      获取元素
+      id   document.getElementById("");
+    标签   document.getElementsByTagName('');
+           document.getElementsByClassName('');
+            
+ ------------------------------------------
+   js的数据类型 :
+      number 
+      string
+      布尔
+         true/false
+      null
+      undifind 
+      obj(对象) 
+      function 函数
+      
+      typeof检测数据类型  t
+   
+   typeof出来的数据类型:string obj undefind boolean function()
+   注释typeof出的 arr null 是obj
+   
+   
+---------------------------------------------
+字符串 string
+   属性 eg：length
+
+   
+    
+------------------------------------------
+JS 中如何遍历
+   for 循环  
+    i++：程序执行后加一
+    ++i:程序执行前加一
+      语法：for(var i=0;i<5;i++){   i 最后是5
+              语句
+           }
+--------------------------------------------
+事件:
+ 事件一定绑定到元素上且与函数配合使用
+js事件：
+   鼠标事件：onclick      鼠标点击
+         ondblclick   双击
+         onmousevoer  划过
+         onmouseout   滑出
+         onmouseup    鼠标弹起
+         onmousedown  鼠标按下
+
+   键盘事件：onkeydown     键盘按下
+             onkeyup       键盘弹起
+
+        
+
+关键字：
+     function: 
+                            函数  匿名函数/有名函数       无论是有名还是匿名都必须调用  匿名往往同过事件调用  
+     this：
+           
+     new：
+
+------------------------------------------------------------------------------------------
+js语句:
+    if{}else{}  //条件语句
+    if(条件一){
+      满足条件执行
+    }else{
+      否则执行这句
+    }
+
+    条件 :<  >  = <= >= != == true/false
+    多个条件:
+      if(){
+      条件一
+      }else if(){
+      条件二
+      }....else{
+      其他
+      }
+三元运算:
+     条件?语句1:语句2
+
+四则运算:  
+     + - * / %(求于余)
+逻辑运算:
+     ||(或) &&(且) !(非)
+
+----------------------------------
+字符串:
+     属性  length
+     
+     方法  charAt()     返回索引值对应的字符  eg:
+           concat()     用于连接多个字符串    eg:a.concat(b);  
+           indexOf()    返回某个字符在字符串中第一次出现的位置 没有则返回-1
+           slice(2,6)   提取出需要的字符串中的一部分 包含开头不包含结尾
+           split()      把一个字符串分割成字符串数组
+           substring()  等价于slice(2,3)
+           toLowerCase  大写转小写
+           toUpperCase  小写转大写
+           
+  
+------------------------------------
+数组的方法:
+   定义数组三种方法   1.var arr=new Array();
+                       arr[0]='zhang'
+                       arr[1]='wang'
+                 
+	                  2.var arr=Array('zhuang','wang');
+	                
+	                  3.var arr=['zhuang','wang','jian'] ;
+   s
+   方法:
+       push()   向数组后添加一个新元素
+       pop()    直接删除数组最后一个元素
+       unshift()在数组前面添加一个新元素
+       shift    删除数组第一个元素           
+       concat() 合并多个数组  语法:ayy.concat(arr1,arr2);直接就是结果(必须声明一个新的变量)
+       join(元素连接方式)       用数组的元素组成一个字符串(和split()相反)
+       toString(没有连接方式)   转换数组到字符串
+       reverse()    倒序排列数组
+       slice(1,3)   截取数组包含前面不包含后面
+       sort()       排序  按照首字符排  sort(function (a,b){return a-b})从小到大  sort(function(a,b){return b-a}
+       splice(索引值,要删除的个数,要添加的元素)    添加/删除
+       
+       indexOf  查找数组元素在数组中的位置
+       
+三添加 两删除 两转换 一截取 一合并 两排序  
+---------------------------------     
+       
+  Math对象:
+  
+       Math.PI     
+       Math.abs(x)   返回x的绝对值
+       Math.ceil()   向上取整
+       Math.floor()  向下取整
+       Math.round()  四舍五入
+       Math.sqrt()   返回数的平方根
+       Math.sin(rad) 返回deg的正弦值  由角度得数字
+       Math.asin(x)  返回x的正弦      由数字得角度
+       Math.cos(x)   返回X的余弦值
+       Math.acos(x)  返回x的反余弦
+       Math.random() 返回0-1之间的随机数
+       
+       
+---------------------------------
+
+定时器:setInterval(function(){  },100)
+     
+---------------------------------
+  isNaN(x)
+     判断x是否为数字 不是就返回true  是就返回false 
+     隐式转换 会将'123'转换成123
+     
+     ===  也有隐式转换的能力
+  parseInt()将字符串强制转化成整数     
+  parseFloat()将字符串强制转换成小数
+  Number()  将字符串转换成数字
+  String()  将别的转化成字符串
+  eval()    将字符串解析成浏览器可以分别的类型
+------------------------------------
+ 对象  json
+json是一个数据储存的语法格式
+{"属性":"属性值"}和数组混合搭配
+obj={"name":["老王","小王"]}  obj.name[1]----->小王
+arr=[{"name":"tom"},{"name","老王"}]   arr[1].name=老王
+
+ajax从服务器上加载的数据都是string 需要解析成浏览器能是别的js对象
+      解析方法有eval();   JSON.parse();
+      JSON.stringift()将js值转化为字符串
+
+xml对象:
+  面试题:
+    你所知道的空标签 <hr/>
+                                      <br/>
+                                      <img/>
+  xml和html的区别:
+    xml必须有闭合标签 区分大小写  必须正确嵌套 属性值必须要加引号 只能用转义字符
+
+    var obj={
+       'name':'zhangsan',   //属性:属性值
+       'sex':'men';
+       'age':23;
+    }
+    
+   读取: . 或者[]
+      
+   json 遍历用for(var i in json){
+               alert(i) // i 是属性 
+               } 
+   
+            for(var i in obj){
+               alert(obj[i])  //读取属性值用[]
+            }
+   
+-------------------------------------------------------------------------------------
+函数：
+
+　　函数的调用:
+		    １．通过绑定事件调用
+		    　　　ｏｂｊ．ｏｎｃｌｉｃｋ＝ｆｕｎｃｔｉｏｎ()｛｝
+		    ２．通过函数名调用
+		    　　　　函数名()
+		    ３．函数自调用
+		    　　　(ｏｂｊ．ｏｎｃｌｉｃｋ＝ｆｕｎｃｔｉｏｎ()｛｝)()
+
+　　函数传参：
+　　　      (function ff(m){
+                    alert(m)
+             })(i); 
+             m 是形参
+             i 是实参
+            ()()这表示自执行函数  i=m  m随着i变化
+                    
+   ****函数没有执行顺序  放在哪都能调用
+                    
+--------------------------------------------
+innerHTML
+       不光包含了文本还包含标签
+       
+innerText
+       仅仅是文本
+
+都可以表示标签中的内容但是有一定区别
+--------------------------------------------
+
+定时器:       
+        1.setInterval(参数一,参数二)            
+            连续性开启
+            参数一  function(){ }
+            参数二  time 以毫秒计算
+            
+            清除定时器clearInterval(参数) 在加定时器的上面加不会出现定时器叠加
+               参数就是定时器的变量名   
+            
+        2.steTimeout(参数一,参数二)
+            只开启一次
+            参数一是一个函数
+            参数二是time 以毫秒计算
+            
+ ---------------------------------------------------------------------------
+字体适配:
+
+	html{
+	     font-size:window.innerWidth/10+"px";
+	} 
+
+-------------------------------------------------------------------------------------------------
+
+面向对象:  一切事物都是对象
+
+   每一个例自带 this
+   
+   this 本身就是一个对象 谁调用他 他就指向谁
+   对象是由类new出来的
+   
+   function obj(){ }   obj();  定义一个模型 类
+ 
+   var obj=function (){ }  obj();
+   
+   函数是方法 方法是函数 函数不是方法 方法不是函数
+   变量是属性
+   
+-----------------------------------------------
+
+return  返回一个东西且终止这个程序
+
+-----------------------------------
+
+Date对象:
+   获取时间.
+	  new Date();
+	  getFullYear() 获取当前系统的年份
+	  getMonth()    获取当前系统的月份  需要加一
+	  getDay()      返回一周中的某一天  周日是零
+	  getData()     返回这个月中的某日
+	  getHours()    返回小时
+	  getMinutes()  返回分钟
+	  getSeconds()  返回秒钟
+	  getTime()      返回1970年1月1日到现在的毫秒数
+	  
+  设置时间        设置后再获取时间
+    time.setFullYear(1993);  
+	time.setMonth(5);
+	time.setHours(2);
+	time.setMinutes(8);
+	time.setDate(22);
+	time.setSeconds(55);
+  
+-------------------------------------------------------------------------
+运动：
+   
+     和时间（定时器）有关系
+     如果使用定位让这个元素运动
+     obj.offsetLeft  获取当前元素的left值  返回的是数字值 不带单位
+     offsetleft用这个不会撑大页面
+     
+减速运动：
+
+
+-------------------------------------------------------------------------------
+js目录:
+    一.对js的简单了解
+       1.js的定义，js的变量，js的注释
+       2.string
+       3.arr
+       4.math
+       5.number
+       6.date
+       7.function      ***抽象的东西
+       8.json
+       9.js散知识点
+       10.事件
+       11.运动 ---网页特效
+       12.
+-------------------------------------
+
+手机端：
+  display:table;      该元素会被作为块级表格来显示
+  display:table-cell; 会作为一个表格单元格显示
+
+
+----------------------------------------
+弹性盒子：
+  
+
+------------------------------------------------------------------------
+position: absolute; 
+   /*   隐式转换 将这个元素变成了行级块元素 
+    *   会脱离文档流 margin-left/right 
+	    不起作用了  
+	    不建议在手机端使用*/
+				
+变量作用域问题 全局变量可以先调取后定义（定义在调取后面）
+
+-----------------------------------
+break     中断程序
+continue  跳过程序继续下一个环节    
+
+break continue 只用在循环里
+----------------------------------------------------------------------
+
+DOM操作：  （获取增加删除修改）
+   
+   1.childNodes 获取子节点（只读 有兼容问题 包括空白节点）；
+   
+   1.1 . 节点类型：nodeType 返回值是 1 2 3
+             1  代表元素节点
+             2  代表属性节点
+             3  代表文本节点 （空白节点）
+             
+   2. 获取子节点的方法 无兼容性用 children()
+   
+   3. attributes  获取指定节点的属性集合 
+      attributes有多个属性 attributes[n].value  
+			               attributes.name
+			               attributes.length    
+   
+   4.firstElementChild  获取元素下第一个子节点（标准）
+   4.1 . firstChild     获取元素下第一个子节点（非标准）
+   
+   5.获取元素下最后一个子节点
+     非标准  lastChild
+     标准    lastElementChild
+     
+   6.获取元素下一个兄弟节点
+     非标准  nextSibling
+     标准 nextElementSibling
+     
+   7.获取元素上一个兄弟元素
+     非标准  previousSibling
+     标准    previousElementSibling     
+   
+   8.parentNode   获取当前节点的父节点没有兼容性
+   
+   9.复习 this
+   this是一个对象 当前事件绑定的元素
+   
+     function run(obj){
+        var obj=obj;
+        var _this=this;
+     
+     }
+     
+    10.width
+       div.style.width                    只读
+       div.offsetWidth  在css中设置的width 只读
+       clientWidth      可视区的宽度       只读
+   
+   
+   10.父级.removeChild()  删除元素节点     
+   
+---------------------------------------------------------------------------
+ 清除浮动：
+   .clearfix:before,.clearfix:after{
+		content:"";
+		display:table;
+	}
+	.clearfix:after{
+		clear:both;
+	}
+   
+---------------------------------------------
+元素的动态创建：
+   document.cretaeElement('li');创建元素节点
+   fu元素.appendChild(子元素);往父元素后面添加
+   fu元素.insertBefore(新元素，被插入的元素);
+   
+   innerHTML+= 保留原本内容 继续往后添加
+   
+ 
+ 为了提高页面优化 减少dom操作 尽量多用innerHTML
+ ------------------------------------------------
+   
+表单form 
+   特有属性：placeholder=""
+             required  必填<input type="text" required>
+            checked     默认被选<input type="text" checked>
+
+   伪类选择器：
+         input:disabled{选取属性有disabled的属性}
+         input:invalid{选取无效的表单元素}
+         input:valid{选择有效的input表单}
+         input:required{含有required属性的input}
+         input:optional{没有required属性的input};
+
+
+input value值有：
+button	定义可点击的按钮（大多与 JavaScript 使用来启动脚本）
+checkbox	定义复选框。
+color	定义拾色器。
+date	定义日期字段（带有 calendar 控件）
+datetime	定义日期字段（带有 calendar 和 time 控件）
+datetime-local	定义日期字段（带有 calendar 和 time 控件）
+month	定义日期字段的月（带有 calendar 控件）
+week	定义日期字段的周（带有 calendar 控件）
+time	定义日期字段的时、分、秒（带有 time 控件）
+email	定义用于 e-mail 地址的文本字段
+file	定义输入字段和 "浏览..." 按钮，供文件上传
+hidden	定义隐藏输入字段
+image	定义图像作为提交按钮
+number	定义带有 spinner 控件的数字字段
+password	定义密码字段。字段中的字符会被遮蔽。
+radio	定义单选按钮。
+range	定义带有 slider 控件的数字字段。
+reset	定义重置按钮。重置按钮会将所有表单字段重置为初始值。
+search	定义用于搜索的文本字段。
+submit	定义提交按钮。提交按钮向服务器发送数据。
+tel	定义用于电话号码的文本字段。
+text	默认。定义单行输入字段，用户可在其中输入文本。默认是 20 个字符。
+url	定义用于 URL 的文本字段。
+
+
+-----------------------------------------------------------------5.5
+
+button和<input type="button"/>标签在ios上出现的按钮带圆角
+
+-----------------
+event对象：
+	1、event存在兼容性  ev=ev||window.event
+	2、event对象有哪些方法和属性
+		clientX   鼠标的x值
+	    clientY   鼠标的y值
+    
+    事件：onclick onmouseover onmouseout onmousedown onmouseup
+          onmousemove鼠标移动
+
+算两点间的距离：
+	设(200,200)
+	a平方加b平方等于c平方
+  eg:Math.sqrt((ev.clientX-200)*(ev.clientX-200)+(ev.clientY-200)*(ev.clientY-200))
+
+
+//获取全部属性
+document.onclick=function(ev){
+	var ev=ev||window.event;
+	
+	for(var attr in ev){
+		console.log(attr);
+	}
+}
+
+-----------
+键盘事件对象：
+	onkeydown:键盘按下
+	onkeyup:键盘抬起
+	event.keyCode() 键盘的键值
+
+获取键值	
+	document.onkeydown=function(ev){
+		ev=ev||window.event;
+		alert(ev.keyCode);
+	}
+------------------------------
+浏览器的兼容问题？
+	1.ev=ev||window.event
+
+------------------------------------------------------------------5.8
+
+1、event对象事件包含所有鼠标和键盘的信息
+2、复习常用的事件有哪些？
+	。。。。
+	
+	表单事件：input对象
+		onchange   表单被修改触发的事件
+	  onfocus    表单聚焦时触发的事件
+		onblur     表单失去焦点触发的事件
+		onsumit    提交表单所触发的事件 写在form上
+		onreset    重置表单
+		
+	window的事件：
+		onload     页面加载完成后执行 包括了css img 文本
+		  eg:  window.onload=function(){}
+		
+		onscroll   当滚动条滚动时触发的事件
+		  eg:  window.onscroll=function(){}
+		  滚动条的距离计算
+			 var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+		onresize  窗口大小被改变是触发的事件                      
+			eg window.onresize=function(){
+				console.log(documnet.body.clientY)
+			}
+
+3、循环语句和条件语句
+	循环语句 for for....in   do while while do
+    
+    判断：switch(变量){
+            case 条件一:
+                 语句一；
+            break;
+    	}
+
+
+----------------------
+js的问题 
+  1、全局变量
+  3、文件依赖
+  
+面向对象：
+	  
+-------------------------------------------------------------5.10
+复习:
+	document.querySelector("")//获取的是一个
+	document.querySelectorAll('')//获取的事一组元素的集合
+	
+-------------------------------------------------------
+node搭建server
+    安装nodejs 查询node是否安装node -v
+	安装npm node管理工具  npm install http-server -g
+	在任意放打开命令行输入 http-server  
+	  
+-----------------------------------------------------------ajax
+
+
+Ajax :是向服务器请求数据的,可以在不刷新整个页面的前提下与服务器发生交互局部加载页面
+	ajax核心就是XMLHttpRequest对象
+	创建这个对象:var xmlhttp=new XMLHttpRequest();
+	ie5-6创建:var xmlhttp=new ActiveXObject("Micorosoft.XMLHTTP");
+	
+	1.兼容: var xhr=null;
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}else{
+		xhr=new ActiveXObject("Microsoft XMLHTTP")
+	}
+	2.发生请求:
+		XMLHttpRequest()的两个方法 open()和send()
+		open(method,url,async)
+			method是请求方式 get和post
+			url是路径也叫数据接口
+			async  是否异步 true 和 false 
+			  所有程序可以同时进行加载叫异步加载 
+			  同步加载时程序一个接一个的进行如果其中一个没有加载完成后面一个只能处于等待状态
+	 3.与服务器交互是4个过程  0代表刚准备状态 1准备状态 2请求以接受 3 请求处理值 4请求以完成
+	 	这几个过程都在xhr的readyState这个属性里
+	  
+	 	xhr.onreadystatechange=function(){
+	 	//		alert(xhr.responseText); 
+	 			if(xhr.readyState==4){
+	 				alert(xhr.responseText)
+	 			}
+	 	} 
+
+
+post请求:
+  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+
+	  
+---------------------------------------------------------------------------------------------------5.12     
+与服务器发生交互的过程:
+  xhr.readyState交互过程(0,1,2,3,4)
+  xhr.responseTest 请求文件中的数据
+  xhr.status请求的状态
+
+函数传参 参数是局部变量
+
+
+------------------------------------------------------------php
+$name --->var name;
+客户端以get请求 服务端就用$_GET[];
+
+1.php的变量用声明 $   eg:$name="hi"; 
+2.php中的链接符用 .    eg:$name."老王"."小王";
+3.客户端用什么方式请求服务器就用什么接收   eg:$name=$_GET['name'];  $name=$_POST['name'];
+4.$_REQUEST ['name']  用来接收get和post发送的请求   
+
+php的数组:
+  1.$arr=['张三','李四','老王'];
+  2.print_r() 以键值对 k=>v 形式输出;
+  3数组自定义key  $arrs=array("老王"=>"王五")
+                                  print_r($arrs["老王"]);  //打印出王五
+
+
+多维数组:
+var arr=[[""][]]
+
+
+-----------------------------------------------------------跨域
+  一个网络地址http://127.0.0.1:8096  是由网络传输协议和域名和端口构成 
+  这三者只要有一个不相同就属于非同源策略
+  jsonp
+    后台会把数据当做一个参数传在一个callback的回调函数里  客户端只需要知道这个callback就可以了
+    第一步:创建script  eg: 
+     var script=document.createElement("script");
+     script.src="https://ecpm.tanx.com/ex?i=mm_12852562_1778064_13674396&cb=jsonp_callback_68197&r=https%3A%2F%2Fhao.360.cn%2F%3Fsrc%3Dlm%26ls%3Dn0904170d98&cg=a7b326d445decab436f0ec7bb27f3db6&pvid=a4392351680ea41b2f125d62bcaa358a&u=https%3A%2F%2Fwww.taobao.com%2F&psl=1&nk=99%2C117%2C105%2C49%2C53%2C48%2C51%2C56%2C51%2C56%2C49%2C54%2C55%2C48&sk=&refpid=&fp=1.Qm_lSgXcfMm477sGcrOZuIjCRETwk_Zpg2Dv0YEWfT6_3HIw21dDxk.UTF-8.hu2lztSK_gBAtByID_hEI0DmqgiayA.Q.t4qxxz";
+     document.body.appendChild(script);
+
+     function jsonp_callback_68197(data){
+         console.log(data)
+     }
+
+    src和href的区别  
+      src链接的是一个资源 没有同源和非同源的说法
+      href是一链接 普通页面跳转
+=        =                =                  =                  =                =微信笔记已备份
+
+---------------------------------------------------------------------------------------5.19
+arguments 函数参数的对象
+
+------------------------------------------------------------------------------5.22
+正则:  是一个内置对象
+    -----要搞清楚是正则的方法还是字符串的方法
+	  正则就是人为的制定一个规则去检验字符串是否符合这个规则
+    语法:
+      var reg=new RegExp(参数一,参数二);  参数一是规则 参数二是修饰符
+      简写: var reg=/规则/修饰符
+
+    方法:
+      test()  检测这个字符串是否有符合规则的没有就返回false 有就返回true
+      Exec() 检索字符串是否包含符合规则的正则内容 有就返回 可没有就返回null
+	  
+	  规则:
+      m:多行
+      i:不区分带小写
+      g:全局
+	  
+主要就是操作字符串
+  字符串的方法: 
+      concat        字符串合并
+      charAt()     返回索引值对应的字符
+      indexOf()   返回字符在字符串中的位置 没有就返回-1
+      大小写转换
+      substring()   截取字符串
+      slice()    截取字符串
+      split()     分割成字符串数组
+      substr()   截取字符串 和substring一样
+
+  跟正则有关的字符串方法:
+      match()    在字符中检索指定的值找到一个或多个与正则表达式的匹配字符  返回是个数组
+      replace()  替换与正则表达式匹配的字符串  出结果的方法需要var一个变量纯起来   str.replace(reg,"dd");
+      search()   检索字符串中与正则表达式匹配的字符有就返回字符的位置没有就是-1  str.search(reg)
+      split()       把字串分割成字符串数组     str.split(reg)
+
+字符串的方括号:
+    [abc] 查找方括号之间的任何字符  返回的是一个obj类型的
+    [^abc]查找不在任何不在方括号之间的字符
+
+[0-9]查找任何从0-9的数字
+[a-z]查找任何从小写a-z之间的任何字符	  
+[A-Z]查找任何从大写A-Z之间的任何字符	  
+[A-z]查找所有的大写的A到小写的z也就是所有的字母不区分大小写
+(red|blue|green)  查找任何指定的选项
+
+元字符:
+    /./  代表查找的单个字符
+    /\w/ 查找单词字符 单词字符有 字母 数字 _
+    /\W/非单词字符   
+    /\d/查找数字
+    /\D/查找非数字
+    /\s/查找空白字符
+    /\S/查找非空白
+    /\n/是换行符
+
+量词:
+    /n+/   匹配至少包含一个n的字符串
+    /n*/    表示匹配0或多个n的字符串
+    /n{x}/  表示匹配x个n的序列的字符串
+    /n{x.}/  匹配至少x个
+    /n{x,y}/  匹配至少x个n最大y个n
+    /n$/  匹配任何以n结尾的字符串
+    /^n/   匹配任何以n开头的字符串
+    /?=n/ 匹配其后紧跟指定为n的字符串
+
+网易邮箱:  reg =/^[a-zA-Z]\w{5,17}@(163|126).com$/g;
+qq邮箱:     reg = /^[1-9]\d{4,10}@{qq.com}$/g
+
+
+-------------------------------------------------
+outline:none;  去掉input获得焦点时的默认边框
+
+---------------------------------------
+try catch 可以检测代码中的错误
+  try包含运行的代码
+  catch包含错误时运行的代码
+  eg: 
+        try{
+          alert("success")
+        }catch(err){
+          alert(err)
+        }
+
+------------------------------------
+bom:
+  window.location.href  网页的网址
+  window.location.open 
+
+---------------------------------
+添加网站为收藏：
+  window.external.addFavorite(sURL, sTitle); 
+
+// 加入收藏完整代码
+  function shoucang(sTitle,sURL) 	{ 
+    try 
+      { 
+      window.external.addFavorite(sURL, sTitle); 
+      } 
+    catch (e) 
+      { 
+      try 
+      { 
+    window.sidebar.addPanel(sTitle, sURL, ""); 
+      } 
+      catch (e) 
+      { 
+      alert("加入收藏失败，请使用Ctrl+D进行添加"); 
+      } 
+    } 
+  } 
+
+-------------------------------------
+清空margin padding
+  body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textare a, p, blockquote, th, td { margin: 0; padding: 0; }
+
+
+
+事件冒泡:当一个元素接收到时间的时候 会把它接收的事件传播给父级
+
+div3.onclick=function(ev){
+    ev=ev||window.event;
+    ev.cancelbubble=true;  //阻止冒泡
+    alert("不会向上传递事件了")
+}
+
+
+
+事件捕获:
+ie8下没有事件捕获
+
+事件监听:
+    ie下 obj.attachEvent("事件名(onclick)",function(){});\
+    其他浏览器 obj.addEventListener('click',function(){},false)  //fales是默认falses阻止冒泡 捕获 true就是捕获 false就是
+
+    对象继承:  
+        call    apply    原型链
+
+----------------------------------------------------------------------------------------
+ajax:
+     创建对象  var xmlhttp;
+               if(window.XMLHttpRequest){
+                   xmlhttp=new XMLHttpRequest();                  //创建xmlhttp对象方法
+               }else{
+                   xmlhttp=ActiveXObject("microsoft.XMLHttp");    //兼容ie5或者ie6
+               }
+
+
+     xhr请求:
+             使用XMLHttpRequest对象的 open() 和 send() 方法;
+             
+               open(method,url,async)  规定请求的类型,url 以及是否异步处理请求
+                    method:请求的类型
+                    url:文件在服务其上的位置
+                    async:true(异歩)false(同步) 
+                    
+               send(string)   将请求发送到服务器
+                    string 仅用于post请求  
+                  
+-------------------------------------------------------------------------------
+json:
+    全称   javascript object notation
+    json 是一种轻量级的数据交换格式
+    json 是独立语言  易理解
+      
+------------------------
+遍历：
+    遍历数组通常使用for循环
+
+
+  =============================9.9
+重力感应 螺旋仪
+  deviceorientation事件提供设备物理方向 
+    监听事件  window.addEventListener('deviceorientation',function(event){ some code .. } )
+      常用的三个属性  
+      平面位于水平上的设备屏幕顶部指向西方
+        {alpha:90, beta:0, gamma:0}
+      指南针只需用360-alpha
+
+      屏幕处于垂直平面屏幕顶部指向上方 beta的值是90
+
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

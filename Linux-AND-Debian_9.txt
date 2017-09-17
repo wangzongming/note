@@ -1,0 +1,75 @@
+常用命令：
+-------------------
+系统：
+	系统升级：apt-get update
+    查看内核：uname -a
+    查看硬盘分区：fdisk -l
+	查看当前有哪些进程：ps -aux
+    查看当前的内存使用情况：free -m
+	终止一个程序：kill 进程号 或killall 进程名
+    查看当前监听80端口的程序  lsof -i :80
+	查看路由信息  route -n/netstat -rn
+    路由添加删除  route add -net 192.168.0.0 netmask 255.255.255.0 gw 172.16.0.1
+                  route del -net 192.168.0.0 netmask 255.255.255.0 gw 172.16.0.1    
+
+-------------------
+文件：
+	查看目录占用空间：du -hs 目录名
+	查看当前目录或子目录 ls -d
+	复制文件夹：
+		CP [optin] ./aa/aa ./bb/aa
+			选项选填 -b(同名备份原来的文件)
+					-r(按递归方式保留原目录结构复制文件)
+					-f（强制覆盖同名文件）
+					
+-------------------
+软件：
+	 安装软件：apt-get install XXX     
+			eg: apt-get install git
+
+
+-------------------
+网络：
+
+
+
+
+-------------------
+vim基本操作：
+	ESC 键切换操作
+	-i/-p  插入
+	:wq  保存退出
+	:exit 
+	---------复制黏贴
+	退出yy复制游标所在行整行。或大写一个Y。
+	2yy或y2y复制两行。 ㄟ ，请举一反三好不好！ :-)
+	y^复制至行首，或y0。不含游标所在处字元。
+	y$复制至行尾。含游标所在处字元。
+	yw复制一个word。
+	y2w复制两个字（单词）。
+	yG复制至档尾。
+	y1G复制至档首。
+	p小写p代表贴至游标后（下）。
+	P大写P代表贴至游标前（上）。
+
+----------
+apt主要命令
+	apt-cache search  ------package 搜索包
+	apt-get install ------package 安装包
+	apt-get remove -----package 删除包
+	apt-get remove --purge ------package 删除包，包括删除配置文件等
+	apt-get update ------更新源
+	apt-get upgrade ------更新已安装的包
+	apt-get dist-upgrade ---------升级系统
+	apt-get dselect-upgrade ------使用 dselect 升级
+
+
+
+
+
+
+
+
+
+
+

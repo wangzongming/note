@@ -1,0 +1,199 @@
+cocos2d-js note
+------------------------------------------2017.8.21
+
+基本步骤：
+    1、首先得有一个导演：cc.director
+      eg: cc.direction.runScene(new PlayScene());
+
+    2、然后创建一个场景：cc.Scene
+      eg: cc.Scene.extend({onEnter:...})
+
+    3、继续创建一个层: cc.Layer
+      eg: cc.Layer.extend({ctor...})
+
+    4、层里面有无数精灵：cc.Sprite
+      eg: cc.Sprite('图片资源')
+
+    ....基本就是以上四个步骤
+
+注意：
+    所有用到的js文件必须写到 project.json 的 jsList数组里
+    所有用到的图片文件资源必须写到 resource.js 的 res对象中
+
+--------------------
+
+定时器：schedule (译：时刻表)
+    1. schedule(callback_fn,interval,repeat,delay);
+        callback_fn:调用的方法名 
+        interval:间隔
+        repeat:重复次数
+        delay:延迟多久进行调用
+    
+    2. scheduleOnce(callback_fn,delay); 只调用一次
+    3. scheduleUpdate() 这个函数每一帧都会被调用 调用方法名为 "update"
+
+--------------------
+
+动作：Active
+    1. cc.MoveTo(4, {x,y}})  在规定的时间内移动到指定的地点
+    2. cc.MoveBy(移动经过某位置)
+    3. cc.JumpTo(跳到某位置)
+    4. cc.BezierTo(贝塞尔曲线运动到某位置)
+    5. cc.FadeIn(淡入)
+    6. cc.FadeOut(淡出)
+    7. cc.FadeTo(渐变)
+    8. cc.Repeat(重复执行动作)
+    9. cc.Spawn(同时执行一批动作)
+    10. cc.Sequence(使一批动作有序执行)
+
+    精灵需要调用runActive方法来运行动画
+      eg: 精灵.runActive(定义的动画名) 
+
+------------------
+
+场景转换：
+    需要用到导演：Director (很重要 游戏的开始和结束都要调用它一般用来初始化游戏或者销毁工作 ...)
+    Director负责控制游戏场景切换，常用的有三个方法：
+        1. pushScene 终止正在运行的场景，把它放到暂停场景的堆栈(内存)中去，
+           新的场景将被执行，由于将场景放置到内存中，场景并没有被release
+
+        2. popScene 将经过pushScene的场景从堆栈（内存）中pop出来执行，而当前场景将被删除
+
+        3. replaceScene 用一个新的场景去替换掉正在运行的场景，正在运行的场景将被终止
+
+    eg: cc.director.replaceScene(cc.TransitionPageTurn(1,new PlayScene(),false) )
+        cc.TransitionPageTurn 创建一个翻页效果的切换
+        类似的还有 cc.TransitionJumpZoom  
+                  cc.TransitionFadeDown ...
+    
+    喵的 浏览器上设置动画直接报错 只能用 cc.director.runScene(new StartScene())
+
+---------------------
+
+事件：
+  事件可以与任何对象进行绑定，对象创建自己的事件监听器，然后加入到全局事件管理器统一管理
+
+--事件监听有一下几种：
+    触摸事件、键盘响应事件、鼠标响应事件、自定义事件、加速计事件
+
+--touch事件 
+
+
+---------------------
+
+帧动画 
+--帧动画就是很多张图片的序列图实现轮流播放产生动画效果，帧越多，动画越流畅；
+    cc.spriteFrame 负责管理精灵帧
+    cc.Animation 负责管理动画序列
+    cc.Animate 负责管理帧动画的动作创建
+
+--帧动画创建流程
+    1. 将连续的动作图片生成cc.spriteFrame 对象放入到数组
+    2. 通过cc.Animation 创建动画序列、
+    3. 通过cc.Animate 制作成帧动画动作
+    4. 最后由该节点Node播放帧动画
+
+
+-------------------------8.22
+EVENT_HIDE 和 EVENT_SHOW
+游戏进入后台和返回游戏(适合用在手机端)用在web上也行
+
+cc.eventManager.addCustomListener(cc.game.EVENT_DIDE,function(){
+    //处理游戏进入后台后的情况
+})
+cc.eventManager.addCustomListener(cc.game.EVENT_SHOW,function(){
+    //处理返回游戏的情况
+})
+
+------------------------
+坐标系：世界坐标系和本地坐标系
+    ......
+
+
+------------------------
+瞄点：
+    Anchor Point (x,y)两个方向取值均为0-1
+    cc.Layer 默认值是(0,0) 也就是左下角
+    其他节点是(0.5,0.5)就是节点中心;
+
+   作用： 它会影响选准缩放等操作
+
+忽略喵点 
+    cc.Node 还拥有 ignoreAnchor 属性，默认值为false,
+    如果改为true，则在定位和仿辐射变幻时忽略锚点
+    始终认为锚点是(0,0)
+
+-------------
+Z值
+    cc.Node包含两种深度值：verextZ 和 zIndex
+    verextZ 是OpenGL坐标系中的Z值，仅在web端的webgl模式或者原生平台上生效、
+    zIndex 是cocos2d-js 本地坐标系中的Z值 （实际开发中只关注它）
+
+-------------
+给节点定位
+    cc.winSize :Cocos2d-js 游戏窗口大小
+    cc.visibleRect :Coco2d-js 游戏的可视范围矩形以及相对游戏窗口的位置等信息
+
+   推荐使用cc,winSize配合cc.visibleRect 可以更有效的为节点定位
+   eg:  cc.pAdd(cc.visibleRect.top , cc.p(0,50))  //游戏的上方中心向下偏移50个像素
+   
+----------------
+坐标系转换
+    cc.Node 提供了四个用于坐标转换的API用于本地和世界坐标之间
+    互相转换，以便用户的计算，在碰撞检测，触点所属权判断。
+
+1. convertToNodeSpace : 将世界坐标转换为本地坐标系里的坐标
+    eg: 如果想要获取 node2在node1本地坐标系中的位置
+            var point = node1.convertToNodeSpace(node2.getPosition());
+
+2.convertToWorldSpace :将本地坐标转换为世界坐标系里的坐标
+    用在不同层之间的碰撞检测
+
+3.convertToNodeSpaceAR: 将世界坐标转化为本地坐标系中相对锚点的坐标
+4.convertToWorldSpaceAR:将本坐标相对于锚点的位置转换为世界标系中的坐标
+
+----------------------------
+屏幕适配方案：
+    1.设置屏幕适配策略 (Resolution Policy)
+    需要在游戏载入过程完成之后（cc.game.onStart函数回调中）;
+      eg:  cc.view.setDesignResolutionSize(320,480, cc.ResolutionPolicy.SHOW_ALL);
+      setDesignResolutionSize 函数的前两个参数是游戏的分辨率
+                                                第三个参数是你选择的适配方案（引擎中内置了五种适配方案）
+
+
+如果设置了分辨率，那可以直接设置Resolution Policy
+cc.view.setResolutionPolicy(cc.ResolutionPolicy.NO_BORCER)
+
+2.Resolution Policy的意义
+就是不管你屏幕大小如何，也不论浏览器窗口的宽高比、
+游戏场景都会自动缩到屏幕大小，在游戏中窗口右上角的坐标永远是(320,448)这是设置的分辨率
+
+3.监听浏览器窗口大小的变化事件
+新的适配方案允许在浏览器大小变化的时候自动重新尝试适配，
+只需要调用cc.view 的resizeWithBrowserSize函数
+    eg: cc.view.resizeWithBrowserSize(true);
+
+
+为了更灵活的应对变化：
+    cc.view提供了一个新的函数：setResizeCallback 
+    setResizeCallback 函数注册一个回调函数来监听浏览器窗口大小变化事件
+    eg ： cc.view.setResizeCallback(function(){
+                    //做任何需要的游戏内容层面的适配操作
+                    //比如说，你可以针对用户的移动设备方向类决定索要应用的适配模式
+                })
+
+4.Fullscreen API 
+    Fullscreen  API是浏览器允许Web页面在获取得用户全屏的一个新的制定中的API
+    (注意：不是所有浏览器有支持这个api)
+
+    尝试进入全屏模式（需要用户互交）
+        cc.screen.requestFullScreen(targetRlement,onFullScreenCallback);
+    检测是否处于全屏模式
+        cc.screen.fullScreen()
+    退出全屏模式
+        cc.screen.exitFullScreen();
+
+
+
+
+
