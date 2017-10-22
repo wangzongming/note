@@ -413,7 +413,7 @@ vm    eg vm /a /b  可以是移动文件亦可以是改名
 让程序后台运行 
 ctrl+z 
 bg %[num]  切换到后台
-bf %[num]	切换到前台
+fg %[num]	切换到前台
 jobs -l 查看在运行的程序
 
 
