@@ -1,0 +1,14 @@
+observable 和 autorun
+
+observable可以用来观测一个数据，如果当观测的数据变化时，
+如果变化值处在autorun中  那autorun就会自动执行
+
+计算属性：computed
+如果有一个值 我们不关心他的值 只关心他是否为正数 就可以用它
+
+
+
+action：
+      mobx推荐将被观测的变量放在 action中
+
+
