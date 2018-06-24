@@ -59,6 +59,7 @@ git config --global user.email "email"
 克隆
 	命令git clone克隆一个本地库
 	eg:  git clone git@github.com:xm124/xm.git(这种地址最快)
+	使用Git下载指定分支命令为：git clone -b 分支名仓库地址
 
 
 -------------------------
@@ -84,7 +85,8 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 	把仓库上的READNE.me文件拉下来
 	具体百度
 
-这种错误避免方法：
+
+这种错误避免方法：
 
 	每次提交之前使用git pull origin master 命令更新本地文件到最新版
 
