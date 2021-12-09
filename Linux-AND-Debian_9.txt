@@ -415,7 +415,7 @@ ctrl+z
 bg %[num]  切换到后台
 fg %[num]	切换到前台
 jobs -l 查看在运行的程序
-
+nohup [命令] & 挂机后台运行
 
 
 
