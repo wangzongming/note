@@ -28,7 +28,7 @@ npm install -g localtunnel
 
 启动隧道
 ```
-lt --host http://wangzongming.top:8002 -s test --port 8000
+lt --host http://wangzongming.top:8001 -s test --port 8000
 ```
 
-访问 http://test.wangzongming.top:8002/
+访问 http://test.wangzongming.top:8001/
