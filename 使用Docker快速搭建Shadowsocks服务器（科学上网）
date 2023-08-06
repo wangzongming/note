@@ -57,14 +57,7 @@ CONTAINER ID        IMAGE                             COMMAND                  C
 
 ## 客户端配置
 
-下载Shadowsocks客户端，可以从 ISS 网站进行下载。
-
-以 Shadowsocks for Windows 客户端 为例，安装好后添加服务器配置：
-
-![MOhbR6iN0Fibphtr.jpg](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8adc6bf581b645439e292fb6095b26d3~tplv-k3u1fbpfcp-zoom-1.image)
-
 填上 ip 地址，端口，密码，密码就是刚刚的 `yourpasswd`,点击确定。
-
 
 代理模式选择 PAC 模式用于代理被墙的网站即可，如果发现 github 还是访问不了说明  PAC 文件不是最新的，点击更新本地 PAC即可
 
