@@ -1,0 +1,71 @@
+## 前置条件
+
+1.  linux 服务器一台（境外的）
+2.  安装Docker（参考菜鸟教程）
+3.  Shadowsocks客户端
+
+## 安装 Shadowsocks
+
+### 拉取docker-shadowsocks镜像
+
+拉取docker-shadowsocks镜像镜像安装，从 Docker Hub 仓库拉取命令如下（笔者未使用）
+
+```
+docker pull oddrationale/docker-shadowsocks
+```
+ 
+ 
+### 配置docker-shadowsocks
+
+输入如下命令：
+
+```
+docker run -d -p 54285:54285 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 54285 -k yourpasswd -m aes-256-cfb
+```
+
+其中，
+
+-   `-d`——容器启动后会进入后台
+-   `-p（第一个）`——指定要映射的端口，使用的格式是`hostPort:containerPort`，即本地的 54285 端口映射到容器的 54285 端口
+-   `-s`——服务器IP
+-   `-p（第二个）`——代理端口
+-   `yourpasswd`——你的密码
+-   `-m`——加密方式
+
+检查一下 SS 是否已经安装成功：
+
+```
+sudo docker ps
+```
+
+可以看到：
+
+```
+CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                      
+10ef831c1904        oddrationale/docker-shadowsocks   "/usr/local/bin/ssser"   4 seconds ago       Up 3 seconds        0.0.0.0:54285->54285/tcp
+```
+
+说明服务器端已经配置成功。
+
+
+## 客户端下载
+
+推荐 https://itlanyan.com/shadowsock-clients/
+
+百度云：https://pan.baidu.com/s/1GTTmcV4FtnD672iuRPopVg 
+提取码：tpri
+
+## 客户端配置
+
+下载Shadowsocks客户端，可以从 ISS 网站进行下载。
+
+以 Shadowsocks for Windows 客户端 为例，安装好后添加服务器配置：
+
+![MOhbR6iN0Fibphtr.jpg](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8adc6bf581b645439e292fb6095b26d3~tplv-k3u1fbpfcp-zoom-1.image)
+
+填上 ip 地址，端口，密码，密码就是刚刚的 `yourpasswd`,点击确定。
+
+
+代理模式选择 PAC 模式用于代理被墙的网站即可，如果发现 github 还是访问不了说明  PAC 文件不是最新的，点击更新本地 PAC即可
+
+
