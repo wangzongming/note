@@ -90,7 +90,18 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 	每次提交之前使用git pull origin master 命令更新本地文件到最新版
 
+
+
+1. 临时启用 Git 长路径支持（Windows 用户）
+如果你使用的是 Windows 系统，可以通过以下命令启用 Git 对长路径的支持：
+bash
+git config --system core.longpaths true
+
 ------------------
+
+
+
+
 
 
 
