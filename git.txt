@@ -102,6 +102,19 @@ git config --system core.longpaths true
 
 
 
+删除子模块
+
+1. 确认路径  `git ls-files --stage | grep xxx`
+2. 删除这些文件/目录的索引
+
+比如：
+git rm -r --cached "libraries2/CronAlarms"
+
+然后正常 git add .
+然后体检 git commit -m'xxx'
+
+
+
 
 
 
