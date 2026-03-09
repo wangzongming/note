@@ -115,6 +115,28 @@ git rm -r --cached "libraries2/CronAlarms"
 
 
 
+---- 回退到某个历史版本 ---
+
+使用 git revert（适用于保留历史）
+
+如果你希望保留历史记录，并且希望回滚特定提交的更改，但不改变仓库的历史结构，可以使用 git revert。这样会生成一个新的提交，撤销你想要回滚的提交内容。
+
+你可以执行 git revert 来回滚到该提交之前的版本：
+
+git revert 8001520204b7de9dd027322ea54810c95cb0d6ab
+
+如果回滚过程中没有冲突，可以继续完成回滚：
+
+git revert --continue
+
+然后，你可以推送更改到 GitLab：
+
+git push origin main
+总结
+
+git reset --hard：适用于你完全不在意历史记录，并且可以推送重写历史。
+
+git revert：适用于保留历史记录，通过创建新的提交撤销某个特定提交的更改。
 
 
 
