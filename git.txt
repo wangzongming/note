@@ -140,3 +140,26 @@ git revert：适用于保留历史记录，通过创建新的提交撤销某个�
 
 
 
+---- rebase 拉取，避免产生和并代码节点 ---
+
+# 1. 确保当前在目标分支（如dev），并查看分支状态（可选，确认无未提交内容）
+git checkout dev
+git status
+
+# 2. 拉取远端最新代码（仅下载，不合并/rebse）
+git fetch origin
+
+# 3. 执行rebase：将本地dev的提交，基于远端origin/dev的最新版本重新应用
+git rebase origin/dev
+
+# 4. 如果rebase过程中出现冲突（最常见情况），先解决冲突，再执行：
+# git add 解决冲突的文件
+# git rebase --continue  # 继续完成rebase
+# （若想放弃本次rebase，执行：git rebase --abort）
+
+5. git push 推送代码
+
+
+
+
+
